@@ -38,9 +38,20 @@ public IEnumerable<Material_DTO> GetMaterial()
 			return new Material_DTO(insertedMaterial);
 		}
 		
-	
+		public Material_DTO Update(Material_DTO materialDto)
+		{
+			Material_BLL materialBll = materialDto.ToBLL();
+			Material_DAL materialDal = new Material_DAL(materialBll);
+			Material_DAL updatedMaterial = _materialRepository.Update(materialDal);
+			return new Material_DTO(updatedMaterial);
+		}
 		
-		
+		public void Delete(Material_DTO materialDto)
+		{
+			Material_BLL materialBll = materialDto.ToBLL();
+			Material_DAL materialDal = new Material_DAL(materialBll);
+			_materialRepository.Delete(materialDal);
+		}
 	}
 }
 
