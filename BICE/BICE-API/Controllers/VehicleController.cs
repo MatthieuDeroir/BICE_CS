@@ -15,6 +15,24 @@ namespace BICE.API.Controllers
         {
             _vehicleService = new Vehicle_SRV();
         }
+        
+        [HttpGet]
+        public ActionResult<IEnumerable<Vehicle_DTO>> GetVehicle()
+        {
+            IEnumerable<Vehicle_DTO> vehicleDto = _vehicleService.GetVehicle();
+            return Ok(vehicleDto);
+        }
+        
+        [HttpGet("{id}")]
+        public ActionResult<Vehicle_DTO> GetVehicleById(int id)
+        {
+            Vehicle_DTO vehicleDto = _vehicleService.GetVehicleById(id);
+            if (vehicleDto == null)
+            {
+                return NotFound();
+            }
+            return Ok(vehicleDto);
+        }
 
         // POST api/vehicle
         [HttpPost]
@@ -29,13 +47,28 @@ namespace BICE.API.Controllers
             return CreatedAtAction(nameof(AddVehicle), new { id = insertedVehicle.Id }, insertedVehicle);
         }
         
-        [HttpGet]
-        public ActionResult<IEnumerable<Vehicle_DTO>> GetVehicle()
+        [HttpPut]
+        public ActionResult<Vehicle_DTO> Update(Vehicle_DTO vehicleDto)
         {
-            IEnumerable<Vehicle_DTO> vehicleDto = _vehicleService.GetVehicle();
-            return Ok(vehicleDto);
-        }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-  
+            Vehicle_DTO updatedVehicle = _vehicleService.Update(vehicleDto);
+            return Ok(updatedVehicle);
+        }
+        
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
+        {
+            Vehicle_DTO vehicleDto = _vehicleService.GetVehicleById(id);
+            if (vehicleDto == null)
+            {
+                return NotFound();
+            }
+            _vehicleService.Delete(vehicleDto);
+            return NoContent();
+        }
     }
 }

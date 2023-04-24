@@ -13,14 +13,6 @@ namespace BICE.SRV
         {
             _vehicleRepository = new Vehicle_Repository();
         }
-
-        public Vehicle_DTO AddVehicle(Vehicle_DTO vehicleDto)
-        {
-            Vehicle_BLL vehicleBll = vehicleDto.ToBLL();
-            Vehicle_DAL vehicleDal = new Vehicle_DAL(vehicleBll);
-            Vehicle_DAL insertedVehicle = _vehicleRepository.Insert(vehicleDal);
-            return new Vehicle_DTO(insertedVehicle);
-        }
         
         public IEnumerable<Vehicle_DTO> GetVehicle()
         {
@@ -32,6 +24,37 @@ namespace BICE.SRV
             }
             return vehicleDto;
         }
+        
+        public Vehicle_DTO GetVehicleById(int id)
+        {
+            Vehicle_DAL vehicleDal = _vehicleRepository.GetById(id);
+            return new Vehicle_DTO(vehicleDal);
+        }
+
+        public Vehicle_DTO AddVehicle(Vehicle_DTO vehicleDto)
+        {
+            Vehicle_BLL vehicleBll = vehicleDto.ToBLL();
+            Vehicle_DAL vehicleDal = new Vehicle_DAL(vehicleBll);
+            Vehicle_DAL insertedVehicle = _vehicleRepository.Insert(vehicleDal);
+            return new Vehicle_DTO(insertedVehicle);
+        }
+        
+        public Vehicle_DTO Update(Vehicle_DTO vehicleDto)
+        {
+            Vehicle_BLL vehicleBll = vehicleDto.ToBLL();
+            Vehicle_DAL vehicleDal = new Vehicle_DAL(vehicleBll);
+            Vehicle_DAL updatedVehicle = _vehicleRepository.Update(vehicleDal);
+            return new Vehicle_DTO(updatedVehicle);
+        }
+        
+        public void Delete(Vehicle_DTO vehicleDto)
+        {
+            Vehicle_BLL vehicleBll = vehicleDto.ToBLL();
+            Vehicle_DAL vehicleDal = new Vehicle_DAL(vehicleBll);
+            _vehicleRepository.Delete(vehicleDal);
+        }
+        
+        
 
         // Implement other CRUD methods using DTO conversions
     }
