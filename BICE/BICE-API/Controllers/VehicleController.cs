@@ -29,6 +29,7 @@ namespace BICE.API.Controllers
             return CreatedAtAction(nameof(AddVehicle), new { id = insertedVehicle.Id }, insertedVehicle);
         }
         
+        [HttpGet]
         public ActionResult<IEnumerable<Vehicle_DTO>> GetVehicle()
         {
             IEnumerable<Vehicle_DTO> vehicleDto = _vehicleService.GetVehicle();
