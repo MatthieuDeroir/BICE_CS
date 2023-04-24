@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BICE.BLL\BICE.BLL.csproj" />
+    <ProjectReference Include="..\BICE.DAL\BICE.DAL.csproj" />
+    <ProjectReference Include="..\BICE.DTO\BICE.DTO.csproj" />
+  </ItemGroup>
+
+</Project>
