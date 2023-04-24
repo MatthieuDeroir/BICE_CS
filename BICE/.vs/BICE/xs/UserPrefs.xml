@@ -1,0 +1,41 @@
+﻿<Properties StartupConfiguration="{03868E16-2731-4A14-BDE0-CB52DEFF15DC}|https">
+  <MonoDevelop.Ide.ItemProperties.BICE.BLL FirstBuild="True" />
+  <MonoDevelop.Ide.ItemProperties.BICE.API FirstBuild="True" PreferredExecutionTarget="/Applications/Firefox.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="BICE.DAL/Repositories/Material_DAL.cs">
+    <Files>
+      <File FileName="BICE.BLL/Material_BLL.cs" />
+      <File FileName="BICE.BLL/Intervention_BLL.cs" />
+      <File FileName="BICE.BLL/Vehicle_BLL.cs" />
+      <File FileName="BICE.BLL/VehicleIntervention_BLL.cs" />
+      <File FileName="BICE.DTO/BaseEntity_DTO.cs" />
+      <File FileName="BICE.DTO/BaseNamedEntity_DTO.cs" />
+      <File FileName="BICE.DAL/Repo_DAL.cs" Line="8" Column="37" />
+      <File FileName="BICE.DAL/IRepository_DAL.cs" Line="6" Column="6" />
+      <File FileName="BICE.DAL/Material_DAL.cs" Line="96" Column="36" />
+      <File FileName="BICE.DAL/Vehicle_DAL.cs" Line="1" Column="1" />
+      <File FileName="BICE.DAL/VehicleIntervention_DAL.cs" Line="1" Column="1" />
+      <File FileName="BICE.DAL/Intervention_DAL.cs" Line="27" Column="55" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="BICE" expanded="True">
+            <Node name="BICE.BLL" expanded="True" />
+            <Node name="BICE.DAL" expanded="True">
+              <Node name="Repositories" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.BICE.SRV FirstBuild="True" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.BICE.TEST FirstBuild="True" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.BICE.DTO FirstBuild="True" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+</Properties>
