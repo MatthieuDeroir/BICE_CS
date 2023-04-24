@@ -128,4 +128,7 @@ Desktop.ini
 # Mac desktop service store files
 .DS_Store
 
+# Rider Jetbrain config
+*/.idea/
+
 _NCrunch*
