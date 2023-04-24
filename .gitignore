@@ -77,6 +77,7 @@ publish/
 ## TODO: If you have NuGet Package Restore enabled, uncomment the next line
 packages/
 ## TODO: If the tool you use requires repositories.config, also uncomment the next line
+!packages/repositories.config
 
 # Windows Azure Build Output
 csx/
@@ -90,6 +91,9 @@ sql/
 *.Cache
 ClientBin/
 [Ss]tyle[Cc]op.*
+<<<<<<< HEAD
+![Ss]tyle[Cc]op.targets
+~$*
 ~
 *~
 *.dbmdl
@@ -123,9 +127,13 @@ ehthumbs.db
 Desktop.ini
 
 # Recycle Bin used on file shares
+$RECYCLE.BIN/
 .BIN/
 
 # Mac desktop service store files
 .DS_Store
+
+# Rider Jetbrain config
+./.idea/*
 
 _NCrunch*
