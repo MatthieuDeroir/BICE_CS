@@ -13,27 +13,118 @@ namespace BICE.DAL
 
         public override Material_DAL GetById(int id)
         {
-            throw new NotImplementedException();
+            var query = "SELECT * FROM Material WHERE Id = @Id";
+            
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                var command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Id", id);
+                connection.Open();
+                var reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    return new Material_DAL(
+                        (int)reader["Id"],
+                        (string)reader["Denomination"],
+                        (string)reader["Barcode"],
+                        (string)reader["Category"],
+                        (int)reader["UsageCount"],
+                        (int?)reader["MaxUsageCount"],
+                        (DateTime?)reader["ExpirationDate"],
+                        (DateTime?)reader["NextControlDate"],
+                        (bool)reader["IsStored"],
+                        (bool)reader["IsLost"],
+                        (bool)reader["IsUsable"]
+                    );
+                }
+            }
+            return null;
         }
 
         public override IEnumerable<Material_DAL> GetAll()
         {
-            throw new NotImplementedException();
+            var query = "SELECT * FROM Material";
+            var materials = new List<Material_DAL>();
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                var command = new SqlCommand(query, connection);
+                connection.Open();
+                var reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    materials.Add(new Material_DAL(
+                        (int)reader["Id"],
+                        (string)reader["Denomination"],
+                        (string)reader["Barcode"],
+                        (string)reader["Category"],
+                        (int)reader["UsageCount"],
+                        (int?)reader["MaxUsageCount"],
+                        (DateTime?)reader["ExpirationDate"],
+                        (DateTime?)reader["NextControlDate"],
+                        (bool)reader["IsStored"],
+                        (bool)reader["IsLost"],
+                        (bool)reader["IsUsable"]
+                    ));
+                }
+            }
+            return materials;
         }
 
         public override Material_DAL Insert(Material_DAL material)
         {
-            throw new NotImplementedException();
+            var query = "INSERT INTO Material (Denomination, Barcode, Category, UsageCount, MaxUsageCount, ExpirationDate, NextControlDate, IsStored, IsLost, IsUsable) VALUES (@Denomination, @Barcode, @Category, @UsageCount, @MaxUsageCount, @ExpirationDate, @NextControlDate, @IsStored, @IsLost, @IsUsable)";
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                var command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Denomination", material.Denomination);
+                command.Parameters.AddWithValue("@Barcode", material.Barcode);
+                command.Parameters.AddWithValue("@Category", material.Category);
+                command.Parameters.AddWithValue("@UsageCount", material.UsageCount);
+                command.Parameters.AddWithValue("@MaxUsageCount", material.MaxUsageCount);
+                command.Parameters.AddWithValue("@ExpirationDate", material.ExpirationDate);
+                command.Parameters.AddWithValue("@NextControlDate", material.NextControlDate);
+                command.Parameters.AddWithValue("@IsStored", material.IsStored);
+                command.Parameters.AddWithValue("@IsLost", material.IsLost);
+                command.Parameters.AddWithValue("@IsUsable", material.IsUsable);
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+            return material;
         }
 
         public override Material_DAL Update(Material_DAL material)
         {
-            throw new NotImplementedException();
+            var query = "UPDATE Material SET Denomination = @Denomination, Barcode = @Barcode, Category = @Category, UsageCount = @UsageCount, MaxUsageCount = @MaxUsageCount, ExpirationDate = @ExpirationDate, NextControlDate = @NextControlDate, IsStored = @IsStored, IsLost = @IsLost, IsUsable = @IsUsable WHERE Id = @Id";
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                var command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Id", material.Id);
+                command.Parameters.AddWithValue("@Denomination", material.Denomination);
+                command.Parameters.AddWithValue("@Barcode", material.Barcode);
+                command.Parameters.AddWithValue("@Category", material.Category);
+                command.Parameters.AddWithValue("@UsageCount", material.UsageCount);
+                command.Parameters.AddWithValue("@MaxUsageCount", material.MaxUsageCount);
+                command.Parameters.AddWithValue("@ExpirationDate", material.ExpirationDate);
+                command.Parameters.AddWithValue("@NextControlDate", material.NextControlDate);
+                command.Parameters.AddWithValue("@IsStored", material.IsStored);
+                command.Parameters.AddWithValue("@IsLost", material.IsLost);
+                command.Parameters.AddWithValue("@IsUsable", material.IsUsable);
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+            return material;
         }
 
         public override void Delete(Material_DAL material)
         {
-            throw new NotImplementedException();
+            var query = "DELETE FROM Material WHERE Id = @Id";
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                var command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Id", material.Id);
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
         }
     }
 }
