@@ -28,7 +28,13 @@ namespace BICE.API.Controllers
             Vehicle_DTO insertedVehicle = _vehicleService.AddVehicle(vehicleDto);
             return CreatedAtAction(nameof(AddVehicle), new { id = insertedVehicle.Id }, insertedVehicle);
         }
+        
+        public ActionResult<IEnumerable<Vehicle_DTO>> GetVehicle()
+        {
+            IEnumerable<Vehicle_DTO> vehicleDto = _vehicleService.GetVehicle();
+            return Ok(vehicleDto);
+        }
 
-        // Implement other CRUD methods using the service
+  
     }
 }

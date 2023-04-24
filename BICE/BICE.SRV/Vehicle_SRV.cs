@@ -21,6 +21,17 @@ namespace BICE.SRV
             Vehicle_DAL insertedVehicle = _vehicleRepository.Insert(vehicleDal);
             return new Vehicle_DTO(insertedVehicle);
         }
+        
+        public IEnumerable<Vehicle_DTO> GetVehicle()
+        {
+            IEnumerable<Vehicle_DAL> vehicleDal = _vehicleRepository.GetAll();
+            List<Vehicle_DTO> vehicleDto = new List<Vehicle_DTO>();
+            foreach (Vehicle_DAL vehicle in vehicleDal)
+            {
+                vehicleDto.Add(new Vehicle_DTO(vehicle));
+            }
+            return vehicleDto;
+        }
 
         // Implement other CRUD methods using DTO conversions
     }

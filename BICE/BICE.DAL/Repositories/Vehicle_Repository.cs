@@ -17,7 +17,29 @@ namespace BICE.DAL
 
         public override IEnumerable<Vehicle_DAL> GetAll()
         {
-            throw new NotImplementedException();
+            var query = "SELECT * FROM Vehicles";
+
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                
+                using (var command = new SqlCommand(query, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            yield return new Vehicle_DAL(
+                                (int)reader["id"],
+                                (string)reader["denomination"],
+                                (string)reader["internalNumber"],
+                                (string)reader["licensePlate"],
+                                (bool)reader["isActive"]
+                            );
+                        }
+                    }
+                }
+            }
         }
 
         public override Vehicle_DAL Insert(Vehicle_DAL vehicle)
