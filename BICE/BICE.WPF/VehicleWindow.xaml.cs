@@ -1,4 +1,6 @@
 ﻿using BICE.DAL;
+using BICE.DTO;
+using BICE.SRV;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,23 +13,22 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace BICE.WPF
-
 {
-    public partial class MainWindow : Window
+    /// <summary>
+    /// Logique d'interaction pour VehicleWindow.xaml
+    /// </summary>
+    public partial class VehicleWindow : Window
     {
-        public MainWindow()
+        public VehicleWindow()
         {
             InitializeComponent();
         }
+        
 
-        private void Button_Click_Vehicle(object sender, RoutedEventArgs e)
-        {
-            VehicleAddWindow vehicleAddWindow = new VehicleAddWindow();
-            vehicleAddWindow.Show();
-        }
+        
+
     }
 }
