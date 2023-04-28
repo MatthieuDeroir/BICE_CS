@@ -15,11 +15,10 @@ namespace BICE.DAL.Repositories
         public Repository()
         {
             var builder = new ConfigurationBuilder();
-
             var config = builder.AddJsonFile("appsettings.json", false, true).Build();
             //ConnectionString =
             //    "Data Source=localhost,1433;Initial Catalog=BICE_DATABASE;User Id=sa;Password=78934797497xX!!;";
-
+            
             //var config = builder.AddJsonFile("appsettings.json", false, true).Build();
             ConnectionString = "Data Source=localhost;Integrated Security=True";
 
