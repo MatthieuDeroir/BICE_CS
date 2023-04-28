@@ -1,6 +1,7 @@
 ﻿using BICE.DAL;
 using BICE.DTO;
 using BICE.SRV;
+using BICE.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,9 @@ namespace BICE.WPF
         public VehicleWindow()
         {
             InitializeComponent();
+
+            // Créez une nouvelle instance du modèle de vue et définissez-la comme contexte de données
+            DataContext = new VehicleViewModel();
         }
         
 
