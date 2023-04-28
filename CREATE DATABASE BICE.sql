@@ -26,6 +26,7 @@ CREATE TABLE Materials (
     nextControlDate DATETIME NULL,
     isStored BIT NOT NULL DEFAULT 1,
     isLost BIT NOT NULL DEFAULT 0,
+    isUsable BIT NOT NULL DEFAULT 0,
 );
 
 -- Table pour stocker les informations sur les interventions
