@@ -60,7 +60,7 @@ namespace BICE.API.Controllers
             return Ok(updatedIntervention);
         }
         
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public ActionResult DeleteIntervention(Intervention_DTO interventionDto)
         {
             if (!ModelState.IsValid)

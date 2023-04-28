@@ -47,6 +47,7 @@ namespace BICE.API.Controllers
             return CreatedAtAction(nameof(AddMaterial), new { id = insertedMaterial.Id }, insertedMaterial);
         }
         
+        [HttpPut]
         public ActionResult<Material_DTO> UpdateMaterial(Material_DTO materialDto)
         {
             if (!ModelState.IsValid)
@@ -58,6 +59,7 @@ namespace BICE.API.Controllers
             return Ok(updatedMaterial);
         }
         
+        [HttpDelete("{id}")]
         public ActionResult<Material_DTO> DeleteMaterial(int id)
         {
             Material_DTO materialDto = _materialService.GetMaterialById(id);
