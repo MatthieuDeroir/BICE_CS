@@ -13,7 +13,7 @@ namespace BICE.DAL
 
         public override Material_DAL GetById(int id)
         {
-            var query = "SELECT * FROM Material WHERE Id = @Id";
+            var query = "SELECT * FROM Materials WHERE Id = @Id";
             
             using (var connection = new SqlConnection(ConnectionString))
             {
@@ -43,7 +43,7 @@ namespace BICE.DAL
 
         public override IEnumerable<Material_DAL> GetAll()
         {
-            var query = "SELECT * FROM Material";
+            var query = "SELECT * FROM Materials";
             var materials = new List<Material_DAL>();
             using (var connection = new SqlConnection(ConnectionString))
             {
@@ -72,7 +72,7 @@ namespace BICE.DAL
 
         public override Material_DAL Insert(Material_DAL material)
         {
-            var query = "INSERT INTO Material (Denomination, Barcode, Category, UsageCount, MaxUsageCount, ExpirationDate, NextControlDate, IsStored, IsLost, IsUsable) VALUES (@Denomination, @Barcode, @Category, @UsageCount, @MaxUsageCount, @ExpirationDate, @NextControlDate, @IsStored, @IsLost, @IsUsable)";
+            var query = "INSERT INTO Materials (Denomination, Barcode, Category, UsageCount, MaxUsageCount, ExpirationDate, NextControlDate, IsStored, IsLost, IsUsable) VALUES (@Denomination, @Barcode, @Category, @UsageCount, @MaxUsageCount, @ExpirationDate, @NextControlDate, @IsStored, @IsLost, @IsUsable)";
             using (var connection = new SqlConnection(ConnectionString))
             {
                 var command = new SqlCommand(query, connection);
@@ -94,7 +94,7 @@ namespace BICE.DAL
 
         public override Material_DAL Update(Material_DAL material)
         {
-            var query = "UPDATE Material SET Denomination = @Denomination, Barcode = @Barcode, Category = @Category, UsageCount = @UsageCount, MaxUsageCount = @MaxUsageCount, ExpirationDate = @ExpirationDate, NextControlDate = @NextControlDate, IsStored = @IsStored, IsLost = @IsLost, IsUsable = @IsUsable WHERE Id = @Id";
+            var query = "UPDATE Materials SET Denomination = @Denomination, Barcode = @Barcode, Category = @Category, UsageCount = @UsageCount, MaxUsageCount = @MaxUsageCount, ExpirationDate = @ExpirationDate, NextControlDate = @NextControlDate, IsStored = @IsStored, IsLost = @IsLost, IsUsable = @IsUsable WHERE Id = @Id";
             using (var connection = new SqlConnection(ConnectionString))
             {
                 var command = new SqlCommand(query, connection);
@@ -117,7 +117,7 @@ namespace BICE.DAL
 
         public override void Delete(Material_DAL material)
         {
-            var query = "DELETE FROM Material WHERE Id = @Id";
+            var query = "DELETE FROM Materials WHERE Id = @Id";
             using (var connection = new SqlConnection(ConnectionString))
             {
                 var command = new SqlCommand(query, connection);

@@ -49,7 +49,7 @@ namespace BICE.API.Controllers
         }
         
         [HttpPut]
-        public ActionResult<Intervention_DTO> Update(Intervention_DTO interventionDto)
+        public ActionResult<Intervention_DTO> UpdateIntervention(Intervention_DTO interventionDto)
         {
             if (!ModelState.IsValid)
             {
@@ -60,8 +60,8 @@ namespace BICE.API.Controllers
             return Ok(updatedIntervention);
         }
         
-        [HttpDelete]
-        public ActionResult Delete(Intervention_DTO interventionDto)
+        [HttpDelete("{id}")]
+        public ActionResult DeleteIntervention(Intervention_DTO interventionDto)
         {
             if (!ModelState.IsValid)
             {

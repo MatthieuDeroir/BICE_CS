@@ -48,7 +48,7 @@ namespace BICE.API.Controllers
         }
         
         [HttpPut]
-        public ActionResult<Vehicle_DTO> Update(Vehicle_DTO vehicleDto)
+        public ActionResult<Vehicle_DTO> UpdateVehicle(Vehicle_DTO vehicleDto)
         {
             if (!ModelState.IsValid)
             {
@@ -60,7 +60,7 @@ namespace BICE.API.Controllers
         }
         
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public ActionResult DeleteVehicle(int id)
         {
             Vehicle_DTO vehicleDto = _vehicleService.GetVehicleById(id);
             if (vehicleDto == null)
@@ -70,5 +70,7 @@ namespace BICE.API.Controllers
             _vehicleService.Delete(vehicleDto);
             return NoContent();
         }
+        
+        
     }
 }
