@@ -7,48 +7,15 @@
         mc:Ignorable="d"
         Title="Vehicle Window" Height="450" Width="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-
-        <!-- Header -->
-        <Label Content="Ajouter un véhicule à la flotte" FontSize="24" FontWeight="Bold" Margin="10" />
-
-        <!-- Form -->
-        <Border Grid.Row="1" Margin="10">
-            <Grid Background="#FFDADADA" RenderTransformOrigin="0.5,0.5">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-
-                <Label Content="Internal Number:" Grid.Row="0" Grid.Column="0" Margin="5" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
-                <TextBox x:Name="InternalNumberTextBox" Grid.Row="0" Grid.Column="1" Margin="5" />
-
-                <Label Content="Denomination:" Grid.Row="1" Grid.Column="0" Margin="5" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
-                <TextBox x:Name="DenominationTextBox" Grid.Row="1" Grid.Column="1" Margin="5" />
-
-                <Label Content="Plaque d'immatriculation:" Grid.Row="2" Grid.Column="0" Margin="5" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
-                <TextBox x:Name="LicensePlateTextBox" Grid.Row="2" Grid.Column="1" Margin="5" />
-
-                <Label Content="Est actif :" Grid.Row="3" Grid.Column="0" Margin="5" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
-                <CheckBox x:Name="IsActiveCheckBox" Grid.Row="3" Grid.Column="1" Margin="5" />
-
-                <Button Content="Créer le véhicule" Grid.Row="8" Grid.Column="1" Margin="5" Click="CreateVehicleButton_Click" HorizontalAlignment="Center" Background="#FFC7C7C7" FontSize="14" FontWeight="Bold" />
-            </Grid>
-        </Border>
+        <DataGrid x:Name="VehicleGrid" ItemsSource="{Binding Vehicles}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Internal Number" Binding="{Binding InternalNumber}" />
+                <DataGridTextColumn Header="Denomination" Binding="{Binding Denomination}" />
+                <DataGridTextColumn Header="License Plate" Binding="{Binding LicensePlate}" />
+                <DataGridCheckBoxColumn Header="Is Active" Binding="{Binding IsActive}" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 
 

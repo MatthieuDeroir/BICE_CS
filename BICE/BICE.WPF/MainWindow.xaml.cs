@@ -26,8 +26,8 @@ namespace BICE.WPF
 
         private void Button_Click_Vehicle(object sender, RoutedEventArgs e)
         {
-            VehicleAddWindow vehicleAddWindow = new VehicleAddWindow();
-            vehicleAddWindow.Show();
+            VehicleWindow vehicleWindow = new VehicleWindow();
+            vehicleWindow.Show();
         }
     }
 }
