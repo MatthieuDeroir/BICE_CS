@@ -7,9 +7,6 @@ namespace BICE.BLL
 {
 	public class Material_BLL
 	{
-        //TODO: Add IsLost property
-        //TODO: Add IsUsable property
-        //TODO: Add IsUsable logic (usageCount < maxUsageCount && expirationDate > DateTime.Now && nextControlDate > DateTime.Now && isStored == true)
         [Required(ErrorMessage = "Denomination is required !")]
         [StringLength(255,ErrorMessage = "Denomination cannot exceed 255 characters !")]
         public String Denomination { get; set; }
@@ -33,9 +30,13 @@ namespace BICE.BLL
 
         [Required(ErrorMessage = "Denomination is required !")]
         public Boolean IsStored { get; set; }
+        
+        public Boolean IsLost { get; set; }
+        
+        public Boolean IsUsable { get; set; }
 
 		public Material_BLL(String denomination, String barcode, String category,
-            int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate, Boolean isStored)
+            int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate, Boolean isStored, Boolean isLost, Boolean isUsable)
 		{
             Denomination = denomination;
             Barcode = barcode;
@@ -45,10 +46,18 @@ namespace BICE.BLL
             ExpirationDate = expirationDate;
             NextControlDate = nextControlDate;
             IsStored = isStored;
-            ValidateDates();
+            IsLost = isLost;
+            IsUsable = isUsable;
+            Validate();
+        }
+        
+        public void Validate()
+        {
             ValidateUsageCount();
             ValidateMaxUsageCount();
-		}
+            ValidateDates();
+            ValidateUsability();
+        }
 
         private void ValidateDates()
         {
@@ -75,6 +84,18 @@ namespace BICE.BLL
             {
                 throw new ArgumentException("Max Usage Count cannot be equal or inferior to 0!");
             } 
+        }
+        
+        public void ValidateUsability()
+        {
+            if (UsageCount < MaxUsageCount && ExpirationDate > DateTime.Now && NextControlDate > DateTime.Now && IsStored == true)
+            {
+                IsUsable = true;
+            }
+            else
+            {
+                IsUsable = false;
+            }
         }
     }
 }

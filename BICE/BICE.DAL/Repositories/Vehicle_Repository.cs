@@ -10,14 +10,62 @@ namespace BICE.DAL
     {
         // Implement the CRUD methods for Vehicle
 
-        public override Vehicle_DAL GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public override IEnumerable<Vehicle_DAL> GetAll()
         {
-            throw new NotImplementedException();
+            var query = "SELECT * FROM Vehicles";
+
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                
+                using (var command = new SqlCommand(query, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            yield return new Vehicle_DAL(
+                                (int)reader["id"],
+                                (string)reader["denomination"],
+                                (string)reader["internalNumber"],
+                                (string)reader["licensePlate"],
+                                (bool)reader["isActive"]
+                            );
+                        }
+                    }
+                }
+            }
+        }
+        
+        public override Vehicle_DAL GetById(int id)
+        {
+            var query = "SELECT * FROM Vehicles WHERE id = @id";
+
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id", id);
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new Vehicle_DAL(
+                                (int)reader["id"],
+                                (string)reader["denomination"],
+                                (string)reader["internalNumber"],
+                                (string)reader["licensePlate"],
+                                (bool)reader["isActive"]
+                            );
+                        }
+                    }
+                }
+            }
+
+            return null;
         }
 
         public override Vehicle_DAL Insert(Vehicle_DAL vehicle)
@@ -45,12 +93,42 @@ namespace BICE.DAL
 
         public override Vehicle_DAL Update(Vehicle_DAL vehicle)
         {
-            throw new NotImplementedException();
+            var query = "UPDATE Vehicles SET internalNumber = @internalNumber, denomination = @denomination, licensePlate = @licensePlate, isActive = @isActive WHERE id = @id";
+
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id", vehicle.Id);
+                    command.Parameters.AddWithValue("@internalNumber", vehicle.InternalNumber);
+                    command.Parameters.AddWithValue("@denomination", vehicle.Denomination);
+                    command.Parameters.AddWithValue("@licensePlate", vehicle.LicensePlate);
+                    command.Parameters.AddWithValue("@isActive", vehicle.IsActive);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+
+            return vehicle;
         }
 
         public override void Delete(Vehicle_DAL vehicle)
         {
-            throw new NotImplementedException();
+            var query = "DELETE FROM Vehicles WHERE id = @id";
+
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id", vehicle.Id);
+
+                    command.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

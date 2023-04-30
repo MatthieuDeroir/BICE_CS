@@ -1,0 +1,29 @@
+﻿<Window x:Class="BICE.WPF.VehicleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BICE.WPF"
+        mc:Ignorable="d"
+        Title="Vehicle Window" Height="450" Width="800">
+    <Grid>
+        <DataGrid x:Name="VehicleGrid" ItemsSource="{Binding Vehicles}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Internal Number" Binding="{Binding InternalNumber}" />
+                <DataGridTextColumn Header="Denomination" Binding="{Binding Denomination}" />
+                <DataGridTextColumn Header="License Plate" Binding="{Binding LicensePlate}" />
+                <DataGridCheckBoxColumn Header="Is Active" Binding="{Binding IsActive}" />
+                <DataGridTemplateColumn Header="Actions">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Supprimer" Click="DeleteButton_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+
+
+</Window>
