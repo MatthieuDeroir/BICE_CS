@@ -6,6 +6,8 @@ namespace BICE.DTO
 {
     public class Vehicle_DTO : BaseNamedEntity_DTO
     {
+        public int Id { get; set; }
+        public String Denomination { get; set; }
         public String InternalNumber { get; set; }
         public String LicensePlate { get; set; }
         public Boolean IsActive { get; set; }
