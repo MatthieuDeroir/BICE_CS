@@ -39,6 +39,11 @@ namespace BICE.DAL
         {
             return new Vehicle_BLL(Denomination, InternalNumber, LicensePlate, IsActive);
         }
+        
+        public Vehicle_DAL ToDAL()
+        {
+            return new Vehicle_DAL(Id, Denomination, InternalNumber, LicensePlate, IsActive);
+        }
     }
 
 }

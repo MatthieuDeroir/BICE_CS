@@ -49,8 +49,7 @@ namespace BICE.SRV
         
         public void Delete(Vehicle_DTO vehicleDto)
         {
-            Vehicle_BLL vehicleBll = vehicleDto.ToBLL();
-            Vehicle_DAL vehicleDal = new Vehicle_DAL(vehicleBll);
+            Vehicle_DAL vehicleDal = vehicleDto.ToDAL();
             _vehicleRepository.Delete(vehicleDal);
         }
         
