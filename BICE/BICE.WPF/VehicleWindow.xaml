@@ -14,6 +14,13 @@
                 <DataGridTextColumn Header="Denomination" Binding="{Binding Denomination}" />
                 <DataGridTextColumn Header="License Plate" Binding="{Binding LicensePlate}" />
                 <DataGridCheckBoxColumn Header="Is Active" Binding="{Binding IsActive}" />
+                <DataGridTemplateColumn Header="Actions">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Supprimer" Click="DeleteButton_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

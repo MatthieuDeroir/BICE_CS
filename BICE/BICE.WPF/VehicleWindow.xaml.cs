@@ -30,9 +30,23 @@ namespace BICE.WPF
             // Créez une nouvelle instance du modèle de vue et définissez-la comme contexte de données
             DataContext = new VehicleViewModel();
         }
-        
 
-        
+        private async void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            var vehicle = button.DataContext as Vehicle_DTO;
+
+            MessageBoxResult result = MessageBox.Show("Voulez-vous vraiment supprimer ce véhicule ?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                await (DataContext as VehicleViewModel).DeleteVehicleFromApi(vehicle.Id);
+                (DataContext as VehicleViewModel).Vehicles.Remove(vehicle);
+
+            }
+        }
+
+
 
     }
 }
