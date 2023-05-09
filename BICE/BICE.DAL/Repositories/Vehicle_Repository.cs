@@ -67,6 +67,12 @@ namespace BICE.DAL
 
             return null;
         }
+
+        public Vehicle_DAL GetByInterventionId(int interventionId)
+        {
+            // to fetch all vehicle by intervention id i must do a join between VehicleIntervention and Vehicle
+            
+        }
         
         public Vehicle_DAL GetByInternalNumber(string internalNumber)
         {
