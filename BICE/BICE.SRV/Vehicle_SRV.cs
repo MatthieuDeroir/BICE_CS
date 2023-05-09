@@ -30,6 +30,12 @@ namespace BICE.SRV
             Vehicle_DAL vehicleDal = _vehicleRepository.GetById(id);
             return new Vehicle_DTO(vehicleDal);
         }
+        
+        public Vehicle_DTO GetVehicleByInternalNumber(string internalNumber)
+        {
+            Vehicle_DAL vehicleDal = _vehicleRepository.GetByInternalNumber(internalNumber);
+            return new Vehicle_DTO(vehicleDal);
+        }
 
         public Vehicle_DTO AddVehicle(Vehicle_DTO vehicleDto)
         {

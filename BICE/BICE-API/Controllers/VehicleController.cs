@@ -33,6 +33,17 @@ namespace BICE.API.Controllers
             }
             return Ok(vehicleDto);
         }
+        
+        [HttpGet("{internalNumber}")]
+        public ActionResult<Vehicle_DTO> GetVehicleByInternalNumber(string internalNumber)
+        {
+            Vehicle_DTO vehicleDto = _vehicleService.GetVehicleByInternalNumber(internalNumber);
+            if (vehicleDto == null)
+            {
+                return NotFound();
+            }
+            return Ok(vehicleDto);
+        }
 
         // POST api/vehicle
         [HttpPost]
