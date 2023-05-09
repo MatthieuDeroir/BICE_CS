@@ -35,6 +35,17 @@ namespace BICE.API.Controllers
             return Ok(materialDto);
         }
         
+        [HttpGet("{barcode}")]
+        public ActionResult<Material_DTO> GetMaterialByBarcode(string barcode)
+        {
+            Material_DTO materialDto = _materialService.GetMaterialByBarcode(barcode);
+            if (materialDto == null)
+            {
+                return NotFound();
+            }
+            return Ok(materialDto);
+        }
+        
         [HttpPost]
         public ActionResult<Material_DTO> AddMaterial(Material_DTO materialDto)
         {
