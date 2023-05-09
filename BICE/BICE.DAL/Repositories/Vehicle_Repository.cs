@@ -68,10 +68,34 @@ namespace BICE.DAL
             return null;
         }
 
-        public Vehicle_DAL GetByInterventionId(int interventionId)
+        public IEnumerable<Vehicle_DAL> GetByInterventionId(int interventionId)
         {
             // to fetch all vehicle by intervention id i must do a join between VehicleIntervention and Vehicle
+            var query = "SELECT * FROM Vehicles WHERE id IN (SELECT vehicleId FROM VehicleInterventions WHERE interventionId = @interventionId)";
             
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@interventionId", interventionId);
+                    
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            yield return new Vehicle_DAL(
+                                (int)reader["id"],
+                                (string)reader["denomination"],
+                                (string)reader["internalNumber"],
+                                (string)reader["licensePlate"],
+                                (bool)reader["isActive"]
+                            );
+                        }
+                    }
+                }
+            }
         }
         
         public Vehicle_DAL GetByInternalNumber(string internalNumber)
@@ -100,6 +124,7 @@ namespace BICE.DAL
                         }
                     }
                 }
+                
             }
 
             return null;
