@@ -19,7 +19,7 @@ namespace BICE.Tests.DALTests
         public void VehicleDAL_Insert_Success()
         {
             // Arrange
-            var vehicleBLL = new Vehicle_BLL("A004", "Vehicle D", "AA-123-DD", true);
+            var vehicleBLL = new Vehicle_BLL(1, "A004", "Vehicle D", "AA-123-DD", true);
             var vehicleDAL = new Vehicle_DAL(vehicleBLL);
 
             // Act
