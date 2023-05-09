@@ -33,10 +33,12 @@ namespace BICE.BLL
         
         public Boolean IsLost { get; set; }
         
-        public Boolean IsUsable { get; set; }
+        public Boolean IsRemoved { get; set; }
+        
+        public int VehicleId { get; set; }
 
 		public Material_BLL(String denomination, String barcode, String category,
-            int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate, Boolean isStored, Boolean isLost, Boolean isUsable)
+            int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate, Boolean isStored, Boolean isLost, Boolean isRemoved, int vehicleId)
 		{
             Denomination = denomination;
             Barcode = barcode;
@@ -47,7 +49,7 @@ namespace BICE.BLL
             NextControlDate = nextControlDate;
             IsStored = isStored;
             IsLost = isLost;
-            IsUsable = isUsable;
+            IsRemoved = isRemoved;
             Validate();
         }
         
@@ -90,11 +92,11 @@ namespace BICE.BLL
         {
             if (UsageCount < MaxUsageCount && ExpirationDate > DateTime.Now && NextControlDate > DateTime.Now && IsStored == true)
             {
-                IsUsable = true;
+                IsRemoved = true;
             }
             else
             {
-                IsUsable = false;
+                IsRemoved = false;
             }
         }
     }

@@ -21,6 +21,10 @@ namespace BICE.API.Controllers
         public ActionResult<IEnumerable<Material_DTO>> GetMaterial()
         {
             IEnumerable<Material_DTO> materialDto = _materialService.GetMaterial();
+            if (materialDto == null)
+            {
+                return NotFound();
+            }
             return Ok(materialDto);
         }
         
@@ -32,6 +36,19 @@ namespace BICE.API.Controllers
             {
                 return NotFound();
             }
+            return Ok(materialDto);
+        }
+
+        [HttpGet("{vehicleId}")]
+        public ActionResult<Material_DTO> GetMaterialByVehicleId(int id)
+        {
+            IEnumerable<Material_DTO> materialDto = _materialService.GetMaterialByVehicleId(id);
+            
+            if (materialDto == null)
+            {
+                return NotFound();
+            }
+            
             return Ok(materialDto);
         }
         
