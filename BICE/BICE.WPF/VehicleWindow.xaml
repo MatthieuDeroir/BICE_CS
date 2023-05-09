@@ -7,23 +7,41 @@
         mc:Ignorable="d"
         Title="Vehicle Window" Height="450" Width="800">
     <Grid>
-        <DataGrid x:Name="VehicleGrid" ItemsSource="{Binding Vehicles}" AutoGenerateColumns="False">
+        <Grid.RowDefinitions>
+            <!-- Header -->
+            <RowDefinition Height="Auto" />
+            <!-- Tableau -->
+            <RowDefinition Height="*" />
+            <!-- Bouton -->
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Content="Liste des véhicules" FontSize="24" FontWeight="Bold" Margin="10" />
+
+        <DataGrid Grid.Row="1" x:Name="VehicleGrid" ItemsSource="{Binding Vehicles}" AutoGenerateColumns="False" Margin="10">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
                 <DataGridTextColumn Header="Internal Number" Binding="{Binding InternalNumber}" />
                 <DataGridTextColumn Header="Denomination" Binding="{Binding Denomination}" />
                 <DataGridTextColumn Header="License Plate" Binding="{Binding LicensePlate}" />
-                <DataGridCheckBoxColumn Header="Is Active" Binding="{Binding IsActive}" />
-                <DataGridTemplateColumn Header="Actions">
+                <DataGridTemplateColumn Header="Supprimer">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="Supprimer" Click="DeleteButton_Click"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Mettre à jour">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Mettre à jour" Click="UpdateButton_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+
+        <Button Grid.Row="2" Content="Ajouter un véhicule" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10" Click="AddVehicleButton_Click" />
     </Grid>
-
-
 </Window>

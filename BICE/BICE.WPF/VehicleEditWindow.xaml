@@ -1,29 +1,24 @@
-﻿<Window x:Class="BICE.WPF.VehicleAddWindow"
+﻿<Window x:Class="BICE.WPF.VehicleEditWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BICE.WPF"
         mc:Ignorable="d"
-        Title="Vehicle Window" Height="450" Width="800">
+        Title="Modifier le véhicule" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <Label Content="Ajouter un véhicule à la flotte" FontSize="24" FontWeight="Bold" Margin="10" />
+        <Label Content="Modifier un véhicule de la flotte" FontSize="24" FontWeight="Bold" Margin="10" />
 
         <!-- Form -->
         <Border Grid.Row="1" Margin="10">
             <Grid Background="#FFDADADA">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -47,10 +42,8 @@
                 <Label Content="Est actif :" Grid.Row="3" Grid.Column="0" Margin="5" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
                 <CheckBox x:Name="IsActiveCheckBox" Grid.Row="3" Grid.Column="1" Margin="5" />
 
-                <Button Content="Créer le véhicule" Grid.Row="8" Grid.Column="1" Margin="5" Click="CreateVehicleButton_Click" HorizontalAlignment="Center" Background="#FFC7C7C7" FontSize="14" FontWeight="Bold" />
+                <Button Content="Mettre à jour le véhicule" Grid.Row="4" Grid.Column="1" Margin="5" Click="UpdateVehicleButton_Click" HorizontalAlignment="Center" Background="#FFC7C7C7" FontSize="14" FontWeight="Bold" />
             </Grid>
         </Border>
     </Grid>
-
-
 </Window>
