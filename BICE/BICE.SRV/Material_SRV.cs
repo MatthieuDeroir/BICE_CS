@@ -29,6 +29,23 @@ public IEnumerable<Material_DTO> GetMaterial()
 			Material_DAL materialDal = _materialRepository.GetById(id);
 			return new Material_DTO(materialDal);
 		}
+
+		public IEnumerable<Material_DTO> GetMaterialByVehicleId(int id)
+		{
+			IEnumerable<Material_DAL> materialDal = _materialRepository.GetByVehicleId(id);
+			List<Material_DTO> materialDto = new List<Material_DTO>();
+			foreach (Material_DAL material in materialDal)
+			{
+				materialDto.Add(new Material_DTO(material));
+			}
+			return materialDto;
+		}
+		
+		public Material_DTO GetMaterialByBarcode(string barcode)
+		{
+			Material_DAL materialDal = _materialRepository.GetByBarcode(barcode);
+			return new Material_DTO(materialDal);
+		}
 		
 		public Material_DTO AddMaterial(Material_DTO materialDto)
 		{

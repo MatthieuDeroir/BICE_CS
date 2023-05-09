@@ -22,18 +22,18 @@ namespace BICE.DAL
         }
         
         public VehicleIntervention_DAL(VehicleIntervention_BLL vehicleIntervention)
-            : this(vehicleIntervention.IdVehicle, vehicleIntervention.IdIntervention)
+            : this(vehicleIntervention.VehicleId, vehicleIntervention.InterventionId)
         {
         }
         
         public VehicleIntervention_DAL(int id, VehicleIntervention_BLL vehicleIntervention)
-            : this(id, vehicleIntervention.IdVehicle, vehicleIntervention.IdIntervention)
+            : this(id, vehicleIntervention.VehicleId, vehicleIntervention.InterventionId)
         {
         }
         
         public VehicleIntervention_BLL ToBLL()
         {
-            return new VehicleIntervention_BLL(VehicleId, InterventionId);
+            return new VehicleIntervention_BLL(Id, VehicleId, InterventionId);
         }
 
     }

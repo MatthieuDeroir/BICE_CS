@@ -30,6 +30,18 @@ namespace BICE.SRV
             Vehicle_DAL vehicleDal = _vehicleRepository.GetById(id);
             return new Vehicle_DTO(vehicleDal);
         }
+        
+        public Vehicle_DTO GetVehiclesByInterventionId(int id)
+        {
+            Vehicle_DAL vehicleDal = _vehicleRepository.GetByInterventionId(id);
+            return new Vehicle_DTO(vehicleDal);
+        }
+        
+        public Vehicle_DTO GetVehicleByInternalNumber(string internalNumber)
+        {
+            Vehicle_DAL vehicleDal = _vehicleRepository.GetByInternalNumber(internalNumber);
+            return new Vehicle_DTO(vehicleDal);
+        }
 
         public Vehicle_DTO AddVehicle(Vehicle_DTO vehicleDto)
         {
@@ -49,8 +61,7 @@ namespace BICE.SRV
         
         public void Delete(Vehicle_DTO vehicleDto)
         {
-            Vehicle_BLL vehicleBll = vehicleDto.ToBLL();
-            Vehicle_DAL vehicleDal = new Vehicle_DAL(vehicleBll);
+            Vehicle_DAL vehicleDal = vehicleDto.ToDAL();
             _vehicleRepository.Delete(vehicleDal);
         }
         

@@ -34,6 +34,7 @@ namespace BICE.API.Controllers
             }
             return Ok(interventionDto);
         }
+        
 
         // POST api/intervention
         [HttpPost]
@@ -48,7 +49,7 @@ namespace BICE.API.Controllers
             return CreatedAtAction(nameof(AddIntervention), new { id = insertedIntervention.Id }, insertedIntervention);
         }
         
-        [HttpPut]
+        [HttpPut("{id}")]
         public ActionResult<Intervention_DTO> UpdateIntervention(Intervention_DTO interventionDto)
         {
             if (!ModelState.IsValid)

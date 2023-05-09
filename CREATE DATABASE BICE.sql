@@ -26,6 +26,8 @@ CREATE TABLE Materials (
     nextControlDate DATETIME NULL,
     isStored BIT NOT NULL DEFAULT 1,
     isLost BIT NOT NULL DEFAULT 0,
+    id_vehicle INT NULL,
+    FOREIGN KEY (id_vehicle) REFERENCES Vehicles(id)
 );
 
 -- Table pour stocker les informations sur les interventions
@@ -34,12 +36,11 @@ CREATE TABLE Interventions (
     denomination NVARCHAR(255) NOT NULL,
     description NVARCHAR(MAX) NULL,
     startDate DATETIME NOT NULL,
-    endDate DATETIME NOT NULL,
+    endDate DATETIME NULL,
 );
 
 -- Table pour stocker les vehicules par intervention
 CREATE TABLE VehicleIntervention (
-    id INT PRIMARY KEY IDENTITY(1,1),
     id_vehicle INT NOT NULL,
     id_intervention INT NOT NULL,
     FOREIGN KEY (id_intervention) REFERENCES Interventions(id),
@@ -48,8 +49,12 @@ CREATE TABLE VehicleIntervention (
 
 -- Table pour stocker l'historique d'utilisation du matériel
 CREATE TABLE MaterialUsageHistory (
+    id INT PRIMARY KEY IDENTITY(1,1),
     id_material INT NOT NULL,
     id_vehicle_intervention INT NOT NULL,
+    usage_date DATETIME NOT NULL,
+    is_used BIT NOT NULL DEFAULT 1,
+    is_lost BIT NOT NULL DEFAULT 0,
     FOREIGN KEY (id_material) REFERENCES Materials(id),
     FOREIGN KEY (id_vehicle_intervention) REFERENCES VehicleIntervention(id)
 );

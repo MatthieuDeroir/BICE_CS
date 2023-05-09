@@ -5,6 +5,8 @@ namespace BICE.BLL
 {
     public class Vehicle_BLL
     {
+        public int Id { get; private set; }
+        
         [Required(ErrorMessage = "Denomination is required")]
         [StringLength(255, ErrorMessage = "Denomination cannot exceed 255 characters")]
         public string Denomination { get; private set; }
@@ -19,8 +21,9 @@ namespace BICE.BLL
 
         public bool IsActive { get; private set; }
 
-        public Vehicle_BLL(string internalNumber, string denomination,  string licensePlate, bool isActive)
+        public Vehicle_BLL(int id, string internalNumber, string denomination,  string licensePlate, bool isActive)
         {
+            Id = id;
             Denomination = denomination;
             InternalNumber = internalNumber;
             LicensePlate = licensePlate;

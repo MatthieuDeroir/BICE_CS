@@ -10,6 +10,8 @@ namespace BICE.DAL
         public string InternalNumber { get; set; }
         public string LicensePlate { get; set; }
         public bool IsActive { get; set; }
+        
+        
 
         public Vehicle_DAL(string denomination, string internalNumber, string licensePlate, bool isActive)
         {
@@ -26,7 +28,7 @@ namespace BICE.DAL
         }
 
         public Vehicle_DAL(Vehicle_BLL vehicle)
-            : this(vehicle.Denomination, vehicle.InternalNumber, vehicle.LicensePlate, vehicle.IsActive)
+            : this(vehicle.Id, vehicle.Denomination, vehicle.InternalNumber, vehicle.LicensePlate, vehicle.IsActive)
         {
         }
 
@@ -37,7 +39,12 @@ namespace BICE.DAL
 
         public Vehicle_BLL ToBLL()
         {
-            return new Vehicle_BLL(Denomination, InternalNumber, LicensePlate, IsActive);
+            return new Vehicle_BLL(Id,Denomination, InternalNumber, LicensePlate, IsActive);
+        }
+        
+        public Vehicle_DAL ToDAL()
+        {
+            return new Vehicle_DAL(Id, Denomination, InternalNumber, LicensePlate, IsActive);
         }
     }
 

@@ -34,7 +34,9 @@ namespace BICE.DAL
                         (DateTime?)reader["NextControlDate"],
                         (bool)reader["IsStored"],
                         (bool)reader["IsLost"],
-                        (bool)reader["IsUsable"]
+                        (bool)reader["IsRemoved"],
+                        (int)reader["VehicleId"]
+                        
                     );
                 }
             }
@@ -63,16 +65,79 @@ namespace BICE.DAL
                         (DateTime?)reader["NextControlDate"],
                         (bool)reader["IsStored"],
                         (bool)reader["IsLost"],
-                        (bool)reader["IsUsable"]
+                        (bool)reader["IsRemoved"],
+                        (int)reader["VehicleId"]
                     ));
                 }
             }
             return materials;
         }
 
+        public IEnumerable<Material_DAL> GetByVehicleId(int id)
+        {
+            var query = "SELECT * FROM Materials WHERE VehicleId = @VehicleId";
+            var materials = new List<Material_DAL>();
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                var command = new SqlCommand(query, connection);
+                connection.Open();
+                var reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    materials.Add(new Material_DAL(
+                        (int)reader["Id"],
+                        (string)reader["Denomination"],
+                        (string)reader["Barcode"],
+                        (string)reader["Category"],
+                        (int)reader["UsageCount"],
+                        (int?)reader["MaxUsageCount"],
+                        (DateTime?)reader["ExpirationDate"],
+                        (DateTime?)reader["NextControlDate"],
+                        (bool)reader["IsStored"],
+                        (bool)reader["IsLost"],
+                        (bool)reader["IsRemoved"],
+                        (int)reader["VehicleId"]
+                    ));
+                }
+            }
+            return materials;
+            
+        }
+        
+        public Material_DAL GetByBarcode(string barcode)
+        {
+            var query = "SELECT * FROM Materials WHERE Barcode = @Barcode";
+            
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                var command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Barcode", barcode);
+                connection.Open();
+                var reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    return new Material_DAL(
+                        (int)reader["Id"],
+                        (string)reader["Denomination"],
+                        (string)reader["Barcode"],
+                        (string)reader["Category"],
+                        (int)reader["UsageCount"],
+                        (int?)reader["MaxUsageCount"],
+                        (DateTime?)reader["ExpirationDate"],
+                        (DateTime?)reader["NextControlDate"],
+                        (bool)reader["IsStored"],
+                        (bool)reader["IsLost"],
+                        (bool)reader["IsRemoved"],
+                        (int)reader["VehicleId"]
+                    );
+                }
+            }
+            return null;
+        }
+
         public override Material_DAL Insert(Material_DAL material)
         {
-            var query = "INSERT INTO Materials (Denomination, Barcode, Category, UsageCount, MaxUsageCount, ExpirationDate, NextControlDate, IsStored, IsLost, IsUsable) VALUES (@Denomination, @Barcode, @Category, @UsageCount, @MaxUsageCount, @ExpirationDate, @NextControlDate, @IsStored, @IsLost, @IsUsable)";
+            var query = "INSERT INTO Materials (Denomination, Barcode, Category, UsageCount, MaxUsageCount, ExpirationDate, NextControlDate, IsStored, IsLost, IsRemoved) VALUES (@Denomination, @Barcode, @Category, @UsageCount, @MaxUsageCount, @ExpirationDate, @NextControlDate, @IsStored, @IsLost, @IsRemoved)";
             using (var connection = new SqlConnection(ConnectionString))
             {
                 var command = new SqlCommand(query, connection);
@@ -85,7 +150,8 @@ namespace BICE.DAL
                 command.Parameters.AddWithValue("@NextControlDate", material.NextControlDate);
                 command.Parameters.AddWithValue("@IsStored", material.IsStored);
                 command.Parameters.AddWithValue("@IsLost", material.IsLost);
-                command.Parameters.AddWithValue("@IsUsable", material.IsUsable);
+                command.Parameters.AddWithValue("@IsRemoved", material.IsRemoved);
+                command.Parameters.AddWithValue("@VehicleId", material.VehicleId);
                 connection.Open();
                 command.ExecuteNonQuery();
             }
@@ -94,7 +160,7 @@ namespace BICE.DAL
 
         public override Material_DAL Update(Material_DAL material)
         {
-            var query = "UPDATE Materials SET Denomination = @Denomination, Barcode = @Barcode, Category = @Category, UsageCount = @UsageCount, MaxUsageCount = @MaxUsageCount, ExpirationDate = @ExpirationDate, NextControlDate = @NextControlDate, IsStored = @IsStored, IsLost = @IsLost, IsUsable = @IsUsable WHERE Id = @Id";
+            var query = "UPDATE Materials SET Denomination = @Denomination, Barcode = @Barcode, Category = @Category, UsageCount = @UsageCount, MaxUsageCount = @MaxUsageCount, ExpirationDate = @ExpirationDate, NextControlDate = @NextControlDate, IsStored = @IsStored, IsLost = @IsLost, IsRemoved = @IsRemoved WHERE Id = @Id";
             using (var connection = new SqlConnection(ConnectionString))
             {
                 var command = new SqlCommand(query, connection);
@@ -108,7 +174,8 @@ namespace BICE.DAL
                 command.Parameters.AddWithValue("@NextControlDate", material.NextControlDate);
                 command.Parameters.AddWithValue("@IsStored", material.IsStored);
                 command.Parameters.AddWithValue("@IsLost", material.IsLost);
-                command.Parameters.AddWithValue("@IsUsable", material.IsUsable);
+                command.Parameters.AddWithValue("@IsRemoved", material.IsRemoved);
+                command.Parameters.AddWithValue("@VehicleId", material.VehicleId);
                 connection.Open();
                 command.ExecuteNonQuery();
             }

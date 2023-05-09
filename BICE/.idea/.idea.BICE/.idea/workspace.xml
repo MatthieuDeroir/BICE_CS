@@ -9,7 +9,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a90e9a96-dbd4-48f2-9ad9-9809aa701d45" name="Changes" comment="" />
+
+    <list default="true" id="a90e9a96-dbd4-48f2-9ad9-9809aa701d45" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BICE/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BICE/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE-API/Controllers/InterventionController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE-API/Controllers/InterventionController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE-API/Controllers/MaterialController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE-API/Controllers/MaterialController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE-API/Controllers/VehicleController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE-API/Controllers/VehicleController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE-API/Controllers/VehicleMaterialController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.BLL/Material_BLL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.BLL/Material_BLL.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.BLL/Vehicle_BLL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.BLL/Vehicle_BLL.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DAL/Material_DAL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Material_DAL.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DAL/Repositories/Material_Repository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Repositories/Material_Repository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DAL/Repositories/Repository_DAL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Repositories/Repository_DAL.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DAL/Vehicle_DAL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Vehicle_DAL.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DTO/Material_DTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DTO/Material_DTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DTO/Vehicle_DTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DTO/Vehicle_DTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.SRV/Material_SRV.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.SRV/Material_SRV.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CREATE DATABASE BICE.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../CREATE DATABASE BICE.sql" afterDir="false" />
+    </list>
+
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,27 +41,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;/Users/mderoir/Library/Application Support/JetBrains/Rider2023.1/resharper-host/DecompilerCache&quot;,
-      &quot;/Users/mderoir/Library/Application Support/JetBrains/Rider2023.1/resharper-host/SourcesCache&quot;,
-      &quot;/Users/mderoir/.local/share/Symbols/src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "/Users/mderoir/Library/Application Support/JetBrains/Rider2023.1/resharper-host/DecompilerCache",
+      "/Users/mderoir/Library/Application Support/JetBrains/Rider2023.1/resharper-host/SourcesCache",
+      "/Users/mderoir/.local/share/Symbols/src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.BICE.API: http">
     <configuration name="BICE.WPF" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
@@ -114,6 +132,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
