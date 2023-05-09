@@ -71,7 +71,7 @@ namespace BICE.DAL
         public IEnumerable<Vehicle_DAL> GetByInterventionId(int interventionId)
         {
             // to fetch all vehicle by intervention id i must do a join between VehicleIntervention and Vehicle
-            var query = "SELECT * FROM Vehicles WHERE id IN (SELECT vehicleId FROM VehicleInterventions WHERE interventionId = @interventionId)";
+            var query = "SELECT * FROM Vehicles WHERE id IN (SELECT id_vehicle FROM VehicleIntervention WHERE id_intervention = @interventionId)";
             
             using (var connection = new SqlConnection(ConnectionString))
             {

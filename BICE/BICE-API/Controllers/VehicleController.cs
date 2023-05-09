@@ -34,7 +34,7 @@ namespace BICE.API.Controllers
             return Ok(vehicleDto);
         }
         
-        [HttpGet("{interventionId}/vehicles")]
+        [HttpGet("intervention/{interventionId}")]
         public ActionResult<Intervention_DTO> GetVehiclesByInterventionId(int interventionId)
         {
             IEnumerable<Vehicle_DTO> vehicleDto = _vehicleService.GetVehiclesByInterventionId(interventionId);

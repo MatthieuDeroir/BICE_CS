@@ -39,7 +39,7 @@ namespace BICE.API.Controllers
             return Ok(materialDto);
         }
 
-        [HttpGet("{vehicleId}")]
+        [HttpGet("vehicle/{vehicleId}")]
         public ActionResult<Material_DTO> GetMaterialByVehicleId(int id)
         {
             IEnumerable<Material_DTO> materialDto = _materialService.GetMaterialByVehicleId(id);
@@ -52,7 +52,7 @@ namespace BICE.API.Controllers
             return Ok(materialDto);
         }
         
-        [HttpGet("{barcode}")]
+        [HttpGet("barcode/{barcode}")]
         public ActionResult<Material_DTO> GetMaterialByBarcode(string barcode)
         {
             Material_DTO materialDto = _materialService.GetMaterialByBarcode(barcode);
