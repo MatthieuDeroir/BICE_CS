@@ -16,7 +16,8 @@ namespace BICE.DTO
 		public DateTime? NextControlDate { get; set; }
 		public Boolean IsStored { get; set; }
 		public Boolean IsLost { get; set; }
-		public Boolean IsUsable { get; set; }
+		public Boolean IsRemoved { get; set; }
+		public int VehicleId { get; set; }
 
 		public Material_DTO(Material_BLL materialBll)
 		{
@@ -29,7 +30,8 @@ namespace BICE.DTO
 			NextControlDate = materialBll.NextControlDate;
 			IsStored = materialBll.IsStored;
 			IsLost = materialBll.IsLost;
-			IsUsable = materialBll.IsUsable;
+			IsRemoved = materialBll.IsRemoved;
+			VehicleId = materialBll.VehicleId;
 		}
 
 		public Material_DTO(Material_DAL materialDal)
@@ -43,21 +45,14 @@ namespace BICE.DTO
 			NextControlDate = materialDal.NextControlDate;
 			IsStored = materialDal.IsStored;
 			IsLost = materialDal.IsLost;
-			IsUsable = materialDal.IsUsable;
+			IsRemoved = materialDal.IsRemoved;
+			VehicleId = materialDal.VehicleId;
 		}
 		
 		public Material_BLL ToBLL()
 		{
-			return new Material_BLL(Denomination, Barcode, Category, UsageCount, MaxUsageCount, ExpirationDate, NextControlDate, IsStored, IsLost, IsUsable);
+			return new Material_BLL(Denomination, Barcode, Category, UsageCount, MaxUsageCount, ExpirationDate, NextControlDate, IsStored, IsLost, IsRemoved, VehicleId);
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-	}
+    }
 }
 

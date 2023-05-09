@@ -18,6 +18,7 @@ namespace BICE.DTO
 
         public Vehicle_DTO(Vehicle_BLL vehicle)
         {
+            Id = vehicle.Id;
             Denomination = vehicle.Denomination;
             InternalNumber = vehicle.InternalNumber;
             LicensePlate = vehicle.LicensePlate;
@@ -35,7 +36,7 @@ namespace BICE.DTO
 
         public Vehicle_BLL ToBLL()
         {
-            return new Vehicle_BLL(InternalNumber, Denomination, LicensePlate, IsActive);
+            return new Vehicle_BLL(Id, InternalNumber, Denomination, LicensePlate, IsActive);
         }
 
         public Vehicle_DAL ToDAL()
