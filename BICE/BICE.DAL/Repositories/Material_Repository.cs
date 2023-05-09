@@ -69,6 +69,36 @@ namespace BICE.DAL
             }
             return materials;
         }
+        
+        public Material_DAL GetByBarcode(string barcode)
+        {
+            var query = "SELECT * FROM Materials WHERE Barcode = @Barcode";
+            
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                var command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Barcode", barcode);
+                connection.Open();
+                var reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    return new Material_DAL(
+                        (int)reader["Id"],
+                        (string)reader["Denomination"],
+                        (string)reader["Barcode"],
+                        (string)reader["Category"],
+                        (int)reader["UsageCount"],
+                        (int?)reader["MaxUsageCount"],
+                        (DateTime?)reader["ExpirationDate"],
+                        (DateTime?)reader["NextControlDate"],
+                        (bool)reader["IsStored"],
+                        (bool)reader["IsLost"],
+                        (bool)reader["IsUsable"]
+                    );
+                }
+            }
+            return null;
+        }
 
         public override Material_DAL Insert(Material_DAL material)
         {

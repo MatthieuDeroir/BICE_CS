@@ -30,6 +30,12 @@ public IEnumerable<Material_DTO> GetMaterial()
 			return new Material_DTO(materialDal);
 		}
 		
+		public Material_DTO GetMaterialByBarcode(string barcode)
+		{
+			Material_DAL materialDal = _materialRepository.GetByBarcode(barcode);
+			return new Material_DTO(materialDal);
+		}
+		
 		public Material_DTO AddMaterial(Material_DTO materialDto)
 		{
 			Material_BLL materialBll = materialDto.ToBLL();
