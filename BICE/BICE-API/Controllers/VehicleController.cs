@@ -58,7 +58,7 @@ namespace BICE.API.Controllers
             return CreatedAtAction(nameof(AddVehicle), new { id = insertedVehicle.Id }, insertedVehicle);
         }
         
-        [HttpPut]
+        [HttpPut("{id}")]
         public ActionResult<Vehicle_DTO> UpdateVehicle(Vehicle_DTO vehicleDto)
         {
             if (!ModelState.IsValid)
