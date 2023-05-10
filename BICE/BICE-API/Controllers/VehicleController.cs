@@ -34,16 +34,7 @@ namespace BICE.API.Controllers
             return Ok(vehicleDto);
         }
         
-        [HttpGet("intervention/{interventionId}")]
-        public ActionResult<Intervention_DTO> GetVehiclesByInterventionId(int interventionId)
-        {
-            IEnumerable<Vehicle_DTO> vehicleDto = _vehicleService.GetVehiclesByInterventionId(interventionId);
-            if (vehicleDto == null)
-            {
-                return NotFound();
-            }
-            return Ok(vehicleDto);
-        }
+        
         
         [HttpGet("{internalNumber}")]
         public ActionResult<Vehicle_DTO> GetVehicleByInternalNumber(string internalNumber)
@@ -69,7 +60,8 @@ namespace BICE.API.Controllers
             return CreatedAtAction(nameof(AddVehicle), new { id = insertedVehicle.Id }, insertedVehicle);
         }
         
-        [HttpPut("{id}")]
+        
+        [HttpPut]
         public ActionResult<Vehicle_DTO> UpdateVehicle(Vehicle_DTO vehicleDto)
         {
             if (!ModelState.IsValid)

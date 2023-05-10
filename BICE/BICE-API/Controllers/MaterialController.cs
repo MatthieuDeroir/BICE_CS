@@ -40,9 +40,9 @@ namespace BICE.API.Controllers
         }
 
         [HttpGet("vehicle/{vehicleId}")]
-        public ActionResult<Material_DTO> GetMaterialByVehicleId(int id)
+        public ActionResult<Material_DTO> GetMaterialByVehicleId(int vehicleId)
         {
-            IEnumerable<Material_DTO> materialDto = _materialService.GetMaterialByVehicleId(id);
+            IEnumerable<Material_DTO> materialDto = _materialService.GetMaterialByVehicleId(vehicleId);
             
             if (materialDto == null)
             {
@@ -75,6 +75,9 @@ namespace BICE.API.Controllers
             return CreatedAtAction(nameof(AddMaterial), new { id = insertedMaterial.Id }, insertedMaterial);
         }
         
+        [HttpPost("history")]
+        public ActionResult<>
+        
         [HttpPut]
         public ActionResult<Material_DTO> UpdateMaterial(Material_DTO materialDto)
         {
@@ -99,5 +102,7 @@ namespace BICE.API.Controllers
             _materialService.Delete(materialDto);
             return Ok();
         }
+        
+        
     }
 }
