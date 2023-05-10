@@ -17,7 +17,7 @@ namespace BICE.DTO
 		public Boolean IsStored { get; set; }
 		public Boolean IsLost { get; set; }
 		public Boolean IsRemoved { get; set; }
-		public int VehicleId { get; set; }
+		public int? VehicleId { get; set; }
 
 		public Material_DTO(Material_BLL materialBll)
 		{

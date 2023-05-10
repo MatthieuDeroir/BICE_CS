@@ -16,6 +16,7 @@ namespace BICE.DAL.Repositories
         {
             var builder = new ConfigurationBuilder();
 
+
             // connection string for VICOOOOOOOOOOOOOO0000000000 🙂
             ConnectionString = "Data Source=localhost;Integrated Security=True";
 
@@ -23,6 +24,17 @@ namespace BICE.DAL.Repositories
             //var config = builder.AddJsonFile("appsettings.json", false, true).Build();
             //ConnectionString =
             //    "Data Source=localhost,1433;Initial Catalog=BICE_DATABASE;User Id=sa;Password=78934797497xX!!;";
+
+
+          
+          // connection string for VICOOOOOOOOOOOOOO0000000000 :)  
+             // ConnectionString = "Data Source=localhost;Integrated Security=True";
+
+          // connection string for _M_A_A_W_O_X_
+            var config = builder.AddJsonFile("appsettings.json", false, true).Build();
+            ConnectionString =
+                "Data Source=localhost,1433;Initial Catalog=BICE_DATABASE;User Id=sa;Password=78934797497xX!!;";
+          
 
             Connection = new SqlConnection(ConnectionString);
 

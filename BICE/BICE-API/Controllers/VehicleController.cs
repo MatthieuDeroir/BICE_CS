@@ -34,6 +34,7 @@ namespace BICE.API.Controllers
             return Ok(vehicleDto);
         }
         
+
         [HttpGet("{interventionId}/vehicles")]
         public ActionResult<Intervention_DTO> GetVehiclesByInterventionId(int interventionId)
         {
@@ -44,6 +45,7 @@ namespace BICE.API.Controllers
             }
             return Ok(vehicleDto);
         }
+
         
         [HttpGet("{internalNumber}")]
         public ActionResult<Vehicle_DTO> GetVehicleByInternalNumber(string internalNumber)
@@ -68,7 +70,7 @@ namespace BICE.API.Controllers
             Vehicle_DTO insertedVehicle = _vehicleService.AddVehicle(vehicleDto);
             return CreatedAtAction(nameof(AddVehicle), new { id = insertedVehicle.Id }, insertedVehicle);
         }
-        
+
         [HttpPut]
         public ActionResult<Vehicle_DTO> UpdateVehicle(Vehicle_DTO vehicleDto)
         {

@@ -35,10 +35,10 @@ namespace BICE.BLL
         
         public Boolean IsRemoved { get; set; }
         
-        public int VehicleId { get; set; }
+        public int? VehicleId { get; set; }
 
 		public Material_BLL(String denomination, String barcode, String category,
-            int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate, Boolean isStored, Boolean isLost, Boolean isRemoved, int vehicleId)
+            int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate, Boolean isStored, Boolean isLost, Boolean isRemoved, int? vehicleId)
 		{
             Denomination = denomination;
             Barcode = barcode;
@@ -50,9 +50,45 @@ namespace BICE.BLL
             IsStored = isStored;
             IsLost = isLost;
             IsRemoved = isRemoved;
+            VehicleId = vehicleId;
             Validate();
         }
         
+        public void UpdateUsageCount()
+        {
+            UsageCount++;
+        }
+        
+        public void PutInStorage()
+        {
+            VehicleId = null;
+            IsStored = true;
+        }
+        
+        public void PutInVehicle(int vehicleId)
+        {
+            VehicleId = vehicleId;
+            IsStored = false;
+        }
+        
+        public void HasBeenLost()
+        {
+            IsLost = true;
+            VehicleId = null;
+            IsStored = false;
+        }
+
+        public void HasBeenRemoved()
+        {
+            IsRemoved = true;
+            VehicleId = null;
+        }
+        
+        public void HasBeenRestored()
+        {
+            IsRemoved = false;
+        }
+
         public void Validate()
         {
             ValidateUsageCount();
@@ -93,6 +129,7 @@ namespace BICE.BLL
             if (UsageCount < MaxUsageCount && ExpirationDate > DateTime.Now && NextControlDate > DateTime.Now && IsStored == true)
             {
                 IsRemoved = true;
+                
             }
             else
             {

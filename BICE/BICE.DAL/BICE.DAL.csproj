@@ -18,7 +18,4 @@
     <None Remove="Repositories\" />
     <None Remove="Interfaces\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
 </Project>

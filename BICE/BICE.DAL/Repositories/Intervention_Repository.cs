@@ -87,6 +87,25 @@ namespace BICE.DAL
             }
             return intervention;
         }
+        
+        public async Task AddVehicleToIntervention(int interventionId, int vehicleId)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                await connection.OpenAsync();
+
+                var query = "INSERT INTO VehicleIntervention (id_intervention, id_vehicle) VALUES (@interventionId, @vehicleId)";
+
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@interventionId", interventionId);
+                    command.Parameters.AddWithValue("@vehicleId", vehicleId);
+
+                    await command.ExecuteNonQueryAsync();
+                }
+            }
+        }
+
 
         
         public override Intervention_DAL Insert(Intervention_DAL intervention)
@@ -126,6 +145,34 @@ namespace BICE.DAL
                 }
             }
         }
-        
+
+        public IEnumerable<Vehicle_DAL> GetVehiclesByInterventionId(int interventionId)
+        {
+            var query = "SELECT * FROM Vehicles WHERE id IN (SELECT id_vehicle FROM VehicleIntervention WHERE id_intervention = @interventionId)";
+
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@interventionId", interventionId);
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            yield return new Vehicle_DAL(
+                                (int)reader["id"], 
+                                (string)reader["denomination"],
+                                (string)reader["internalNumber"],
+                                (string)reader["licensePlate"],
+                                (bool)reader["isActive"]
+                            );
+                        }
+                    }
+                }
+            }
+        }
     }
 }
