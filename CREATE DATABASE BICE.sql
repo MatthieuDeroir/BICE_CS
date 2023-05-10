@@ -26,6 +26,7 @@ CREATE TABLE Materials (
     nextControlDate DATETIME NULL,
     isStored BIT NOT NULL DEFAULT 1,
     isLost BIT NOT NULL DEFAULT 0,
+    isRemoved BIT NOT NULL DEFAULT 0,
     id_vehicle INT NULL,
     FOREIGN KEY (id_vehicle) REFERENCES Vehicles(id)
 );
@@ -41,6 +42,7 @@ CREATE TABLE Interventions (
 
 -- Table pour stocker les vehicules par intervention
 CREATE TABLE VehicleIntervention (
+    id INT PRIMARY KEY IDENTITY(1,1),
     id_vehicle INT NOT NULL,
     id_intervention INT NOT NULL,
     FOREIGN KEY (id_intervention) REFERENCES Interventions(id),

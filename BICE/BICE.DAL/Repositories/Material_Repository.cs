@@ -177,11 +177,12 @@ namespace BICE.DAL
                 command.Parameters.AddWithValue("@UsageCount", material.UsageCount);
                 command.Parameters.AddWithValue("@MaxUsageCount", material.MaxUsageCount.HasValue ? (object)material.MaxUsageCount.Value : DBNull.Value);
                 command.Parameters.AddWithValue("@ExpirationDate", material.ExpirationDate.HasValue ? (object)material.ExpirationDate.Value : DBNull.Value);
-                command.Parameters.AddWithValue("@NextControl", material.NextControlDate.HasValue ? (object)material.NextControlDate.Value : DBNull.Value);
+                command.Parameters.AddWithValue("@NextControlDate", material.NextControlDate.HasValue ? (object)material.NextControlDate.Value : DBNull.Value);
                 command.Parameters.AddWithValue("@IsStored", true);
                 command.Parameters.AddWithValue("@IsLost", false);
                 command.Parameters.AddWithValue("@IsRemoved", false);
-                command.Parameters.AddWithValue("@VehicleId", null);
+                command.Parameters.AddWithValue("@VehicleId", material.VehicleId.HasValue ? (object)material.VehicleId.Value : DBNull.Value);
+
                 connection.Open();
                 command.ExecuteNonQuery();
             }
@@ -201,11 +202,12 @@ namespace BICE.DAL
                 command.Parameters.AddWithValue("@UsageCount", material.UsageCount);
                 command.Parameters.AddWithValue("@MaxUsageCount", material.MaxUsageCount.HasValue ? (object)material.MaxUsageCount.Value : DBNull.Value);
                 command.Parameters.AddWithValue("@ExpirationDate", material.ExpirationDate.HasValue ? (object)material.ExpirationDate.Value : DBNull.Value);
-                command.Parameters.AddWithValue("@NextControl", material.NextControlDate.HasValue ? (object)material.NextControlDate.Value : DBNull.Value);
+                command.Parameters.AddWithValue("@NextControlDate", material.NextControlDate.HasValue ? (object)material.NextControlDate.Value : DBNull.Value);
                 command.Parameters.AddWithValue("@IsStored", material.IsStored);
                 command.Parameters.AddWithValue("@IsLost", material.IsLost);
                 command.Parameters.AddWithValue("@IsRemoved", material.IsRemoved);
-                command.Parameters.AddWithValue("@VehicleId", material.VehicleId);
+                command.Parameters.AddWithValue("@VehicleId", material.VehicleId.HasValue ? (object)material.VehicleId.Value : DBNull.Value);
+
                 connection.Open();
                 command.ExecuteNonQuery();
             }

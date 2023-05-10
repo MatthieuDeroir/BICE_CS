@@ -4,6 +4,7 @@ using System.Xml.Linq;
 using BICE.BLL;
 using BICE.DAL;
 
+
 namespace BICE.DTO
 {
 	public class Material_DTO : BaseNamedEntity_DTO
