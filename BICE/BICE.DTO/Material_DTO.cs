@@ -19,6 +19,7 @@ namespace BICE.DTO
 		public Boolean? IsRemoved { get; set; }
 		public int? VehicleId { get; set; }
 
+		//DTO when is created
 		public Material_DTO(string barcode, string category, int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate)
 		{
 			Barcode = barcode;
@@ -27,6 +28,10 @@ namespace BICE.DTO
 			MaxUsageCount = maxUsageCount;
 			ExpirationDate = expirationDate;
 			NextControlDate = nextControlDate;
+			IsStored = true;
+			IsLost = false;
+			IsRemoved = false;
+			VehicleId = null;
 		}
 
 		public Material_DTO(Material_BLL materialBll)
