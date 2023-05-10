@@ -42,6 +42,12 @@ public IEnumerable<Material_DTO> GetMaterial()
 			return materialDto;
 		}
 		
+		public Material_DTO GetMaterialByBarcode(string barcode)
+		{
+			Material_DAL materialDal = _materialRepository.GetByBarcode(barcode);
+			return new Material_DTO(materialDal);
+		}
+		
 		public IEnumerable<Material_DTO> GetMaterialsByBarcodes(List<string> barcodes)
 		{
 			IEnumerable<Material_DAL> materialDals = _materialRepository.GetMaterialsByBarcodes(barcodes);
@@ -52,7 +58,7 @@ public IEnumerable<Material_DTO> GetMaterial()
 			}
 			return materialDto;
 		}
-		
+
 		public Material_DTO AddMaterial(Material_DTO materialDto)
 		{
 			Material_BLL materialBll = materialDto.ToBLL();
@@ -74,24 +80,10 @@ public IEnumerable<Material_DTO> GetMaterial()
 			return insertedMaterials;
 		}
 		
-		public Material_DTO Update(Material_DTO materialDto)
-		{
-			Material_BLL materialBll = materialDto.ToBLL();
-			Material_DAL materialDal = new Material_DAL(materialBll);
-			Material_DAL updatedMaterial = _materialRepository.Update(materialDal);
-			return new Material_DTO(updatedMaterial);
-		}
-		
-		public void Delete(Material_DTO materialDto)
-		{
-			Material_BLL materialBll = materialDto.ToBLL();
-			Material_DAL materialDal = new Material_DAL(materialBll);
-			_materialRepository.Delete(materialDal);
-		}
-
 		public IEnumerable<Material_DTO> PrepareVehicle(int vehicleId, List<string> barcodes)
 		{
 			IEnumerable<Material_DAL> materialsToStore = _materialRepository.GetMaterialsByVehicleId(vehicleId);
+			
 			foreach (Material_DAL material in materialsToStore)
 			{
 				Material_DTO materialDto = new Material_DTO(material);
@@ -115,12 +107,25 @@ public IEnumerable<Material_DTO> GetMaterial()
 			
 			return materialDtos;
 		}
-
-		public Material_DTO GetMaterialByBarcode(string barcode)
+		
+		public Material_DTO Update(Material_DTO materialDto)
 		{
-			Material_DAL materialDal = _materialRepository.GetMaterialByBarcode(barcode);
-			return new Material_DTO(materialDal);
+			Material_BLL materialBll = materialDto.ToBLL();
+			Material_DAL materialDal = new Material_DAL(materialBll);
+			Material_DAL updatedMaterial = _materialRepository.Update(materialDal);
+			return new Material_DTO(updatedMaterial);
 		}
+		
+		public void Delete(Material_DTO materialDto)
+		{
+			Material_BLL materialBll = materialDto.ToBLL();
+			Material_DAL materialDal = new Material_DAL(materialBll);
+			_materialRepository.Delete(materialDal);
+		}
+
+		
+
+		
 	}
 }
 

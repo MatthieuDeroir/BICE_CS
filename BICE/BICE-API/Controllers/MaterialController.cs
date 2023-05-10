@@ -74,11 +74,20 @@ namespace BICE.API.Controllers
             Material_DTO insertedMaterial = _materialService.AddMaterial(materialDto);
             return CreatedAtAction(nameof(AddMaterial), new { id = insertedMaterial.Id }, insertedMaterial);
         }
+
+
+        [HttpPost("insert-list")]
+        public ActionResult<Material_DTO> InsertMaterialList(IEnumerable<Material_DTO> materialDtos)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            IEnumerable<Material_DTO> insertedMaterials = _materialService.AddMaterials(materialDtos);
+            return Ok(insertedMaterials);
+        }
         
-        // [HttpPost("history")]
-        // public ActionResult<>
-        // [HttpPost("insert-list")]
-        // public ActionResult<Material_DTO> InsertMaterialList(IEnumerable<Material_DTO> materialDtos)
+        
         [HttpPut("vehicle-preparation/{vehicleId}")]
         public IActionResult PrepareVehicle(int vehicleId, [FromBody] List<string> barcodes)
         {
@@ -92,6 +101,9 @@ namespace BICE.API.Controllers
                 return BadRequest($"Error preparing vehicle: {ex.Message}");
             }
         }
+        
+        // [HttpPost("history")]
+        // public ActionResult<>
 
         [HttpPut]
         public ActionResult<Material_DTO> UpdateMaterial(Material_DTO materialDto)
