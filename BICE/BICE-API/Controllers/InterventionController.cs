@@ -49,7 +49,7 @@ namespace BICE.API.Controllers
             return CreatedAtAction(nameof(AddIntervention), new { id = insertedIntervention.Id }, insertedIntervention);
         }
         
-        [HttpGet("/{interventionId}/vehicles")]
+        [HttpGet("{interventionId}/vehicles")]
         public ActionResult<Intervention_DTO> GetVehiclesByInterventionId(int interventionId)
         {
             IEnumerable<Vehicle_DTO> vehicleDto = _interventionService.GetVehiclesByInterventionId(interventionId);
