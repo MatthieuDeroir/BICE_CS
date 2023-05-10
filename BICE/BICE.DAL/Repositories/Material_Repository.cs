@@ -175,9 +175,9 @@ namespace BICE.DAL
                 command.Parameters.AddWithValue("@Barcode", material.Barcode);
                 command.Parameters.AddWithValue("@Category", material.Category);
                 command.Parameters.AddWithValue("@UsageCount", material.UsageCount);
-                command.Parameters.AddWithValue("@MaxUsageCount", material.MaxUsageCount);
-                command.Parameters.AddWithValue("@ExpirationDate", material.ExpirationDate);
-                command.Parameters.AddWithValue("@NextControlDate", material.NextControlDate);
+                command.Parameters.AddWithValue("@MaxUsageCount", material.MaxUsageCount.HasValue ? (object)material.MaxUsageCount.Value : DBNull.Value);
+                command.Parameters.AddWithValue("@ExpirationDate", material.ExpirationDate.HasValue ? (object)material.ExpirationDate.Value : DBNull.Value);
+                command.Parameters.AddWithValue("@NextControl", material.NextControlDate.HasValue ? (object)material.NextControlDate.Value : DBNull.Value);
                 command.Parameters.AddWithValue("@IsStored", true);
                 command.Parameters.AddWithValue("@IsLost", false);
                 command.Parameters.AddWithValue("@IsRemoved", false);
@@ -199,9 +199,9 @@ namespace BICE.DAL
                 command.Parameters.AddWithValue("@Barcode", material.Barcode);
                 command.Parameters.AddWithValue("@Category", material.Category);
                 command.Parameters.AddWithValue("@UsageCount", material.UsageCount);
-                command.Parameters.AddWithValue("@MaxUsageCount", material.MaxUsageCount);
-                command.Parameters.AddWithValue("@ExpirationDate", material.ExpirationDate);
-                command.Parameters.AddWithValue("@NextControlDate", material.NextControlDate);
+                command.Parameters.AddWithValue("@MaxUsageCount", material.MaxUsageCount.HasValue ? (object)material.MaxUsageCount.Value : DBNull.Value);
+                command.Parameters.AddWithValue("@ExpirationDate", material.ExpirationDate.HasValue ? (object)material.ExpirationDate.Value : DBNull.Value);
+                command.Parameters.AddWithValue("@NextControl", material.NextControlDate.HasValue ? (object)material.NextControlDate.Value : DBNull.Value);
                 command.Parameters.AddWithValue("@IsStored", material.IsStored);
                 command.Parameters.AddWithValue("@IsLost", material.IsLost);
                 command.Parameters.AddWithValue("@IsRemoved", material.IsRemoved);
