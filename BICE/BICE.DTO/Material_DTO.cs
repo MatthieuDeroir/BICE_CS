@@ -14,12 +14,12 @@ namespace BICE.DTO
 		public int? MaxUsageCount { get; set; }
 		public DateTime? ExpirationDate { get; set; }
 		public DateTime? NextControlDate { get; set; }
-		public Boolean IsStored { get; set; }
-		public Boolean IsLost { get; set; }
-		public Boolean IsRemoved { get; set; }
+		public Boolean? IsStored { get; set; }
+		public Boolean? IsLost { get; set; }
+		public Boolean? IsRemoved { get; set; }
 		public int? VehicleId { get; set; }
 
-		public Material_DTO(string barcode, string category, int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate, bool isStored, bool isLost, bool isRemoved, int? vehicleId)
+		public Material_DTO(string barcode, string category, int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate)
 		{
 			Barcode = barcode;
 			Category = category;
@@ -27,10 +27,6 @@ namespace BICE.DTO
 			MaxUsageCount = maxUsageCount;
 			ExpirationDate = expirationDate;
 			NextControlDate = nextControlDate;
-			IsStored = isStored;
-			IsLost = isLost;
-			IsRemoved = isRemoved;
-			VehicleId = vehicleId;
 		}
 
 		public Material_DTO(Material_BLL materialBll)
