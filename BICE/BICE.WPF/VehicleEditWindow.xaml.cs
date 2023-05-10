@@ -1,5 +1,6 @@
 ﻿using BICE.DTO;
 using BICE.WPF.ViewModels;
+using System.Diagnostics;
 using System.Windows;
 
 namespace BICE.WPF
@@ -32,7 +33,7 @@ namespace BICE.WPF
             _vehicle.IsActive = IsActiveCheckBox.IsChecked.Value;
 
             // Appeler la méthode de mise à jour du véhicule
-            await _vehicleViewModel.UpdateVehicleAsync(_vehicle);
+            await _vehicleViewModel.UpdateVehicle(_vehicle);
 
             // Fermer la fenêtre
             Close();
