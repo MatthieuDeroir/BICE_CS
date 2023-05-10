@@ -123,7 +123,48 @@ public IEnumerable<Material_DTO> GetMaterial()
 			_materialRepository.Delete(materialDal);
 		}
 
-		
+		public IEnumerable<Material_DTO> HandleInterventionReturn(int vehicleId, InterventionReturn_DTO interventionReturnDto)
+		{
+			IEnumerable<Material_DAL> materialsOnVehicle = _materialRepository.GetMaterialsByVehicleId(vehicleId);
+			List<Material_DTO> updatedMaterials = new List<Material_DTO>();
+
+			foreach (Material_DAL material in materialsOnVehicle)
+			{
+				Material_DTO materialDto = new Material_DTO(material);
+				Material_BLL materialBll = materialDto.ToBLL();
+        
+				if (interventionReturnDto.UsedBarcodes.Contains(materialBll.Barcode) || interventionReturnDto.UnusedBarcodes.Contains(materialBll.Barcode))
+				{
+					// Update usage count if material is in the used barcodes list
+					if (interventionReturnDto.UsedBarcodes.Contains(materialBll.Barcode))
+					{
+						materialBll.UpdateUsageCount();
+					}
+					
+					// Evaluate if the material should be removed
+					materialBll.ValidateUsability();
+            
+					// Put unused materials back in storage
+					if (interventionReturnDto.UnusedBarcodes.Contains(materialBll.Barcode))
+					{
+						materialBll.PutInStorage();
+					}
+				}
+				else
+				{
+					// Mark material as lost
+					materialBll.HasBeenLost();
+				}
+
+				// Update Material in the database and add it to the updated materials list
+				Material_DAL updatedMaterialDal = new Material_DAL(materialBll);
+				Material_DAL updatedMaterial = _materialRepository.Update(updatedMaterialDal);
+				updatedMaterials.Add(new Material_DTO(updatedMaterial));
+			}
+
+			return updatedMaterials;
+		}
+
 
 		
 	}

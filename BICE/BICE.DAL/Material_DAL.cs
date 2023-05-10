@@ -17,9 +17,9 @@ namespace BICE.DAL
         public bool IsLost { get; set; }
         public bool IsRemoved { get; set; }
         
-        public int VehicleId { get; set; }
+        public int? VehicleId { get; set; }
 
-        public Material_DAL(string denomination, string barcode, string category, int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate, bool isStored, bool isLost, bool isRemoved, int vehicleId)
+        public Material_DAL(string denomination, string barcode, string category, int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate, bool isStored, bool isLost, bool isRemoved, int? vehicleId)
         {
             Denomination = denomination;
             Barcode = barcode;
@@ -34,7 +34,7 @@ namespace BICE.DAL
             VehicleId = vehicleId;
         }
         
-        public Material_DAL(int id, string denomination, string barcode, string category, int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate, bool isStored, bool isLost, bool isRemoved, int vehicleId)
+        public Material_DAL(int id, string denomination, string barcode, string category, int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate, bool isStored, bool isLost, bool isRemoved, int? vehicleId)
             : this(denomination, barcode, category, usageCount, maxUsageCount, expirationDate, nextControlDate, isStored, isLost, isRemoved, vehicleId)
         {
             Id = id;

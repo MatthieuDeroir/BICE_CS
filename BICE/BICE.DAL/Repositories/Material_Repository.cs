@@ -178,10 +178,10 @@ namespace BICE.DAL
                 command.Parameters.AddWithValue("@MaxUsageCount", material.MaxUsageCount);
                 command.Parameters.AddWithValue("@ExpirationDate", material.ExpirationDate);
                 command.Parameters.AddWithValue("@NextControlDate", material.NextControlDate);
-                command.Parameters.AddWithValue("@IsStored", material.IsStored);
-                command.Parameters.AddWithValue("@IsLost", material.IsLost);
-                command.Parameters.AddWithValue("@IsRemoved", material.IsRemoved);
-                command.Parameters.AddWithValue("@VehicleId", material.VehicleId);
+                command.Parameters.AddWithValue("@IsStored", true);
+                command.Parameters.AddWithValue("@IsLost", false);
+                command.Parameters.AddWithValue("@IsRemoved", false);
+                command.Parameters.AddWithValue("@VehicleId", null);
                 connection.Open();
                 command.ExecuteNonQuery();
             }
@@ -254,85 +254,5 @@ namespace BICE.DAL
             }
             return materials;
         }
-
-        public List<Material_DAL> UpdateMaterialsIsStored(IEnumerable<Material_DAL> materialDals, bool isStored)
-        {
-            var materials = new List<Material_DAL>();
-            using (var connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-
-                foreach (var barcode in materialDals)
-                {
-                    var query = "UPDATE Materials SET IsStored = @IsStored WHERE Barcode = @Barcode; SELECT * FROM Materials WHERE Barcode = @Barcode";
-                    var command = new SqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@IsStored", isStored);
-                    command.Parameters.AddWithValue("@Barcode", barcode);
-
-                    var reader = command.ExecuteReader();
-                    if (reader.Read())
-                    {
-                        materials.Add(new Material_DAL(
-                            (int)reader["Id"],
-                            (string)reader["Denomination"],
-                            (string)reader["Barcode"],
-                            (string)reader["Category"],
-                            (int)reader["UsageCount"],
-                            (int?)reader["MaxUsageCount"],
-                            (DateTime?)reader["ExpirationDate"],
-                            (DateTime?)reader["NextControlDate"],
-                            (bool)reader["IsStored"],
-                            (bool)reader["IsLost"],
-                            (bool)reader["IsRemoved"],
-                            (int)reader["VehicleId"]
-                        ));
-                    }
-
-                    reader.Close();
-                }
-            }
-            return materials;
-        }
-
-        public IEnumerable<Material_DAL> UpdateMaterialsVehicleId(IEnumerable<Material_DAL> materialsToPrepare, int vehicleId)
-        {
-            var query = "UPDATE Materials SET VehicleId = @VehicleId WHERE Barcode = @Barcode; SELECT * FROM Materials WHERE Barcode = @Barcode";
-            var materials = new List<Material_DAL>();
-            using (var connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-
-                foreach (var barcode in materialsToPrepare)
-                {
-                    var command = new SqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@VehicleId", vehicleId);
-                    command.Parameters.AddWithValue("@Barcode", barcode);
-
-                    var reader = command.ExecuteReader();
-                    if (reader.Read())
-                    {
-                        materials.Add(new Material_DAL(
-                            (int)reader["Id"],
-                            (string)reader["Denomination"],
-                            (string)reader["Barcode"],
-                            (string)reader["Category"],
-                            (int)reader["UsageCount"],
-                            (int?)reader["MaxUsageCount"],
-                            (DateTime?)reader["ExpirationDate"],
-                            (DateTime?)reader["NextControlDate"],
-                            (bool)reader["IsStored"],
-                            (bool)reader["IsLost"],
-                            (bool)reader["IsRemoved"],
-                            (int)reader["VehicleId"]
-                        ));
-                    }
-
-                    reader.Close();
-                }
-            }
-            return materials;
-        }
-
-       
     }
 }
