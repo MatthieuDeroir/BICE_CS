@@ -22,7 +22,6 @@ namespace BICE.DTO
 		public int? VehicleId { get; set; }
 
 		//DTO when is created for the WPF to API tranfer! Initializing the values to avoid null exceptions
-		
 		[JsonConstructor]
 		public Material_DTO(string barcode, string denomination, string category, int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate)
 		{
