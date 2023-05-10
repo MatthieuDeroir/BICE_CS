@@ -7,7 +7,7 @@ namespace BICE.DTO
 {
 	public class Material_DTO : BaseNamedEntity_DTO
     {
-	    
+		public String Denomination { get; set; }   
 		public String Barcode { get; set; }
 		public String Category { get; set; }
 		public int UsageCount { get; set; }
@@ -20,9 +20,10 @@ namespace BICE.DTO
 		public int? VehicleId { get; set; }
 
 		//DTO when is created for the WPF to API tranfer! Initializing the values to avoid null exceptions
-		public Material_DTO(string barcode, string category, int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate)
+		public Material_DTO(string barcode, string denomination, string category, int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate)
 		{
 			Barcode = barcode;
+			Denomination = denomination;
 			Category = category;
 			UsageCount = usageCount;
 			MaxUsageCount = maxUsageCount;
