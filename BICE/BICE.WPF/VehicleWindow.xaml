@@ -6,42 +6,93 @@
         xmlns:local="clr-namespace:BICE.WPF"
         mc:Ignorable="d"
         Title="Vehicle Window" Height="450" Width="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <!-- Header -->
-            <RowDefinition Height="Auto" />
-            <!-- Tableau -->
-            <RowDefinition Height="*" />
-            <!-- Bouton -->
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+    <TabControl>
+        <TabItem Header="Véhicules">
+            <Grid>
+                <!-- Contenu du premier onglet (liste des véhicules, boutons, etc.) -->
+                <Grid.RowDefinitions>
+                    <!-- Header -->
+                    <RowDefinition Height="Auto" />
+                    <!-- Tableau -->
+                    <RowDefinition Height="*" />
+                    <!-- Bouton -->
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Content="Liste des véhicules" FontSize="24" FontWeight="Bold" Margin="10" />
+                <Label Grid.Row="0" Content="Liste des véhicules" FontSize="24" FontWeight="Bold" Margin="10" />
 
-        <DataGrid Grid.Row="1" x:Name="VehicleGrid" ItemsSource="{Binding Vehicles}" AutoGenerateColumns="False" Margin="10">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
-                <DataGridTextColumn Header="Internal Number" Binding="{Binding InternalNumber}" />
-                <DataGridTextColumn Header="Denomination" Binding="{Binding Denomination}" />
-                <DataGridTextColumn Header="License Plate" Binding="{Binding LicensePlate}" />
-                <DataGridTemplateColumn Header="Supprimer">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="Supprimer" Click="DeleteButton_Click"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                <DataGrid Grid.Row="1" x:Name="VehicleGrid" ItemsSource="{Binding Vehicles}" AutoGenerateColumns="False" Margin="10"  CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                        <DataGridTextColumn Header="Internal Number" Binding="{Binding InternalNumber}" />
+                        <DataGridTextColumn Header="Denomination" Binding="{Binding Denomination}" />
+                        <DataGridTextColumn Header="License Plate" Binding="{Binding LicensePlate}" />
+                        <DataGridTemplateColumn Header="Supprimer">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Supprimer" Click="DeleteButton_Click"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn Header="Mettre à jour">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="Mettre à jour" Click="UpdateButton_Click"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+                        <DataGridTemplateColumn Header="Mettre à jour">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Mettre à jour" Click="UpdateButton_Click"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Ajouter un véhicule">
+            <Grid>
+                <!-- Contenu du deuxième onglet (formulaire de modification) -->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-        <Button Grid.Row="2" Content="Ajouter un véhicule" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10" Click="AddVehicleButton_Click" />
-    </Grid>
+                <!-- Header -->
+                <Label Content="Ajouter un véhicule à la flotte" FontSize="24" FontWeight="Bold" Margin="10" />
+
+                <!-- Form -->
+                <Border Grid.Row="1" Margin="10">
+                    <Grid Background="#FFDADADA">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Content="Internal Number:" Grid.Row="0" Grid.Column="0" Margin="5" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
+                        <TextBox x:Name="InternalNumberTextBox" Grid.Row="0" Grid.Column="1" Margin="5" />
+
+                        <Label Content="Denomination:" Grid.Row="1" Grid.Column="0" Margin="5" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
+                        <TextBox x:Name="DenominationTextBox" Grid.Row="1" Grid.Column="1" Margin="5" />
+
+                        <Label Content="Plaque d'immatriculation:" Grid.Row="2" Grid.Column="0" Margin="5" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
+                        <TextBox x:Name="LicensePlateTextBox" Grid.Row="2" Grid.Column="1" Margin="5" />
+
+                        <Label Content="Est actif :" Grid.Row="3" Grid.Column="0" Margin="5" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
+                        <CheckBox x:Name="IsActiveCheckBox" Grid.Row="3" Grid.Column="1" Margin="5" />
+
+                        <Button Content="Créer le véhicule" Grid.Row="8" Grid.Column="1" Margin="5" Click="CreateVehicleButton_Click" HorizontalAlignment="Center" Background="#FFC7C7C7" FontSize="14" FontWeight="Bold" />
+                    </Grid>
+                </Border>
+            </Grid>
+        </TabItem>
+    </TabControl>
 </Window>

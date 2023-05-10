@@ -8,5 +8,6 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Button Content="allez à la page de gestion des véhicules" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Click_Vehicle"/>
+        <Button Content="allez à la page de gestion des materiels" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Button_Click_Material" Margin="0,258,0,0"/>
     </Grid>
 </Window>

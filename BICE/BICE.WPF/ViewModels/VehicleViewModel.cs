@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace BICE.WPF.ViewModels
 {
@@ -63,6 +64,7 @@ namespace BICE.WPF.ViewModels
             StringContent content = new StringContent(vehicleJson, Encoding.UTF8, "application/json");
 
             HttpResponseMessage response = await client.PutAsync($"api/Vehicle", content);
+
             if (response.IsSuccessStatusCode)
             {
                 MessageBox.Show("Le véhicule a été mis à jour avec succès.", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -73,35 +75,30 @@ namespace BICE.WPF.ViewModels
             }
         }
 
+        /*
         public async Task UpdateVehicleAsync(Vehicle_DTO vehicle)
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:7001/");
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            string jsonString = JsonConvert.SerializeObject(vehicle);
-            HttpContent content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-
-            HttpResponseMessage response = await client.PutAsync($"api/Vehicle", content);
-            if (response.IsSuccessStatusCode)
+            using (HttpClient client = new HttpClient())
             {
-                string responseContent = await response.Content.ReadAsStringAsync();
-                Vehicle_DTO updatedVehicle = JsonConvert.DeserializeObject<Vehicle_DTO>(responseContent);
+                client.BaseAddress = new Uri("https://localhost:7001/");
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                // Trouver l'index du véhicule dans la liste des véhicules
-                int index = Vehicles.IndexOf(Vehicles.FirstOrDefault(v => v.Id == updatedVehicle.Id));
+                string jsonString = JsonConvert.SerializeObject(vehicle);
+                HttpContent content = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
-                // Mettre à jour le véhicule dans la liste
-                if (index >= 0)
+                HttpResponseMessage response = await client.PutAsync($"api/Vehicle", content);
+                if (response.IsSuccessStatusCode)
                 {
-                    Vehicles[index] = updatedVehicle;
+                    // Recharger la liste des véhicules pour refléter les modifications
+                    await LoadVehicles();
+                }
+                else
+                {
+                    // Gérer l'échec de la requête
                 }
             }
-            else
-            {
-                // Gérer l'échec de la requête
-            }
-        }
+        }*/
+
 
     }
 }

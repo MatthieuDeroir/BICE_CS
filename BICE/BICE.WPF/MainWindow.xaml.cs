@@ -30,5 +30,10 @@ namespace BICE.WPF
             VehicleWindow vehicleWindow = new VehicleWindow();
             vehicleWindow.Show();
         }
+        private void Button_Click_Material(object sender, RoutedEventArgs e)
+        {
+            MaterialWindow materialWindow = new MaterialWindow();
+            materialWindow.Show();
+        }
     }
 }
