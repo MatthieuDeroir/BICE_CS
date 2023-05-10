@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using BICE.DTO;
+using Microsoft.VisualBasic.FileIO;
 using Microsoft.Win32;
 using Newtonsoft.Json;
+
 
 namespace BICE.WPF
 {
@@ -27,7 +31,7 @@ namespace BICE.WPF
         private async void LoadMaterials()
         {
             using HttpClient client = new HttpClient();
-            var materials = await client.GetFromJsonAsync<List<Material_DTO>>(ApiUrl+"/Material");
+            var materials = await client.GetFromJsonAsync<List<Material_DTO>>(ApiUrl + "/Material");
 
             if (materials != null)
             {
@@ -39,86 +43,71 @@ namespace BICE.WPF
                 MessageBox.Show("Erreur lors de la récupération des matériels depuis l'API.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private void ImportCsvButton_Click(object sender, RoutedEventArgs e)
+
+        public List<Material_DTO> ParseCsvToMaterialDto(string filePath)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog
-            {
-                Filter = "CSV Files (*.csv)|*.csv",
-                Multiselect = false
-            };
+            List<Material_DTO> materials = new List<Material_DTO>();
+            string[] lines = File.ReadAllLines(filePath);
 
-            if (openFileDialog.ShowDialog() == true)
-            {
-                string csvPath = openFileDialog.FileName;
-                var materials = ReadMaterialsFromCsv(csvPath);
+            // Skip the header if the CSV file has one
 
-                if (materials != null)
+            for (int i = 1; i < lines.Length; i++)
+            {
+                string[] fields = lines[i].Split(';');
+
+                string barcode = fields[0];
+                string denomination = fields[1];
+                string category = fields[2];
+                int usageCount = int.Parse(fields[3]);
+                int? maxUsageCount = string.IsNullOrEmpty(fields[4]) ? (int?)null : int.Parse(fields[4]);
+                DateTime? expirationDate = string.IsNullOrEmpty(fields[5]) ? (DateTime?)null : DateTime.ParseExact(fields[5], "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime? nextControlDate = string.IsNullOrEmpty(fields[6]) ? (DateTime?)null : DateTime.ParseExact(fields[6], "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                Material_DTO materialDto = new Material_DTO(barcode, denomination, category, usageCount, maxUsageCount, expirationDate, nextControlDate);
+                materials.Add(materialDto);
+            }
+
+            return materials;
+        }
+
+        public async void FichierDropStackPanel_CSVReader_JsonConverter(object sender, DragEventArgs e)
+        {
+            var liste_DTO = new List<Material_DTO>();
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                string path = Path.GetFullPath(files[0]);
+                string filename = Path.GetFileName(files[0]);
+                NomFichierLabel.Content = filename;
+
+                try
                 {
-                    foreach (var material in materials)
-                    {
-                        AddMaterialAsync(material);
-                    }
+                    liste_DTO = ParseCsvToMaterialDto(path);
 
-                    MessageBox.Show("Les matériels ont été ajoutés avec succès.", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
+                    await envoyer_e(liste_DTO);
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Erreur lors de la lecture du fichier CSV.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                    // Handle exceptions here, e.g. show a message to the user
+                    MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
 
-        private List<Material_DTO> ReadMaterialsFromCsv(string csvPath)
+        public async Task envoyer_e(List<Material_DTO> liste_DTO)
         {
             try
             {
-                var lines = File.ReadAllLines(csvPath);
-                var materials = new List<Material_DTO>();
-
-                foreach (string line in lines)
-                {
-                    var values = line.Split(',');   
-
-                    var material = new Material_DTO
-                    {
-                        Barcode = values[0],
-                        Denomination = values[1],
-                        Category = values[2],
-                        UsageCount = int.Parse(values[3]),
-                        MaxUsageCount = int.Parse(values[4]),
-                        ExpirationDate = DateTime.Parse(values[5]),
-                        NextControlDate = DateTime.Parse(values[6])
-                    };
-
-                    materials.Add(material);
-                }
-
-                return materials;
+                string json = JsonConvert.SerializeObject(liste_DTO);
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri("https://localhost:7001/");
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage response = await client.PostAsync("api/Material/insert-list", new StringContent(json, Encoding.UTF8, "application/json"));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return null;
-            }
-        }
 
-        private async void AddMaterialAsync(Material_DTO material)
-        {
-            using HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(ApiUrl+"");
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            string materialJson = JsonConvert.SerializeObject(material);
-            StringContent content = new StringContent(materialJson, Encoding.UTF8, "application/json");
-
-            HttpResponseMessage response = await client.PostAsync(ApiUrl, content);
-
-            if (response.IsSuccessStatusCode)
-            {
-                // Mettre à jour la liste des matériels (si nécessaire)
-            }
-            else
-            {
-                MessageBox.Show("Une erreur s'est produite lors de l'ajout du matériel.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

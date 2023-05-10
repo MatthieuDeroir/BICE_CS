@@ -60,7 +60,19 @@
             </TabItem>
             <TabItem Header="Ajouter un matériel">
                 <Grid>
-                    <Button Grid.Row="2" Content="Importer CSV" Margin="10" Click="ImportCsvButton_Click" />
+                    <Label
+            x:Name="NomFichierLabel"
+            Grid.Row="0"
+            HorizontalAlignment="Center"
+            Content=""
+            FontSize="15px">
+                    </Label>
+                    <StackPanel
+            x:Name="FichierDropStackPanel"
+            Margin="45"
+            AllowDrop="True"
+            Background="LightGray"
+            Drop="FichierDropStackPanel_CSVReader_JsonConverter" Grid.RowSpan="2"/>
                 </Grid>
             </TabItem>
 
