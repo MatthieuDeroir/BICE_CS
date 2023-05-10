@@ -50,9 +50,27 @@ namespace BICE.BLL
             IsStored = isStored;
             IsLost = isLost;
             IsRemoved = isRemoved;
+            VehicleId = vehicleId;
             Validate();
         }
         
+        public void UpdateUsageCount()
+        {
+            UsageCount++;
+        }
+        
+        public void PutInStorage()
+        {
+            VehicleId = 0;
+            IsStored = true;
+        }
+        
+        public void PutInVehicle(int vehicleId)
+        {
+            VehicleId = vehicleId;
+            IsStored = false;
+        }
+
         public void Validate()
         {
             ValidateUsageCount();

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using BICE.DAL;
 using BICE.DTO;
 using BICE.BLL;
@@ -41,10 +42,15 @@ public IEnumerable<Material_DTO> GetMaterial()
 			return materialDto;
 		}
 		
-		public Material_DTO GetMaterialByBarcode(string barcode)
+		public IEnumerable<Material_DTO> GetMaterialsByBarcodes(List<string> barcodes)
 		{
-			Material_DAL materialDal = _materialRepository.GetByBarcode(barcode);
-			return new Material_DTO(materialDal);
+			IEnumerable<Material_DAL> materialDals = _materialRepository.GetMaterialsByBarcodes(barcodes);
+			List<Material_DTO> materialDto = new List<Material_DTO>();
+			foreach (Material_DAL material in materialDals)
+			{
+				materialDto.Add(new Material_DTO(material));
+			}
+			return materialDto;
 		}
 		
 		public Material_DTO AddMaterial(Material_DTO materialDto)
@@ -53,6 +59,19 @@ public IEnumerable<Material_DTO> GetMaterial()
 			Material_DAL materialDal = new Material_DAL(materialBll);
 			Material_DAL insertedMaterial = _materialRepository.Insert(materialDal);
 			return new Material_DTO(insertedMaterial);
+		}
+
+		public IEnumerable<Material_DTO> AddMaterials(IEnumerable<Material_DTO> materialDtos)
+		{
+			List<Material_DTO> insertedMaterials = new List<Material_DTO>();
+			foreach (Material_DTO materialDto in materialDtos)
+			{
+				Material_BLL materialBll = materialDto.ToBLL();
+				Material_DAL materialDal = new Material_DAL(materialBll);
+				Material_DAL insertedMaterial = _materialRepository.Insert(materialDal);
+				insertedMaterials.Add(new Material_DTO(insertedMaterial));
+			}
+			return insertedMaterials;
 		}
 		
 		public Material_DTO Update(Material_DTO materialDto)
@@ -68,6 +87,33 @@ public IEnumerable<Material_DTO> GetMaterial()
 			Material_BLL materialBll = materialDto.ToBLL();
 			Material_DAL materialDal = new Material_DAL(materialBll);
 			_materialRepository.Delete(materialDal);
+		}
+
+		public IEnumerable<Material_DTO> PrepareVehicle(int vehicleId, List<string> barcodes)
+		{
+			IEnumerable<Material_DAL> materialsToStore = _materialRepository.GetMaterialsByVehicleId(vehicleId);
+			foreach (Material_DAL material in materialsToStore)
+			{
+				Material_DTO materialDto = new Material_DTO(material);
+				Material_BLL materialBll = materialDto.ToBLL();
+				materialBll.PutInStorage();
+				Material_DAL materialDal = new Material_DAL(materialBll);
+				_materialRepository.Update(materialDal);
+			}
+    
+			IEnumerable<Material_DAL> materialsToPrepare = _materialRepository.GetMaterialsByBarcodes(barcodes);
+			List<Material_DTO> materialDtos = new List<Material_DTO>();
+			foreach (Material_DAL material in materialsToPrepare)
+			{
+				Material_DTO materialDto = new Material_DTO(material);
+				Material_BLL materialBll = materialDto.ToBLL();
+				materialBll.PutInVehicle(vehicleId);
+				Material_DAL materialDal = new Material_DAL(materialBll);
+				Material_DAL updatedMaterial = _materialRepository.Update(materialDal);
+				materialDtos.Add(new Material_DTO(updatedMaterial));
+			}
+			
+			return materialDtos;
 		}
 	}
 }

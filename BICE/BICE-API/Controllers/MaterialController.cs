@@ -75,9 +75,24 @@ namespace BICE.API.Controllers
             return CreatedAtAction(nameof(AddMaterial), new { id = insertedMaterial.Id }, insertedMaterial);
         }
         
-        [HttpPost("history")]
-        public ActionResult<>
-        
+        // [HttpPost("history")]
+        // public ActionResult<>
+        // [HttpPost("insert-list")]
+        // public ActionResult<Material_DTO> InsertMaterialList(IEnumerable<Material_DTO> materialDtos)
+        [HttpPut("vehicle-preparation/{vehicleId}")]
+        public IActionResult PrepareVehicle(int vehicleId, [FromBody] List<string> barcodes)
+        {
+            try
+            {
+                var preparedMaterials = _materialService.PrepareVehicle(vehicleId, barcodes);
+                return Ok(preparedMaterials);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Error preparing vehicle: {ex.Message}");
+            }
+        }
+
         [HttpPut]
         public ActionResult<Material_DTO> UpdateMaterial(Material_DTO materialDto)
         {
