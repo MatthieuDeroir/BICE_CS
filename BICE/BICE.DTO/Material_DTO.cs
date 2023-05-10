@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 using System.Xml.Linq;
 using BICE.BLL;
 using BICE.DAL;
@@ -20,6 +21,8 @@ namespace BICE.DTO
 		public int? VehicleId { get; set; }
 
 		//DTO when is created for the WPF to API tranfer! Initializing the values to avoid null exceptions
+		
+		[JsonConstructor]
 		public Material_DTO(string barcode, string denomination, string category, int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate)
 		{
 			Barcode = barcode;

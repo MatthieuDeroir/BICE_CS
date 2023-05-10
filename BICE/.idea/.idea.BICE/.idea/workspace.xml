@@ -9,7 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a90e9a96-dbd4-48f2-9ad9-9809aa701d45" name="Changes" comment="" />
+    <list default="true" id="a90e9a96-dbd4-48f2-9ad9-9809aa701d45" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/BICE.SRV/Material_SRV.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.SRV/Material_SRV.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -109,7 +111,7 @@
       <workItem from="1682432611189" duration="1174000" />
       <workItem from="1682668917171" duration="907000" />
       <workItem from="1682671971544" duration="1368000" />
-      <workItem from="1683699391111" duration="17942000" />
+      <workItem from="1683699391111" duration="21369000" />
     </task>
     <servers />
   </component>

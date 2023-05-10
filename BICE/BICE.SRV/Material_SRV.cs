@@ -72,8 +72,7 @@ public IEnumerable<Material_DTO> GetMaterial()
 			List<Material_DTO> insertedMaterials = new List<Material_DTO>();
 			foreach (Material_DTO materialDto in materialDtos)
 			{
-				Material_BLL materialBll = materialDto.ToBLL();
-				Material_DAL materialDal = new Material_DAL(materialBll);
+				Material_DAL materialDal = new Material_DAL(materialDto.ToBLL());
 				Material_DAL insertedMaterial = _materialRepository.Insert(materialDal);
 				insertedMaterials.Add(new Material_DTO(insertedMaterial));
 			}
