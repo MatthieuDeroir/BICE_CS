@@ -1,8 +1,9 @@
 using BICE.DAL;
+using BICE.DTO.Interfaces;
 
 namespace BICE.DTO;
 
-public class MaterialVehicle_DTO : Material_DTO
+public class MaterialVehicle_DTO : Material_DTO, IMaterialVehicle_DTO
 {
     
     	
