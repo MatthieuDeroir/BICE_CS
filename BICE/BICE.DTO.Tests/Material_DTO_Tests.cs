@@ -8,13 +8,14 @@ public class Material_DTO_Tests
     {
         var materialDto = new Material_DTO
         (
-            "TestMaterial",
-            "BC1234",
-            "Cat1", 
-            5,
+            1,
+            "Test Material",
+            "Test Category",
+            "BC001",
+            2,
             10,
-            DateTime.Now + TimeSpan.FromDays(10),
-            DateTime.Now ,
+            DateTime.Now,
+            DateTime.Now,
             true,
             false,
             false,

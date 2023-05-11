@@ -21,7 +21,7 @@ namespace BICE.Tests.BLLTests
             int? vehicleId = null;
 
             // Act
-            var materialBLL = new Material_BLL(denomination, barcode, category, usageCount, maxUsageCount, expirationDate, nextControlDate, isStored, isLost, isRemoved, vehicleId);
+            var materialBLL = new Material_BLL(1, denomination, barcode, category, usageCount, maxUsageCount, expirationDate, nextControlDate, isStored, isLost, isRemoved, vehicleId);
 
             // Assert
             Assert.NotNull(materialBLL);
@@ -56,7 +56,7 @@ namespace BICE.Tests.BLLTests
             bool isRemoved = false;
             int? vehicleId = null;
 
-            var materialBLL = new Material_BLL(denomination, barcode, category, usageCount, maxUsageCount, expirationDate, nextControlDate, isStored, isLost, isRemoved, vehicleId);
+            var materialBLL = new Material_BLL(1, denomination, barcode, category, usageCount, maxUsageCount, expirationDate, nextControlDate, isStored, isLost, isRemoved, vehicleId);
 
             // Act
             materialBLL.UpdateUsageCount();

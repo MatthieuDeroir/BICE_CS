@@ -38,7 +38,10 @@ public class MaterialServiceTests
         var updatedMaterials = _materialService.HandleInterventionReturn(vehicleId, interventionReturnDto);
 
         // Assert
-        // Assert that the updatedMaterials list has the expected state
+        Assert.NotNull(updatedMaterials);
+        Assert.NotEmpty(updatedMaterials);
+        Assert.Equal(2, updatedMaterials.Count());
+        
         // This will depend on the actual data you used in your test
         // For example, you might want to check that the usage count was incremented for used materials
     }
