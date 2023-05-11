@@ -130,7 +130,7 @@ namespace BICE.BLL
         
         public void ValidateUsability()
         {
-            if (UsageCount < MaxUsageCount && ExpirationDate > DateTime.Now)
+            if (UsageCount < MaxUsageCount && ExpirationDate > DateTime.Now && !IsLost && !IsRemoved)
             {
                 IsRemoved = false;
             }

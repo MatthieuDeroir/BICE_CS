@@ -28,7 +28,5 @@ public class MaterialVehicle_DTO : Material_DTO
         VehicleDenomination = vehicleDenomination; // Assign the vehicle denomination from the joined data
         VehicleInternalNumber = vehicleInternalNumber; // Assign the vehicle number from the joined data
         VehicleLicensePlate = vehicleLicensePlate; // Assign the vehicle license plate from the joined data
-			
-			
     }
 }
