@@ -21,7 +21,49 @@
 
             </TabItem>
             <TabItem Header="Ajout">
-                
+                <Grid>
+                    <!-- Contenu du deuxième onglet (formulaire de modification) -->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Header -->
+                    <Label Content="Ajouter une intervention" FontSize="24" FontWeight="Bold" Margin="10" />
+
+                    <!-- Form -->
+                    <Border Grid.Row="1" Margin="10">
+                        <Grid Background="#FFDADADA">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Dénomination:" Grid.Row="0" Grid.Column="0" Margin="5" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
+                            <TextBox x:Name="DenominationTextBox" Grid.Row="0" Grid.Column="1" Margin="5" />
+
+                            <Label Content="Description:" Grid.Row="1" Grid.Column="0" Margin="5" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
+                            <TextBox x:Name="DescriptionTextBox" Grid.Row="1" Grid.Column="1" Margin="5" />
+
+                            <Label Content="Date de début:" Grid.Row="2" Grid.Column="0" Margin="5" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
+                            <DatePicker x:Name="StartDatePicker" Grid.Row="2" Grid.Column="1" Margin="5" />
+
+                            <Label Content="Date de fin:" Grid.Row="3" Grid.Column="0" Margin="5" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
+                            <DatePicker x:Name="EndDatePicker" Grid.Row="3" Grid.Column="1" Margin="5" />
+
+                            <Button Content="Créer l'intervention" Grid.Row="4" Grid.Column="1" Margin="5" Click="CreateInterventionButton_Click" HorizontalAlignment="Center" Background="#FFC7C7C7" FontSize="14" FontWeight="Bold" />
+                        </Grid>
+                    </Border>
+                </Grid>
+
             </TabItem>
             <TabItem Header="Retour d'intervention">
 
