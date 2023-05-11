@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BICE.BLL
 {
-    public class Vehicle_BLL
+    public class Vehicle_BLL : Interfaces.IVehicle_BLL
     {
         public int Id { get; private set; }
         
