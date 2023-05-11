@@ -10,7 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a90e9a96-dbd4-48f2-9ad9-9809aa701d45" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/BICE.SRV/Material_SRV.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.SRV/Material_SRV.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BICE.BLL.Tests/Material_BLL_Tests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.BLL.Tests/Intervention_BLL_Tests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.BLL.Tests/Intervention_BLL_Tests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.BLL/Material_BLL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.BLL/Material_BLL.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +113,7 @@
       <workItem from="1682432611189" duration="1174000" />
       <workItem from="1682668917171" duration="907000" />
       <workItem from="1682671971544" duration="1368000" />
-      <workItem from="1683699391111" duration="21369000" />
+      <workItem from="1683699391111" duration="23930000" />
     </task>
     <servers />
   </component>
