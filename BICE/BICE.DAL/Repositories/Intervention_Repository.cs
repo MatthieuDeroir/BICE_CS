@@ -86,6 +86,7 @@ namespace BICE.DAL
                 }
             }
             return intervention;
+            
         }
         
         public async Task AddVehicleToIntervention(int interventionId, int vehicleId)
