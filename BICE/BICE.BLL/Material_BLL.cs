@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Security.Principal;
 using System.ComponentModel.DataAnnotations;
 
@@ -7,6 +7,7 @@ namespace BICE.BLL
 {
 	public class Material_BLL
 	{
+        public int Id { get; set; }
         [Required(ErrorMessage = "Denomination is required !")]
         [StringLength(255,ErrorMessage = "Denomination cannot exceed 255 characters !")]
         public String Denomination { get; set; }
@@ -35,10 +36,12 @@ namespace BICE.BLL
         public Boolean IsRemoved { get; set; }
         
         public int? VehicleId { get; set; }
+   
 
-		public Material_BLL(String denomination, String barcode, String category,
+        public Material_BLL(int id, String denomination, String barcode, String category,
             int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate, Boolean isStored, Boolean isLost, Boolean isRemoved, int? vehicleId)
 		{
+            Id = id;
             Denomination = denomination;
             Barcode = barcode;
             Category = category;
@@ -92,7 +95,9 @@ namespace BICE.BLL
         {
             ValidateUsageCount();
             ValidateMaxUsageCount();
+
             //ValidateDates();
+
             ValidateUsability();
         }
 

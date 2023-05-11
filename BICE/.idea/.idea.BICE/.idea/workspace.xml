@@ -10,9 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a90e9a96-dbd4-48f2-9ad9-9809aa701d45" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/BICE.BLL.Tests/Material_BLL_Tests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BICE.BLL.Tests/Intervention_BLL_Tests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.BLL.Tests/Intervention_BLL_Tests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BICE/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BICE/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BICE.BLL/Material_BLL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.BLL/Material_BLL.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DAL/Material_DAL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Material_DAL.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DAL/Repositories/Material_Repository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Repositories/Material_Repository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DTO/Material_DTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DTO/Material_DTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.SRV/Material_SRV.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.SRV/Material_SRV.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

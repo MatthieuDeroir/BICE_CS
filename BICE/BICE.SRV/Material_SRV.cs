@@ -67,28 +67,30 @@ public IEnumerable<Material_DTO> GetMaterial()
 			return new Material_DTO(insertedMaterial);
 		}
 
-        public IEnumerable<Material_DTO> AddMaterials(IEnumerable<Material_DTO> materialDtos)
-        {
-            List<Material_DTO> insertedMaterials = new List<Material_DTO>();
-            foreach (Material_DTO materialDto in materialDtos)
-            {
-                try
-                {
-                    Material_DAL materialDal = new Material_DAL(materialDto.ToBLL());
-                    Material_DAL insertedMaterial = _materialRepository.Insert(materialDal);
-                    insertedMaterials.Add(new Material_DTO(insertedMaterial));
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    throw;
-                }
 
-            }
-            return insertedMaterials;
-        }
+		public IEnumerable<Material_DTO> AddMaterials(IEnumerable<Material_DTO> materialDtos)
+		{
+			List<Material_DTO> insertedMaterials = new List<Material_DTO>();
+			foreach (Material_DTO materialDto in materialDtos)
+			{
+				try
+				{
+					Material_DAL materialDal = new Material_DAL(materialDto.ToBLL());
+					Material_DAL insertedMaterial = _materialRepository.Insert(materialDal);
+					insertedMaterials.Add(new Material_DTO(insertedMaterial));
+				}
+				catch (Exception e)
+				{
+					Console.WriteLine(e);
+					throw;
+				}
+				
+			}
+			return insertedMaterials;
+		}
+		
+		public IEnumerable<Material_DTO> PrepareVehicle(int vehicleId, List<string> barcodes)
 
-        public IEnumerable<Material_DTO> PrepareVehicle(int vehicleId, List<string> barcodes)
 		{
 			IEnumerable<Material_DAL> materialsToStore = _materialRepository.GetMaterialsByVehicleId(vehicleId);
 			
@@ -118,9 +120,7 @@ public IEnumerable<Material_DTO> GetMaterial()
 		
 		public Material_DTO Update(Material_DTO materialDto)
 		{
-			Material_BLL materialBll = materialDto.ToBLL();
-			Material_DAL materialDal = new Material_DAL(materialBll);
-			Material_DAL updatedMaterial = _materialRepository.Update(materialDal);
+			Material_DAL updatedMaterial = _materialRepository.Update(materialDto.ToDAL());
 			return new Material_DTO(updatedMaterial);
 		}
 		
@@ -131,69 +131,6 @@ public IEnumerable<Material_DTO> GetMaterial()
 			_materialRepository.Delete(materialDal);
 		}
 
-// public IEnumerable<Material_DTO> HandleInterventionReturn(int vehicleId, InterventionReturn_DTO interventionReturnDto)
-// {
-//     IEnumerable<Material_DAL> materialsOnVehicle = _materialRepository.GetMaterialsByVehicleId(vehicleId);
-//     List<Material_DTO> updatedMaterials = new List<Material_DTO>();
-//
-//     // Fetch the vehicle and find the associated intervention
-//     Vehicle_DAL vehicle = _vehicleRepository.GetVehicleById(vehicleId);
-//     int interventionId = _vehicleInterventionRepository.GetInterventionIdByVehicleId(vehicle.Id);
-//
-//     foreach (Material_DAL material in materialsOnVehicle)
-//     {
-//         Material_DTO materialDto = new Material_DTO(material);
-//         Material_BLL materialBll = materialDto.ToBLL();
-//         
-//         if (interventionReturnDto.UsedBarcodes.Contains(materialBll.Barcode) || interventionReturnDto.UnusedBarcodes.Contains(materialBll.Barcode))
-//         {
-//             // Update usage count if material is in the used barcodes list
-//             if (interventionReturnDto.UsedBarcodes.Contains(materialBll.Barcode))
-//             {
-//                 materialBll.UpdateUsageCount();
-//                 
-//                 // Create a new instance of MaterialUsageHistory
-//                 MaterialUsageHistory_DTO usageHistory = new MaterialUsageHistory_DTO()
-//                 {
-//                     MaterialId = material.Id,
-//                     InterventionId = interventionId, // Use the fetched interventionId
-//                     UsageDate = DateTime.UtcNow // Use the current date and time
-//                 };
-//
-//                 // Add the usage history to the database
-//                 _materialUsageHistoryRepository.AddUsageHistory(usageHistory);
-//             }
-//             
-//             // Evaluate if the material should be removed
-//             materialBll.ValidateUsability();
-//         }
-//         else
-//         {
-//             // Mark material as lost
-//             materialBll.HasBeenLost();
-//             
-//             // Add a lost record to MaterialUsageHistory
-//             MaterialUsageHistory_DTO lostHistory = new MaterialUsageHistory_DTO()
-//             {
-//                 MaterialId = material.Id,
-//                 InterventionId = interventionId, // Use the fetched interventionId
-//                 UsageDate = DateTime.UtcNow, // Use the current date and time
-//                 IsUsed = false, // Material was not used
-//                 IsLost = true // Material is lost
-//             };
-//
-//             // Add the lost history to the database
-//             _materialUsageHistoryRepository.AddUsageHistory(lostHistory);
-//         }
-//
-//         // Update Material in the database and add it to the updated materials list
-//         Material_DAL updatedMaterialDal = new Material_DAL(materialBll);
-//         Material_DAL updatedMaterial = _materialRepository.Update(updatedMaterialDal);
-//         updatedMaterials.Add(new Material_DTO(updatedMaterial));
-//     }
-//
-//     return updatedMaterials;
-// }
 
 	}
 }

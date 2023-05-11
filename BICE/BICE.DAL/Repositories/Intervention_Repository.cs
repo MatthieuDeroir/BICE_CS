@@ -55,7 +55,7 @@ namespace BICE.DAL
                             return new Intervention_DAL(
                                 (int)reader["id"],
                                 (string)reader["denomination"],
-                                (string)reader["description"],
+                                reader["description"] == DBNull.Value ? (string)null : (string)reader["description"],
                                 (DateTime)reader["startDate"],
                                 (DateTime)reader["endDate"]
                             );
@@ -173,6 +173,30 @@ namespace BICE.DAL
                     }
                 }
             }
+        }
+
+        public int GetLastInterventionIdByVehicleId(int vehicleId)
+        {
+            var query = "SELECT TOP 1 id_intervention FROM VehicleIntervention WHERE id_vehicle = @vehicleId ORDER BY id_intervention DESC";
+            
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@vehicleId", vehicleId);
+                    
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return (int)reader["id_intervention"];
+                        }
+                    }
+                }
+            }
+            return 0;
         }
     }
 }
