@@ -28,7 +28,6 @@ namespace BICE.BLL
 
         public DateTime? NextControlDate { get; set; }
 
-        [Required(ErrorMessage = "Denomination is required !")]
         public Boolean IsStored { get; set; }
         
         public Boolean IsLost { get; set; }
@@ -99,9 +98,9 @@ namespace BICE.BLL
 
         private void ValidateDates()
         {
-            if (ExpirationDate.HasValue && NextControlDate.HasValue && ExpirationDate > NextControlDate)
+            if (ExpirationDate.HasValue && NextControlDate.HasValue && ExpirationDate < NextControlDate)
             {
-                throw new ArgumentException("Expiration date cannot be after next control date!");
+                throw new ArgumentException("Next control date cannot be after expiration date!");
             }
         }
 
@@ -126,14 +125,14 @@ namespace BICE.BLL
         
         public void ValidateUsability()
         {
-            if (UsageCount < MaxUsageCount && ExpirationDate > DateTime.Now && NextControlDate > DateTime.Now && IsStored == true)
+            if (UsageCount < MaxUsageCount && ExpirationDate > DateTime.Now)
             {
-                IsRemoved = true;
+                IsRemoved = false;
                 
             }
             else
             {
-                IsRemoved = false;
+                IsRemoved = true;
             }
         }
     }
