@@ -131,7 +131,6 @@ namespace BICE.BLL
             if (UsageCount < MaxUsageCount && ExpirationDate > DateTime.Now)
             {
                 IsRemoved = false;
-                
             }
             else
             {

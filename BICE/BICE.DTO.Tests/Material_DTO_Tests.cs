@@ -14,7 +14,7 @@ public class Material_DTO_Tests
             "BC001",
             2,
             10,
-            DateTime.Now,
+            DateTime.Now + TimeSpan.FromDays(10),
             DateTime.Now,
             true,
             false,
