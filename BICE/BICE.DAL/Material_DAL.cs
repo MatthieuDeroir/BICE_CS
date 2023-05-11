@@ -41,7 +41,7 @@ namespace BICE.DAL
         }
 
         public Material_DAL(Material_BLL materialBll)
-            : this(materialBll.Denomination, materialBll.Barcode, materialBll.Category, materialBll.UsageCount, materialBll.MaxUsageCount, materialBll.ExpirationDate, materialBll.NextControlDate, materialBll.IsStored, materialBll.IsLost, materialBll.IsRemoved, materialBll.VehicleId)
+            : this(materialBll.Id, materialBll.Denomination, materialBll.Barcode, materialBll.Category, materialBll.UsageCount, materialBll.MaxUsageCount, materialBll.ExpirationDate, materialBll.NextControlDate, materialBll.IsStored, materialBll.IsLost, materialBll.IsRemoved, materialBll.VehicleId)
         {
             
         }

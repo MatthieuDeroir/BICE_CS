@@ -76,10 +76,12 @@ namespace BICE.DAL
         public IEnumerable<Material_DAL> GetByVehicleId(int id)
         {
             var query = "SELECT * FROM Materials WHERE Id_Vehicle = @VehicleId";
+
             var materials = new List<Material_DAL>();
             using (var connection = new SqlConnection(ConnectionString))
             {
                 var command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@VehicleId", id);
                 connection.Open();
                 var reader = command.ExecuteReader();
                 while (reader.Read())
@@ -225,7 +227,6 @@ namespace BICE.DAL
                 command.Parameters.AddWithValue("@IsLost", material.IsLost);
                 command.Parameters.AddWithValue("@IsRemoved", material.IsRemoved);
                 command.Parameters.AddWithValue("@VehicleId", material.VehicleId.HasValue ? (object)material.VehicleId.Value : DBNull.Value);
-
                 connection.Open();
                 command.ExecuteNonQuery();
             }

@@ -118,9 +118,7 @@ public IEnumerable<Material_DTO> GetMaterial()
 		
 		public Material_DTO Update(Material_DTO materialDto)
 		{
-			Material_BLL materialBll = materialDto.ToBLL();
-			Material_DAL materialDal = new Material_DAL(materialBll);
-			Material_DAL updatedMaterial = _materialRepository.Update(materialDal);
+			Material_DAL updatedMaterial = _materialRepository.Update(materialDto.ToDAL());
 			return new Material_DTO(updatedMaterial);
 		}
 		
