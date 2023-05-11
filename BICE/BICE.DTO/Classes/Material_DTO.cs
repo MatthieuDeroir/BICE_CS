@@ -1,16 +1,13 @@
-﻿using System;
-using System.Text.Json.Serialization;
-using System.Xml.Linq;
+﻿using System.Text.Json.Serialization;
 using BICE.BLL;
 using BICE.DAL;
+using BICE.DTO.Interfaces;
 
 
 namespace BICE.DTO
 {
-	public class Material_DTO : BaseNamedEntity_DTO
-    {
-	    public int Id { get; set; }
-		public String Denomination { get; set; }   
+	public class Material_DTO : BaseNamedEntity_DTO, IMaterial_DTO
+	{
 		public String Barcode { get; set; }
 		public String Category { get; set; }
 		public int UsageCount { get; set; }
@@ -21,12 +18,13 @@ namespace BICE.DTO
 		public Boolean IsLost { get; set; }
 		public Boolean IsRemoved { get; set; }
 		public int? VehicleId { get; set; }
-	
-		
+
+
 
 		//DTO when is created for the WPF to API tranfer! Initializing the values to avoid null exceptions
 		[JsonConstructor]
-		public Material_DTO(string barcode, string denomination, string category, int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate)
+		public Material_DTO(string barcode, string denomination, string category, int usageCount, int? maxUsageCount,
+			DateTime? expirationDate, DateTime? nextControlDate)
 		{
 			Barcode = barcode;
 			Denomination = denomination;
@@ -41,7 +39,9 @@ namespace BICE.DTO
 			VehicleId = null;
 		}
 
-		public Material_DTO(int id, string barcode, string denomination, string category, int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate, bool isStored, bool isLost, bool isRemoved, int? vehicleId)
+		public Material_DTO(int id, string barcode, string denomination, string category, int usageCount,
+			int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate, bool isStored, bool isLost,
+			bool isRemoved, int? vehicleId)
 		{
 			Id = Id;
 			Barcode = barcode;
@@ -96,19 +96,17 @@ namespace BICE.DTO
 
 		public Material_BLL ToBLL()
 		{
-			return new Material_BLL(Id, Denomination, Barcode, Category, UsageCount, MaxUsageCount, ExpirationDate, NextControlDate, IsStored, IsLost, IsRemoved, VehicleId);
+			return new Material_BLL(Id, Denomination, Barcode, Category, UsageCount, MaxUsageCount, ExpirationDate,
+				NextControlDate, IsStored, IsLost, IsRemoved, VehicleId);
 		}
 
 		public Material_DAL ToDAL()
 		{
-			return new Material_DAL(Id, Denomination, Barcode, Category, UsageCount, MaxUsageCount, ExpirationDate, NextControlDate, IsStored, IsLost, IsRemoved, VehicleId);
+			return new Material_DAL(Id, Denomination, Barcode, Category, UsageCount, MaxUsageCount, ExpirationDate,
+				NextControlDate, IsStored, IsLost, IsRemoved, VehicleId);
 		}
-		
-	
-		
-		
-    }
 
-    }
+	}
+}
 
 

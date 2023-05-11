@@ -3,7 +3,7 @@ using BICE.BLL;
 
 namespace BICE.DAL
 {
-    public class Material_DAL
+    public class Material_DAL : IMaterial_DAL
     {
         public int Id { get; set; }
         public string Denomination { get; set; }

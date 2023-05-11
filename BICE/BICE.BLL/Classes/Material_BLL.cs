@@ -1,11 +1,12 @@
 using System;
 using System.Security.Principal;
 using System.ComponentModel.DataAnnotations;
+using BICE.BLL.Interfaces;
 
 
 namespace BICE.BLL
 {
-	public class Material_BLL
+	public class Material_BLL : IMaterial_BLL
 	{
         public int Id { get; set; }
         [Required(ErrorMessage = "Denomination is required !")]

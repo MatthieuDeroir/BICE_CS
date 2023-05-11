@@ -4,7 +4,7 @@ using BICE.DAL;
 
 namespace BICE.SRV
 {
-	public class Intervention_SRV
+	public class Intervention_SRV : IIntervention_SRV
 	{
 		private readonly Intervention_Repository _interventionRepository;
 		private readonly Material_Repository _materialRepository;

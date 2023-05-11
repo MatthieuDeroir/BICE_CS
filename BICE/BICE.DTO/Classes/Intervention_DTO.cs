@@ -1,10 +1,10 @@
-﻿using System;
-using BICE.BLL;
+﻿using BICE.BLL;
 using BICE.DAL;
+using BICE.DTO.Interfaces;
 
 namespace BICE.DTO
 {
-	public class Intervention_DTO : BaseNamedEntity_DTO
+	public class Intervention_DTO : BaseNamedEntity_DTO, IIntervention_DTO
 	{
 		public String? Description { get; set; }
 		public DateTime StartDate { get; set; }
