@@ -73,7 +73,7 @@ namespace BICE.WPF
             List<Material_DTO> materials = new List<Material_DTO>();
             string[] lines = File.ReadAllLines(filePath);
 
-            for (int i = 1; i < lines.Length; i++)
+            for (int i = 0; i < lines.Length; i++)
             {
                 string[] fields = lines[i].Split(';');
 
