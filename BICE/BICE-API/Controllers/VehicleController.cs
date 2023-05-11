@@ -96,6 +96,19 @@ namespace BICE.API.Controllers
             return Ok(updatedVehicle);
         }
         
+        [HttpPut("enable/{id}")]
+        public ActionResult<Vehicle_DTO> EnableVehicle(int id)
+        {
+            Vehicle_DTO vehicleDto = _vehicleService.GetVehicleById(id);
+            if (vehicleDto == null)
+            {
+                return NotFound();
+            }
+            vehicleDto.IsActive = true;
+            Vehicle_DTO updatedVehicle = _vehicleService.Update(vehicleDto);
+            return Ok(updatedVehicle);
+        }
+        
         [HttpDelete("{id}")]
         public ActionResult DeleteVehicle(int id)
         {
