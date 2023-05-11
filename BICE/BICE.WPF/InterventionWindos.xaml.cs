@@ -1,4 +1,5 @@
 ﻿using BICE.DTO;
+using BICE.WPF.ViewModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -97,6 +98,25 @@ namespace BICE.WPF
             else
             {
                 MessageBox.Show("Une erreur s'est produite lors de l'ajout de l'intervention.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private async void InterventionReturnButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Vérifier si une Intervention est sélectionné
+            if (InterventionGrid.SelectedItem != null)
+            {
+                Intervention_DTO selectedIntervention = InterventionGrid.SelectedItem as Intervention_DTO;
+
+                // Créer une nouvelle instance de la fenêtre d'édition de véhicule
+                InterventionReturnWindow interventionReturnWindow = new InterventionReturnWindow(selectedIntervention);
+
+                // Afficher la fenêtre d'édition de véhicule
+                interventionReturnWindow.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Veuillez sélectionner un véhicule à modifier.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
