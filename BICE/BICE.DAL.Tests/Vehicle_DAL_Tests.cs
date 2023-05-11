@@ -19,7 +19,7 @@ namespace BICE.Tests.DALTests
         public void VehicleDAL_Insert_Success()
         {
             // Arrange
-            var vehicleBLL = new Vehicle_BLL(1, "A004", "Vehicle D", "AA-123-DD", true);
+            var vehicleBLL = new Vehicle_BLL(2, "A006", "Vehicle E", "AA-123-4D", true);
             var vehicleDAL = new Vehicle_DAL(vehicleBLL);
 
             // Act
@@ -32,5 +32,7 @@ namespace BICE.Tests.DALTests
             Assert.Equal(vehicleBLL.LicensePlate, insertedVehicle.LicensePlate);
             Assert.Equal(vehicleBLL.IsActive, insertedVehicle.IsActive);
         }
+        
+        
     }
 }

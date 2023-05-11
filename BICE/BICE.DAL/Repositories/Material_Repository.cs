@@ -29,15 +29,15 @@ namespace BICE.DAL
                         (string)reader["Barcode"],
                         (string)reader["Category"],
                         (int)reader["UsageCount"],
-                        (int?)reader["MaxUsageCount"],
-                        (DateTime?)reader["ExpirationDate"],
-                        (DateTime?)reader["NextControlDate"],
+                        reader["MaxUsageCount"] == DBNull.Value ? (int?)null : (int)reader["MaxUsageCount"],
+                        reader["ExpirationDate"] == DBNull.Value ? (DateTime?)null : (DateTime)reader["ExpirationDate"],
+                        reader["NextControlDate"] == DBNull.Value ? (DateTime?)null : (DateTime)reader["NextControlDate"],
                         (bool)reader["IsStored"],
                         (bool)reader["IsLost"],
                         (bool)reader["IsRemoved"],
-                        (int)reader["VehicleId"]
-                        
+                        reader["Id_Vehicle"] == DBNull.Value ? (int?)null : (int)reader["Id_Vehicle"]
                     );
+
                 }
             }
             return null;
@@ -60,13 +60,13 @@ namespace BICE.DAL
                         (string)reader["Barcode"],
                         (string)reader["Category"],
                         (int)reader["UsageCount"],
-                        (int?)reader["MaxUsageCount"],
-                        (DateTime?)reader["ExpirationDate"],
-                        (DateTime?)reader["NextControlDate"],
+                        reader["MaxUsageCount"] == DBNull.Value ? (int?)null : (int)reader["MaxUsageCount"],
+                        reader["ExpirationDate"] == DBNull.Value ? (DateTime?)null : (DateTime)reader["ExpirationDate"],
+                        reader["NextControlDate"] == DBNull.Value ? (DateTime?)null : (DateTime)reader["NextControlDate"],
                         (bool)reader["IsStored"],
                         (bool)reader["IsLost"],
                         (bool)reader["IsRemoved"],
-                        (int)reader["VehicleId"]
+                        reader["Id_Vehicle"] == DBNull.Value ? (int?)null : (int)reader["Id_Vehicle"]
                     ));
                 }
             }
@@ -90,13 +90,13 @@ namespace BICE.DAL
                         (string)reader["Barcode"],
                         (string)reader["Category"],
                         (int)reader["UsageCount"],
-                        (int?)reader["MaxUsageCount"],
-                        (DateTime?)reader["ExpirationDate"],
-                        (DateTime?)reader["NextControlDate"],
+                        reader["MaxUsageCount"] == DBNull.Value ? (int?)null : (int)reader["MaxUsageCount"],
+                        reader["ExpirationDate"] == DBNull.Value ? (DateTime?)null : (DateTime)reader["ExpirationDate"],
+                        reader["NextControlDate"] == DBNull.Value ? (DateTime?)null : (DateTime)reader["NextControlDate"],
                         (bool)reader["IsStored"],
                         (bool)reader["IsLost"],
                         (bool)reader["IsRemoved"],
-                        (int)reader["VehicleId"]
+                        reader["Id_Vehicle"] == DBNull.Value ? (int?)null : (int)reader["Id_Vehicle"]
                     ));
                 }
             }
@@ -121,13 +121,13 @@ namespace BICE.DAL
                         (string)reader["Barcode"],
                         (string)reader["Category"],
                         (int)reader["UsageCount"],
-                        (int?)reader["MaxUsageCount"],
-                        (DateTime?)reader["ExpirationDate"],
-                        (DateTime?)reader["NextControlDate"],
+                        reader["MaxUsageCount"] == DBNull.Value ? (int?)null : (int)reader["MaxUsageCount"],
+                        reader["ExpirationDate"] == DBNull.Value ? (DateTime?)null : (DateTime)reader["ExpirationDate"],
+                        reader["NextControlDate"] == DBNull.Value ? (DateTime?)null : (DateTime)reader["NextControlDate"],
                         (bool)reader["IsStored"],
                         (bool)reader["IsLost"],
                         (bool)reader["IsRemoved"],
-                        (int)reader["VehicleId"]
+                        reader["Id_Vehicle"] == DBNull.Value ? (int?)null : (int)reader["Id_Vehicle"]
                     );
                 }
             }
@@ -152,13 +152,13 @@ namespace BICE.DAL
                         (string)reader["Barcode"],
                         (string)reader["Category"],
                         (int)reader["UsageCount"],
-                        (int?)reader["MaxUsageCount"],
-                        (DateTime?)reader["ExpirationDate"],
-                        (DateTime?)reader["NextControlDate"],
+                        reader["MaxUsageCount"] == DBNull.Value ? (int?)null : (int)reader["MaxUsageCount"],
+                        reader["ExpirationDate"] == DBNull.Value ? (DateTime?)null : (DateTime)reader["ExpirationDate"],
+                        reader["NextControlDate"] == DBNull.Value ? (DateTime?)null : (DateTime)reader["NextControlDate"],
                         (bool)reader["IsStored"],
                         (bool)reader["IsLost"],
                         (bool)reader["IsRemoved"],
-                        (int)reader["VehicleId"]
+                        reader["Id_Vehicle"] == DBNull.Value ? (int?)null : (int)reader["Id_Vehicle"]
                     ));
                 }
             }
@@ -191,7 +191,7 @@ namespace BICE.DAL
 
         public override Material_DAL Update(Material_DAL material)
         {
-            var query = "UPDATE Materials SET Denomination = @Denomination, Barcode = @Barcode, Category = @Category, UsageCount = @UsageCount, MaxUsageCount = @MaxUsageCount, ExpirationDate = @ExpirationDate, NextControlDate = @NextControlDate, IsStored = @IsStored, IsLost = @IsLost, IsRemoved = @IsRemoved WHERE Id = @Id";
+            var query = "UPDATE Materials SET Denomination = @Denomination, Barcode = @Barcode, Category = @Category, UsageCount = @UsageCount, MaxUsageCount = @MaxUsageCount, ExpirationDate = @ExpirationDate, NextControlDate = @NextControlDate, IsStored = @IsStored, IsLost = @IsLost, IsRemoved = @IsRemoved, Id_Vehicle = @VehicleId, WHERE Id = @Id";
             using (var connection = new SqlConnection(ConnectionString))
             {
                 var command = new SqlCommand(query, connection);
@@ -244,13 +244,13 @@ namespace BICE.DAL
                         (string)reader["Barcode"],
                         (string)reader["Category"],
                         (int)reader["UsageCount"],
-                        (int?)reader["MaxUsageCount"],
-                        (DateTime?)reader["ExpirationDate"],
-                        (DateTime?)reader["NextControlDate"],
+                        reader["MaxUsageCount"] == DBNull.Value ? (int?)null : (int)reader["MaxUsageCount"],
+                        reader["ExpirationDate"] == DBNull.Value ? (DateTime?)null : (DateTime)reader["ExpirationDate"],
+                        reader["NextControlDate"] == DBNull.Value ? (DateTime?)null : (DateTime)reader["NextControlDate"],
                         (bool)reader["IsStored"],
                         (bool)reader["IsLost"],
                         (bool)reader["IsRemoved"],
-                        (int)reader["VehicleId"]
+                        reader["Id_Vehicle"] == DBNull.Value ? (int?)null : (int)reader["Id_Vehicle"]
                     ));
                 }
             }
