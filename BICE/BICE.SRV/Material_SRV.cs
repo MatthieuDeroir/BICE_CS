@@ -135,7 +135,7 @@ public IEnumerable<Material_DTO> GetMaterial()
 			_materialRepository.Delete(materialDal);
 		}
 		
-		public IEnumerable<Material_DTO> HandleInterventionReturn(int vehicleId, InterventionReturn_DTO interventionReturnDto)
+		public IEnumerable<Material_DTO> HandleInterventionReturn(int interventionId, int vehicleId, InterventionReturn_DTO interventionReturnDto)
 		{
 			IEnumerable<Material_DAL> materialsOnVehicle = _materialRepository.GetMaterialsByVehicleId(vehicleId);
 			List<Material_DTO> updatedMaterials = new List<Material_DTO>();
@@ -143,10 +143,9 @@ public IEnumerable<Material_DTO> GetMaterial()
 			// Fetch the vehicle and find the associated intervention
 			Vehicle_DAL vehicle = _vehicleRepository.GetById(vehicleId);
 			// Fetch the last intervention id for the vehicle
-			int interventionId = _interventionRepository.GetLastInterventionIdByVehicleId(vehicleId);
-			
+
 			// Get the vehicleintervention id from the intervention id and the vehicle id
-			int VehicleinterventionId = _vehicleRepository.GetVehicleInterventionIdByInterventionIdAndVehicleId(interventionId, vehicleId);
+			int VehicleInterventionId = _vehicleRepository.GetVehicleInterventionIdByInterventionIdAndVehicleId(interventionId, vehicleId);
 			
 
 			foreach (Material_DAL material in materialsOnVehicle)
@@ -165,9 +164,9 @@ public IEnumerable<Material_DTO> GetMaterial()
 						MaterialUsageHistory_DAL usageHistory = new MaterialUsageHistory_DAL
 						(
 							material.Id,
-							VehicleinterventionId, // Use the fetched vehicleinterventionId
+							VehicleInterventionId, // Use the fetched vehicleinterventionId
 							// Use the date and time from the intervention id
-							DateTime.Now, 
+							_interventionRepository.GetById(interventionId).StartDate, 
 							true, // Material was used
 							false // Material was not lost
 						);
@@ -188,8 +187,8 @@ public IEnumerable<Material_DTO> GetMaterial()
 					MaterialUsageHistory_DAL lostHistory = new MaterialUsageHistory_DAL
 					(
 					material.Id,
-					interventionId, // Use the fetched interventionId
-					DateTime.UtcNow, // Use the current date and time
+					VehicleInterventionId, // Use the fetched interventionId
+					_interventionRepository.GetById(interventionId).StartDate, // Use the date and time from the intervention id
 					false, // Material was not used
 					true // Material is lost
 					);
@@ -205,9 +204,66 @@ public IEnumerable<Material_DTO> GetMaterial()
 
 			return updatedMaterials;
 		}
+		
+		public IEnumerable<MaterialUsageHistory_DTO> GetMaterialUsageHistory(int materialId)
+		{
+			IEnumerable<MaterialUsageHistory_DAL> materialUsageHistoryDals = _materialRepository.GetMaterialUsageHistory(materialId);
+			List<MaterialUsageHistory_DTO> materialUsageHistoryDtos = new List<MaterialUsageHistory_DTO>();
+			foreach (MaterialUsageHistory_DAL materialUsageHistoryDal in materialUsageHistoryDals)
+			{
+				materialUsageHistoryDtos.Add(new MaterialUsageHistory_DTO(materialUsageHistoryDal));
+			}
+			return materialUsageHistoryDtos;
+		}
+
+
+		public IEnumerable<Material_DTO> GetStoredMaterials()
+		{
+			// Fetch all materials from repository
+			var allMaterials = _materialRepository.GetAll();
+
+			// Filter only the materials that are stored or attached to a vehicle
+			// var storedMaterials = allMaterials.Where(m => m.IsStored || m.VehicleId != null);
+		
+			
+			// make a join with the vehicle table to get the vehicle name when the material is attached to a vehicle otherwise the vehicle name is null
+			var storedMaterials = from m in allMaterials
+								  join v in _vehicleRepository.GetAll() on m.VehicleId equals v.Id into mv
+								  from v in mv.DefaultIfEmpty()
+								  where m.IsStored || m.VehicleId != null
+								  select new { m, InternalNumber = v == null ? null : v.InternalNumber, Denomination = v == null ? null : v.Denomination, LicensePlate = v == null ? null : v.LicensePlate };
 
 
 
+
+			 // Convert to DTOs and return
+			return storedMaterials.Select(m => new Material_DTO(m.m, m.InternalNumber, m.Denomination, m.LicensePlate)).ToList();
+		}
+
+		public IEnumerable<Material_DTO> GetMaterialsToBeRemoved()
+		{
+			// Fetch all materials from repository
+			var allMaterials = _materialRepository.GetAll();
+
+			// Filter the materials that need to be removed, for example, expired or overused materials
+			var materialsToBeRemoved = allMaterials.Where(m => m.ExpirationDate < DateTime.Now || m.UsageCount > m.MaxUsageCount);
+
+			// Convert to DTOs and return
+			return materialsToBeRemoved.Select(m => new Material_DTO(m)).ToList();
+		}
+
+
+		public IEnumerable<Material_DTO> GetMaterialsToBeChecked()
+		{
+			// Fetch all materials from repository
+			var allMaterials = _materialRepository.GetAll();
+
+			// Filter the materials that need to be checked, for example, those whose next control date is coming up
+			var materialsToBeChecked = allMaterials.Where(m => m.NextControlDate <= DateTime.Now); 
+
+			// Convert to DTOs and return
+			return materialsToBeChecked.Select(m => new Material_DTO(m)).ToList();
+		}
 	}
 }
 
