@@ -2,6 +2,9 @@ namespace BICE.DAL.Repositories;
 
 public interface IIntervention_Repository : IRepository<Intervention_DAL>
 {
+    /// <summary>
+    /// Defines the repository operations for handling intervention data.
+    /// </summary>
     public IEnumerable<Intervention_DAL> GetAll();
     
     public Intervention_DAL GetById(int id);

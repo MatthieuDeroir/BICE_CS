@@ -1,8 +1,13 @@
 namespace BICE.DAL.Repositories;
 
-public interface IMaterial_Repository
+
+/// <summary>
+/// Defines the repository operations for handling material data.
+/// </summary>
+
+public interface IMaterial_Repository 
 {
-    // GET
+
     public IEnumerable<Material_DAL> GetAll();
     
     public Material_DAL GetById(int id);
