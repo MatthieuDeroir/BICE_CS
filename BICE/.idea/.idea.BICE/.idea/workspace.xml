@@ -9,7 +9,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a90e9a96-dbd4-48f2-9ad9-9809aa701d45" name="Changes" comment="" />
+    <list default="true" id="a90e9a96-dbd4-48f2-9ad9-9809aa701d45" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/BICE.DTO/MaterialVehicle_DTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BICE/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BICE/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE-API/Controllers/MaterialController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE-API/Controllers/MaterialController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.BLL/Material_BLL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.BLL/Material_BLL.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DAL/Intervention_DAL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Classes/Intervention_DAL.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DAL/MaterialUsageHistory_DAL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Classes/MaterialUsageHistory_DAL.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DAL/Material_DAL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Classes/Material_DAL.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DAL/Repositories/Material_Repository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Repositories/Material_Repository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DAL/Vehicle_DAL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Classes/Vehicle_DAL.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DTO.Tests/Material_DTO_Tests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DTO.Tests/Material_DTO_Tests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DTO/MaterialUsageHistory_DTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DTO/MaterialUsageHistory_DTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DTO/Material_DTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DTO/Material_DTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.SRV.Tests/Vehicle_SRV_Tests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.SRV.Tests/Vehicle_SRV_Tests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.SRV/Material_SRV.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.SRV/Material_SRV.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,7 +48,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -109,13 +124,37 @@
       <workItem from="1682432611189" duration="1174000" />
       <workItem from="1682668917171" duration="907000" />
       <workItem from="1682671971544" duration="1368000" />
+      <workItem from="1683699391111" duration="23930000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="DotNet Exception Breakpoints">
+          <properties exception="System.NullReferenceException" isInternal="false" displayValue="NullReferenceException" namespaceName="System">
+            <option name="internal" value="false" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

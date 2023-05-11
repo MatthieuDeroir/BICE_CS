@@ -68,6 +68,68 @@ namespace BICE.DAL
             return null;
         }
 
+        public IEnumerable<Vehicle_DAL> GetByInterventionId(int interventionId)
+        {
+            // to fetch all vehicle by intervention id i must do a join between VehicleIntervention and Vehicle
+            var query = "SELECT * FROM Vehicles WHERE id IN (SELECT id_vehicle FROM VehicleIntervention WHERE id_intervention = @interventionId)";
+            
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@interventionId", interventionId);
+                    
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            yield return new Vehicle_DAL(
+                                (int)reader["id"],
+                                (string)reader["denomination"],
+                                (string)reader["internalNumber"],
+                                (string)reader["licensePlate"],
+                                (bool)reader["isActive"]
+                            );
+                        }
+                    }
+                }
+            }
+        }
+        
+        public Vehicle_DAL GetByInternalNumber(string internalNumber)
+        {
+            var query = "SELECT * FROM Vehicles WHERE internalNumber = @internalNumber";
+
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@internalNumber", internalNumber);
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new Vehicle_DAL(
+                                (int)reader["id"],
+                                (string)reader["denomination"],
+                                (string)reader["internalNumber"],
+                                (string)reader["licensePlate"],
+                                (bool)reader["isActive"]
+                            );
+                        }
+                    }
+                }
+                
+            }
+
+            return null;
+        }
+
         public override Vehicle_DAL Insert(Vehicle_DAL vehicle)
         {
             var query = "INSERT INTO Vehicles (internalNumber, denomination, licensePlate, isActive) OUTPUT INSERTED.id VALUES (@internalNumber, @denomination, @licensePlate, @isActive)";
@@ -129,6 +191,32 @@ namespace BICE.DAL
                     command.ExecuteNonQuery();
                 }
             }
+        }
+
+        public int GetVehicleInterventionIdByInterventionIdAndVehicleId(int interventionId, int vehicleId)
+        {
+            var query = "SELECT id FROM VehicleIntervention WHERE id_intervention = @interventionId AND id_vehicle = @vehicleId";
+
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@interventionId", interventionId);
+                    command.Parameters.AddWithValue("@vehicleId", vehicleId);
+                    
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return (int)reader["id"];
+                        }
+                    }
+                }
+            }
+
+            return 0;
         }
     }
 }

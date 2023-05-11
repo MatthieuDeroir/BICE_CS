@@ -33,6 +33,30 @@ namespace BICE.API.Controllers
             }
             return Ok(vehicleDto);
         }
+        
+
+        [HttpGet("{interventionId}/vehicles")]
+        public ActionResult<Vehicle_DTO> GetVehiclesByInterventionId(int interventionId)
+        {
+            IEnumerable<Vehicle_DTO> vehicleDto = _vehicleService.GetVehiclesByInterventionId(interventionId);
+            if (vehicleDto == null)
+            {
+                return NotFound();
+            }
+            return Ok(vehicleDto);
+        }
+
+        
+        [HttpGet("{internalNumber}")]
+        public ActionResult<Vehicle_DTO> GetVehicleByInternalNumber(string internalNumber)
+        {
+            Vehicle_DTO vehicleDto = _vehicleService.GetVehicleByInternalNumber(internalNumber);
+            if (vehicleDto == null)
+            {
+                return NotFound();
+            }
+            return Ok(vehicleDto);
+        }
 
         // POST api/vehicle
         [HttpPost]
@@ -46,7 +70,7 @@ namespace BICE.API.Controllers
             Vehicle_DTO insertedVehicle = _vehicleService.AddVehicle(vehicleDto);
             return CreatedAtAction(nameof(AddVehicle), new { id = insertedVehicle.Id }, insertedVehicle);
         }
-        
+
         [HttpPut]
         public ActionResult<Vehicle_DTO> UpdateVehicle(Vehicle_DTO vehicleDto)
         {

@@ -9,9 +9,9 @@ namespace BICE.DAL
         public string Denomination { get; set; }
         public string? Description { get; set; }
         public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
         
-        public Intervention_DAL(string denomination, string? description, DateTime startDate, DateTime endDate)
+        public Intervention_DAL(string denomination, string? description, DateTime startDate, DateTime? endDate)
         {
             Denomination = denomination;
             Description = description;
@@ -19,7 +19,7 @@ namespace BICE.DAL
             EndDate = endDate;
         }
         
-        public Intervention_DAL(int id, string denomination, string? description, DateTime startDate, DateTime endDate)
+        public Intervention_DAL(int id, string denomination, string? description, DateTime startDate, DateTime? endDate)
             : this(denomination, description, startDate, endDate)
         {
             Id = id;
