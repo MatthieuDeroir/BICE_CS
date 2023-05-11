@@ -21,11 +21,7 @@ namespace BICE.DTO
 		public Boolean IsLost { get; set; }
 		public Boolean IsRemoved { get; set; }
 		public int? VehicleId { get; set; }
-		
-		//variable only used by the export with the join of the vehicle
-		public String VehicleDenomination { get; set; }
-		public String VehicleInternalNumber { get; set; }
-		public String VehicleLicensePlate { get; set; }
+	
 		
 
 		//DTO when is created for the WPF to API tranfer! Initializing the values to avoid null exceptions
@@ -92,7 +88,12 @@ namespace BICE.DTO
 			IsRemoved = materialDal.IsRemoved;
 			VehicleId = materialDal.VehicleId;
 		}
-		
+
+		protected Material_DTO()
+		{
+			throw new NotImplementedException();
+		}
+
 		public Material_BLL ToBLL()
 		{
 			return new Material_BLL(Id, Denomination, Barcode, Category, UsageCount, MaxUsageCount, ExpirationDate, NextControlDate, IsStored, IsLost, IsRemoved, VehicleId);
@@ -103,27 +104,8 @@ namespace BICE.DTO
 			return new Material_DAL(Id, Denomination, Barcode, Category, UsageCount, MaxUsageCount, ExpirationDate, NextControlDate, IsStored, IsLost, IsRemoved, VehicleId);
 		}
 		
-		//Export Join with Vehicle
-		public Material_DTO(Material_DAL materialDal, string vehicleInternalNumber, string vehicleDenomination, string vehicleLicensePlate)
-		{
-			Id = materialDal.Id;
-			Denomination = materialDal.Denomination;
-			Barcode = materialDal.Barcode;
-			Category = materialDal.Category;
-			UsageCount = materialDal.UsageCount;
-			MaxUsageCount = materialDal.MaxUsageCount;
-			ExpirationDate = materialDal.ExpirationDate;
-			NextControlDate = materialDal.NextControlDate;
-			IsStored = materialDal.IsStored;
-			IsLost = materialDal.IsLost;
-			IsRemoved = materialDal.IsRemoved;
-			VehicleId = materialDal.VehicleId;
-			VehicleDenomination = vehicleDenomination; // Assign the vehicle denomination from the joined data
-			VehicleInternalNumber = vehicleInternalNumber; // Assign the vehicle number from the joined data
-			VehicleLicensePlate = vehicleLicensePlate; // Assign the vehicle license plate from the joined data
-			
-			
-		}
+	
+		
 		
     }
 
