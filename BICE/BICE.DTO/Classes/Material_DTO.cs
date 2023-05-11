@@ -43,7 +43,7 @@ namespace BICE.DTO
 			int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate, bool isStored, bool isLost,
 			bool isRemoved, int? vehicleId)
 		{
-			Id = Id;
+			Id = id;
 			Barcode = barcode;
 			Denomination = denomination;
 			Category = category;
@@ -91,7 +91,7 @@ namespace BICE.DTO
 
 		protected Material_DTO()
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public Material_BLL ToBLL()
