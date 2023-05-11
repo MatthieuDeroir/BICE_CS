@@ -15,7 +15,7 @@ namespace BICE.DAL
 
             using (var connection = new SqlConnection(ConnectionString))
             {
-                connection.Open();
+                connection.OpenAsync();
                 
                 using (var command = new SqlCommand(query, connection))
                 {

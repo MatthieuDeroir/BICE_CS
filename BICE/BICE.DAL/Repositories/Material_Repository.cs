@@ -7,7 +7,7 @@ using BICE.BLL;
 
 namespace BICE.DAL
 {
-    public class Material_Repository : Repository<Material_DAL>, IVehicle_Repository
+    public class Material_Repository : Repository<Material_DAL>, IMaterial_Repository
     {
         // Implement the CRUD methods for Material
 
