@@ -1,17 +1,14 @@
-﻿using System;
-using System.Text.Json.Serialization;
-using System.Xml.Linq;
+﻿using System.Text.Json.Serialization;
 using BICE.BLL;
 using BICE.DAL;
+using BICE.DTO.Interfaces;
 
 
 namespace BICE.DTO
 {
-	public class Material_DTO : BaseNamedEntity_DTO
+	public class Material_DTO : BaseNamedEntity_DTO, IMaterial_DTO
     {
-	    public int Id { get; set; }
-		public String Denomination { get; set; }   
-		public String Barcode { get; set; }
+	    public String Barcode { get; set; }
 		public String Category { get; set; }
 		public int UsageCount { get; set; }
 		public int? MaxUsageCount { get; set; }
@@ -121,10 +118,7 @@ namespace BICE.DTO
 			VehicleDenomination = vehicleDenomination; // Assign the vehicle denomination from the joined data
 			VehicleInternalNumber = vehicleInternalNumber; // Assign the vehicle number from the joined data
 			VehicleLicensePlate = vehicleLicensePlate; // Assign the vehicle license plate from the joined data
-			
-			
 		}
-		
     }
 
     }
