@@ -44,23 +44,6 @@ namespace BICE.WPF
             }
         }
 
-        public async Task envoyer_e(List<Material_DTO> liste_DTO)
-        {
-            try
-            {
-                string json = JsonConvert.SerializeObject(liste_DTO);
-                HttpClient client = new HttpClient();
-                client.BaseAddress = new Uri("https://localhost:7001/");
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage response = await client.PostAsync("api/Material/insert-list", new StringContent(json, Encoding.UTF8, "application/json"));
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
         private void ImportCsvButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog

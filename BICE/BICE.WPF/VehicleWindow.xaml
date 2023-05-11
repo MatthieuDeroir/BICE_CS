@@ -27,6 +27,7 @@
                         <DataGridTextColumn Header="Internal Number" Binding="{Binding InternalNumber}" />
                         <DataGridTextColumn Header="Denomination" Binding="{Binding Denomination}" />
                         <DataGridTextColumn Header="License Plate" Binding="{Binding LicensePlate}" />
+                        
                         <DataGridTemplateColumn Header="Supprimer">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -42,6 +43,15 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
+                        
+                        <DataGridTemplateColumn Header="Ajouter du materiel">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Ajouter du materiel" Click="AddMaterialButton_Click"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

@@ -120,5 +120,24 @@ namespace BICE.WPF
             LicensePlateTextBox.Text = "";
             IsActiveCheckBox.IsChecked = false;
         }
+
+        private void AddMaterialButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Vérifier si un véhicule est sélectionné
+            if (VehicleGrid.SelectedItem != null)
+            {
+                Vehicle_DTO selectedVehicle = VehicleGrid.SelectedItem as Vehicle_DTO;
+
+                // Créer une nouvelle instance de la fenêtre d'édition de véhicule
+                VehicleAddMaterialWindow editWindow = new VehicleAddMaterialWindow(DataContext as VehicleViewModel, selectedVehicle);
+
+                // Afficher la fenêtre d'édition de véhicule
+                editWindow.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Veuillez sélectionner un véhicule à modifier.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
     }
 }
