@@ -1,9 +1,10 @@
 ﻿    using System;
     using BICE.BLL;
+    using BICE.DAL.Repositories;
 
     namespace BICE.DAL
     {
-        public class Vehicle_DAL
+        public class Vehicle_DAL : IVehicle_DAL
         {
             public int Id { get; set; }
             public string Denomination { get; set; }
