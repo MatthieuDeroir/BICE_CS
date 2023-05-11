@@ -2,10 +2,11 @@
 using BICE.DTO;
 using BICE.BLL;
 using BICE.DAL;
+using BICE.SRV.Interfaces;
 
 namespace BICE.SRV
 {
-    public class Vehicle_SRV
+    public class Vehicle_SRV : IVehicle_SRV
     {
         private readonly Vehicle_Repository _vehicleRepository;
 

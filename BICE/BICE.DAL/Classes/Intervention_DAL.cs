@@ -1,9 +1,10 @@
 ﻿using BICE.BLL;
 using System;
+using BICE.DAL.Repositories;
 
 namespace BICE.DAL
 {
-    public class Intervention_DAL
+    public class Intervention_DAL : IIntervention_DAL
     {
         public int Id { get; set; }
         public string Denomination { get; set; }

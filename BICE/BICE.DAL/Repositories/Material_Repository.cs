@@ -7,7 +7,7 @@ using BICE.BLL;
 
 namespace BICE.DAL
 {
-    public class Material_Repository : Repository<Material_DAL>
+    public class Material_Repository : Repository<Material_DAL>, IMaterial_Repository
     {
         // Implement the CRUD methods for Material
 
@@ -295,33 +295,6 @@ namespace BICE.DAL
                 connection.Open();
                 command.ExecuteNonQuery();
             }
-        }
-
-        public IEnumerable<MaterialUsageHistory_DAL> GetUsageHistoryByMaterial(int materialId)
-        {
-            var query = "SELECT * FROM MaterialUsageHistory WHERE Id_Material = @Id_Material";
-            
-            var usageHistory = new List<MaterialUsageHistory_DAL>();
-            
-            using (var connection = new SqlConnection(ConnectionString))
-            {
-                var command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Id_Material", materialId);
-                connection.Open();
-                var reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    usageHistory.Add(new MaterialUsageHistory_DAL(
-                        (int)reader["Id"],
-                        (int)reader["Id_Material"],
-                        (int)reader["Id_Vehicle_Intervention"],
-                        (DateTime)reader["UsageDate"],
-                        (bool)reader["IsUsed"],
-                        (bool)reader["IsLost"]
-                    ));
-                }
-            }
-            return usageHistory;
         }
 
         public IEnumerable<MaterialUsageHistory_DAL> GetMaterialUsageHistory(int materialId)

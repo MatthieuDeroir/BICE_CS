@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BICE.BLL
 {
-    public class Intervention_BLL
+    public class Intervention_BLL : Interfaces.IIntervention_BLL
     {
         [Required(ErrorMessage = "Denomination is required !")]
         [StringLength(255, ErrorMessage = "Denomination length cannot exceed 255 characters !")]

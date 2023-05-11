@@ -1,13 +1,11 @@
-﻿using System;
-using BICE.BLL;
+﻿using BICE.BLL;
 using BICE.DAL;
+using BICE.DTO.Interfaces;
 
 namespace BICE.DTO
 {
-    public class Vehicle_DTO : BaseNamedEntity_DTO
+    public class Vehicle_DTO : BaseNamedEntity_DTO, IVehicle_DTO
     {
-        public int Id { get; set; }
-        public String Denomination { get; set; }
         public String InternalNumber { get; set; }
         public String LicensePlate { get; set; }
         public Boolean IsActive { get; set; }

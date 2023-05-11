@@ -1,10 +1,10 @@
 using BICE.DAL;
+using BICE.DTO.Interfaces;
 
 namespace BICE.DTO;
 
-public class MaterialUsageHistory_DTO
+public class MaterialUsageHistory_DTO : BaseEntity_DTO, IMaterialUsageHistory_DTO
 {
-    public int Id { get; set; }
     public int MaterialId { get; set; }
     public int VehicleInterventionId { get; set; }
     public DateTime UsageDate { get; set; }

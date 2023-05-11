@@ -7,7 +7,7 @@ using BICE.DAL.Repositories;
 
 namespace BICE.DAL
 {
-    public class Intervention_Repository : Repository<Intervention_DAL>
+    public class Intervention_Repository : Repository<Intervention_DAL>, IIntervention_Repository
     {
         public override IEnumerable<Intervention_DAL> GetAll()
         {
@@ -15,7 +15,7 @@ namespace BICE.DAL
 
             using (var connection = new SqlConnection(ConnectionString))
             {
-                connection.Open();
+                connection.OpenAsync();
                 
                 using (var command = new SqlCommand(query, connection))
                 {
@@ -86,25 +86,10 @@ namespace BICE.DAL
                 }
             }
             return intervention;
+            
         }
         
-        public async Task AddVehicleToIntervention(int interventionId, int vehicleId)
-        {
-            using (var connection = new SqlConnection(ConnectionString))
-            {
-                await connection.OpenAsync();
-
-                var query = "INSERT INTO VehicleIntervention (id_intervention, id_vehicle) VALUES (@interventionId, @vehicleId)";
-
-                using (var command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@interventionId", interventionId);
-                    command.Parameters.AddWithValue("@vehicleId", vehicleId);
-
-                    await command.ExecuteNonQueryAsync();
-                }
-            }
-        }
+        
 
 
         
@@ -172,6 +157,40 @@ namespace BICE.DAL
                             );
                         }
                     }
+                }
+            }
+        }
+        public async Task AddVehicleToIntervention(int interventionId, int vehicleId)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                await connection.OpenAsync();
+
+                var query = "INSERT INTO VehicleIntervention (id_intervention, id_vehicle) VALUES (@interventionId, @vehicleId)";
+
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@interventionId", interventionId);
+                    command.Parameters.AddWithValue("@vehicleId", vehicleId);
+
+                    await command.ExecuteNonQueryAsync();
+                }
+            }
+        }
+        public Task RemoveVehicleFromIntervention(int interventionId, int vehicleId)
+        {
+            var query = "DELETE FROM VehicleIntervention WHERE id_intervention = @interventionId AND id_vehicle = @vehicleId";
+            
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@interventionId", interventionId);
+                    command.Parameters.AddWithValue("@vehicleId", vehicleId);
+                    
+                    return command.ExecuteNonQueryAsync();
                 }
             }
         }

@@ -1,6 +1,8 @@
+using BICE.DAL.Repositories;
+
 namespace BICE.DAL;
 
-public class MaterialUsageHistory_DAL
+public class MaterialUsageHistory_DAL : IMaterialUsageHistory_DAL
 {
     public int Id { get; set; }
     public int MaterialId { get; set; }
