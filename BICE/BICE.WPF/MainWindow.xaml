@@ -10,5 +10,6 @@
         <Button Content="allez à la page de gestion des véhicules" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Click_Vehicle"/>
         <Button Content="allez à la page de gestion des materiels" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Button_Click_Material" Margin="0,258,0,0"/>
         <Button Content="allez à la page de gestion des interventions" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Button_Click_Intervention" Margin="0,309,0,0"/>
+        <Button Content="téléchargement du fichier" HorizontalAlignment="Center" VerticalAlignment="Top" Click="DownloadButton_Click" Margin="0,367,0,0"/>
     </Grid>
 </Window>

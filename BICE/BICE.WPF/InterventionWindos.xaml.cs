@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -118,6 +119,26 @@ namespace BICE.WPF
             {
                 MessageBox.Show("Veuillez sélectionner un véhicule à modifier.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+        }
+
+        private void InterventionAddVehiculesButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Vérifier si une Intervention est sélectionné
+            if (InterventionGrid.SelectedItem != null)
+            {
+                Intervention_DTO selectedIntervention = InterventionGrid.SelectedItem as Intervention_DTO;
+
+                // Créer une nouvelle instance de la fenêtre d'édition de véhicule
+                InterventionAddVehiculesWindow interventionAddVehiculesWindow = new InterventionAddVehiculesWindow(selectedIntervention);
+
+                // Afficher la fenêtre d'édition de véhicule
+                interventionAddVehiculesWindow.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Veuillez sélectionner un véhicule à modifier.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            
         }
 
     }
