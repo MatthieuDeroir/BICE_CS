@@ -35,5 +35,10 @@ namespace BICE.WPF
             MaterialWindow materialWindow = new MaterialWindow();
             materialWindow.Show();
         }
+        private void Button_Click_Intervention(object sender, RoutedEventArgs e)
+        {
+            InterventionWindos interventionWindos = new InterventionWindos();
+            interventionWindos.Show();
+        }
     }
 }

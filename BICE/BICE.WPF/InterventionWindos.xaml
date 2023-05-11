@@ -1,0 +1,31 @@
+﻿<Window x:Class="BICE.WPF.InterventionWindos"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BICE.WPF"
+        mc:Ignorable="d"
+        Title="InterventionWindos" Height="450" Width="800">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Affichage">
+                <DataGrid Grid.Row="1" x:Name="InterventionGrid" ItemsSource="{Binding Interventions}" AutoGenerateColumns="False" Margin="10" CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                        <DataGridTextColumn Header="Dénomination" Binding="{Binding Denomination}" />
+                        <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
+                        <DataGridTextColumn Header="Date de début" Binding="{Binding StartDate}" />
+                        <DataGridTextColumn Header="Date de fin" Binding="{Binding EndDate}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </TabItem>
+            <TabItem Header="Ajout">
+                
+            </TabItem>
+            <TabItem Header="Retour d'intervention">
+
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
