@@ -74,67 +74,70 @@ namespace BICE.SRV
 		}
 		
 		public IEnumerable<Material_DTO> HandleInterventionReturn(int vehicleId, InterventionReturn_DTO interventionReturnDto)
-{
-    IEnumerable<Material_DAL> materialsOnVehicle = _materialRepository.GetMaterialsByVehicleId(vehicleId);
-    List<Material_DTO> updatedMaterials = new List<Material_DTO>();
+		{
+			IEnumerable<Material_DAL> materialsOnVehicle = _materialRepository.GetMaterialsByVehicleId(vehicleId);
+			List<Material_DTO> updatedMaterials = new List<Material_DTO>();
 
-    // Fetch the vehicle and find the associated intervention
-    Vehicle_DAL vehicle = _vehicleRepository.GetVehicleById(vehicleId);
-    int interventionId = _vehicleInterventionRepository.GetInterventionIdByVehicleId(vehicle.Id);
+			// Fetch the vehicle and find the associated intervention
+			Vehicle_DAL vehicle = _vehicleRepository.GetById(vehicleId);
+			// Fetch the last intervention id for the vehicle
+			int interventionId = _interventionRepository.GetLastInterventionIdByVehicleId(vehicleId);
 
-    foreach (Material_DAL material in materialsOnVehicle)
-    {
-        Material_DTO materialDto = new Material_DTO(material);
-        Material_BLL materialBll = materialDto.ToBLL();
+			foreach (Material_DAL material in materialsOnVehicle)
+			{
+				Material_DTO materialDto = new Material_DTO(material);
+				Material_BLL materialBll = materialDto.ToBLL();
         
-        if (interventionReturnDto.UsedBarcodes.Contains(materialBll.Barcode) || interventionReturnDto.UnusedBarcodes.Contains(materialBll.Barcode))
-        {
-            // Update usage count if material is in the used barcodes list
-            if (interventionReturnDto.UsedBarcodes.Contains(materialBll.Barcode))
-            {
-                materialBll.UpdateUsageCount();
+				if (interventionReturnDto.UsedBarcodes.Contains(materialBll.Barcode) || interventionReturnDto.UnusedBarcodes.Contains(materialBll.Barcode))
+				{
+					// Update usage count if material is in the used barcodes list
+					if (interventionReturnDto.UsedBarcodes.Contains(materialBll.Barcode))
+					{
+						materialBll.UpdateUsageCount();
                 
-                // Create a new instance of MaterialUsageHistory
-                MaterialUsageHistory_DTO usageHistory = new MaterialUsageHistory_DTO()
-                {
-                    MaterialId = material.Id,
-                    InterventionId = interventionId, // Use the fetched interventionId
-                    UsageDate = DateTime.UtcNow // Use the current date and time
-                };
+						// Create a new instance of MaterialUsageHistory
+						MaterialUsageHistory_DAL usageHistory = new MaterialUsageHistory_DAL
+						(
+							material.Id,
+							interventionId, // Use the fetched interventionId
+							// Use the date and time from the intervention id
+							_interventionRepository.GetById(interventionId).EndDate,
+							true, // Material was used
+							false // Material was not lost
+						);
 
-                // Add the usage history to the database
-                _materialUsageHistoryRepository.AddUsageHistory(usageHistory);
-            }
+						// Add the usage history to the database
+						_materialRepository.AddUsageHistory(usageHistory);
+					}
             
-            // Evaluate if the material should be removed
-            materialBll.ValidateUsability();
-        }
-        else
-        {
-            // Mark material as lost
-            materialBll.HasBeenLost();
+					// Evaluate if the material should be removed
+					materialBll.ValidateUsability(); 
+				}
+				else
+				{
+					// Mark material as lost
+					materialBll.HasBeenLost();
             
-            // Add a lost record to MaterialUsageHistory
-            MaterialUsageHistory_DTO lostHistory = new MaterialUsageHistory_DTO()
-            {
-                MaterialId = material.Id,
-                InterventionId = interventionId, // Use the fetched interventionId
-                UsageDate = DateTime.UtcNow, // Use the current date and time
-                IsUsed = false, // Material was not used
-                IsLost = true // Material is lost
-            };
+					// Add a lost record to MaterialUsageHistory
+					MaterialUsageHistory_DAL lostHistory = new MaterialUsageHistory_DAL
+					(
+					material.Id,
+					interventionId, // Use the fetched interventionId
+					DateTime.UtcNow, // Use the current date and time
+					false, // Material was not used
+					true // Material is lost
+					);
 
-            // Add the lost history to the database
-            _materialUsageHistoryRepository.AddUsageHistory(lostHistory);
-        }
+					// Add the lost history to the database
+					_materialRepository.AddUsageHistory(lostHistory);
+				} 
+				// Update Material in the database and add it to the updated materials list
+				Material_DAL updatedMaterialDal = new Material_DAL(materialBll);
+				Material_DAL updatedMaterial = _materialRepository.Update(updatedMaterialDal);
+				updatedMaterials.Add(new Material_DTO(updatedMaterial));
+			}
 
-        // Update Material in the database and add it to the updated materials list
-        Material_DAL updatedMaterialDal = new Material_DAL(materialBll);
-        Material_DAL updatedMaterial = _materialRepository.Update(updatedMaterialDal);
-        updatedMaterials.Add(new Material_DTO(updatedMaterial));
-    }
-
-    return updatedMaterials;
+			return updatedMaterials;
 }
 
 

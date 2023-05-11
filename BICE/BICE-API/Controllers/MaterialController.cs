@@ -89,7 +89,7 @@ namespace BICE.API.Controllers
         
         
         [HttpPut("vehicle-preparation/{vehicleId}")]
-        public IActionResult PrepareVehicle(int vehicleId, [FromBody] List<string> barcodes)
+        public IActionResult PrepareVehicle(int vehicleId, List<string> barcodes)
         {
             try
             {

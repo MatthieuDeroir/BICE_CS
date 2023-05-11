@@ -18,7 +18,7 @@ namespace BICE.DAL.Repositories
 
 
             // connection string for VICOOOOOOOOOOOOOO0000000000 🙂
-            ConnectionString = "Data Source=localhost;Integrated Security=True";
+            ConnectionString = "Data Source=localhost;Initial Catalog=BICE_DATABASE;Integrated Security=True";
 
             // connection string for __M_A_T_Y_W_IZOD
             //var config = builder.AddJsonFile("appsettings.json", false, true).Build();

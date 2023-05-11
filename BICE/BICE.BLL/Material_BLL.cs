@@ -92,7 +92,7 @@ namespace BICE.BLL
         {
             ValidateUsageCount();
             ValidateMaxUsageCount();
-            ValidateDates();
+            // ValidateDates();
             ValidateUsability();
         }
 

@@ -9,7 +9,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a90e9a96-dbd4-48f2-9ad9-9809aa701d45" name="Changes" comment="" />
+    <list default="true" id="a90e9a96-dbd4-48f2-9ad9-9809aa701d45" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/BICE.DAL/MaterialUsageHistory_DAL.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BICE.SRV.Tests/Intervention_SRV_Tests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BICE/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BICE/.idea/indexLayout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BICE/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BICE/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE-API/Controllers/MaterialController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE-API/Controllers/MaterialController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.BLL/Material_BLL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.BLL/Material_BLL.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DAL/Repositories/Intervention_Repository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Repositories/Intervention_Repository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DAL/Repositories/Material_Repository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Repositories/Material_Repository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DAL/Repositories/Repository_DAL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Repositories/Repository_DAL.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DTO/MaterialUsageHistory_DTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DTO/MaterialUsageHistory_DTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.SRV/Intervention_SRV.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.SRV/Intervention_SRV.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.SRV/Material_SRV.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.SRV/Material_SRV.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
