@@ -16,6 +16,14 @@
                         <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
                         <DataGridTextColumn Header="Date de début" Binding="{Binding StartDate}" />
                         <DataGridTextColumn Header="Date de fin" Binding="{Binding EndDate}" />
+
+                        <DataGridTemplateColumn Header="Retour d'intervention">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Retour d'intervention" Click="InterventionReturnButton_Click"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
 
@@ -66,7 +74,7 @@
 
             </TabItem>
             <TabItem Header="Retour d'intervention">
-
+                
             </TabItem>
         </TabControl>
     </Grid>
