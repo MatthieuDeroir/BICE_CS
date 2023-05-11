@@ -65,9 +65,9 @@ namespace BICE.API.Controllers
         
         // Endpoint to get the list of stored materials with their vehicle information
         [HttpGet("stored-materials")]
-        public ActionResult<IEnumerable<Material_DTO>> GetStoredMaterials()
+        public ActionResult<IEnumerable<MaterialVehicle_DTO>> GetStoredMaterials()
         {
-            IEnumerable<Material_DTO> materials = _materialService.GetStoredMaterials();
+            IEnumerable<MaterialVehicle_DTO> materials = _materialService.GetStoredMaterials();
             return Ok(materials);
         }
 
