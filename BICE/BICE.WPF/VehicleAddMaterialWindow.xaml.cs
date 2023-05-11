@@ -89,7 +89,7 @@ namespace BICE.WPF
             string materialsJson = JsonConvert.SerializeObject(barcodes);
             StringContent content = new StringContent(materialsJson, Encoding.UTF8, "application/json");
 
-            HttpResponseMessage response = await client.PostAsync(client.BaseAddress, content);
+            HttpResponseMessage response = await client.PutAsync(client.BaseAddress, content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -97,7 +97,12 @@ namespace BICE.WPF
             }
             else
             {
-                MessageBox.Show("Une erreur s'est produite lors de l'ajout du matériel.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                // Lisez le contenu de la réponse
+                var responseContent = await response.Content.ReadAsStringAsync();
+
+                // Affichez le contenu de la réponse dans la console de débogage ou dans un MessageBox
+                System.Diagnostics.Debug.WriteLine(responseContent);
+                MessageBox.Show("Une erreur s'est produite lors de l'ajout du matériel. Détails : " + responseContent, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
