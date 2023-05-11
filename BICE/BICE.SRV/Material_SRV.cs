@@ -67,19 +67,28 @@ public IEnumerable<Material_DTO> GetMaterial()
 			return new Material_DTO(insertedMaterial);
 		}
 
-		public IEnumerable<Material_DTO> AddMaterials(IEnumerable<Material_DTO> materialDtos)
-		{
-			List<Material_DTO> insertedMaterials = new List<Material_DTO>();
-			foreach (Material_DTO materialDto in materialDtos)
-			{
-				Material_DAL materialDal = new Material_DAL(materialDto.ToBLL());
-				Material_DAL insertedMaterial = _materialRepository.Insert(materialDal);
-				insertedMaterials.Add(new Material_DTO(insertedMaterial));
-			}
-			return insertedMaterials;
-		}
-		
-		public IEnumerable<Material_DTO> PrepareVehicle(int vehicleId, List<string> barcodes)
+        public IEnumerable<Material_DTO> AddMaterials(IEnumerable<Material_DTO> materialDtos)
+        {
+            List<Material_DTO> insertedMaterials = new List<Material_DTO>();
+            foreach (Material_DTO materialDto in materialDtos)
+            {
+                try
+                {
+                    Material_DAL materialDal = new Material_DAL(materialDto.ToBLL());
+                    Material_DAL insertedMaterial = _materialRepository.Insert(materialDal);
+                    insertedMaterials.Add(new Material_DTO(insertedMaterial));
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+
+            }
+            return insertedMaterials;
+        }
+
+        public IEnumerable<Material_DTO> PrepareVehicle(int vehicleId, List<string> barcodes)
 		{
 			IEnumerable<Material_DAL> materialsToStore = _materialRepository.GetMaterialsByVehicleId(vehicleId);
 			

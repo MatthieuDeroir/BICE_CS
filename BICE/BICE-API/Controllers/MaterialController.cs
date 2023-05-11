@@ -77,7 +77,7 @@ namespace BICE.API.Controllers
 
 
         [HttpPost("insert-list")]
-        public ActionResult<Material_DTO> InsertMaterialList(IEnumerable<Material_DTO> materialDtos)
+        public ActionResult<Material_DTO> InsertMaterialList([FromBody]IEnumerable<Material_DTO> materialDtos)
         {
             if (!ModelState.IsValid)
             {

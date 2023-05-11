@@ -44,12 +44,51 @@ namespace BICE.WPF
             }
         }
 
+        public async Task envoyer_e(List<Material_DTO> liste_DTO)
+        {
+            try
+            {
+                string json = JsonConvert.SerializeObject(liste_DTO);
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri("https://localhost:7001/");
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage response = await client.PostAsync("api/Material/insert-list", new StringContent(json, Encoding.UTF8, "application/json"));
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void ImportCsvButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "CSV Files (*.csv)|*.csv",
+                Multiselect = false
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string csvPath = openFileDialog.FileName;
+                var materials = ParseCsvToMaterialDto(csvPath);
+
+                if (materials != null)
+                {
+                    AddMaterialsAsync(materials);
+                }
+                else
+                {
+                    MessageBox.Show("Erreur lors de la lecture du fichier CSV.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
         public List<Material_DTO> ParseCsvToMaterialDto(string filePath)
         {
             List<Material_DTO> materials = new List<Material_DTO>();
             string[] lines = File.ReadAllLines(filePath);
-
-            // Skip the header if the CSV file has one
 
             for (int i = 1; i < lines.Length; i++)
             {
@@ -70,45 +109,26 @@ namespace BICE.WPF
             return materials;
         }
 
-        public async void FichierDropStackPanel_CSVReader_JsonConverter(object sender, DragEventArgs e)
+        private async void AddMaterialsAsync(List<Material_DTO> materials)
         {
-            var liste_DTO = new List<Material_DTO>();
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            using HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("https://localhost:7001/api/Material/insert-list");
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string materialsJson = JsonConvert.SerializeObject(materials);
+            StringContent content = new StringContent(materialsJson, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await client.PostAsync(client.BaseAddress, content);
+
+            if (response.IsSuccessStatusCode)
             {
-                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                string path = Path.GetFullPath(files[0]);
-                string filename = Path.GetFileName(files[0]);
-                NomFichierLabel.Content = filename;
-
-                try
-                {
-                    liste_DTO = ParseCsvToMaterialDto(path);
-
-                    await envoyer_e(liste_DTO);
-                }
-                catch (Exception ex)
-                {
-                    // Handle exceptions here, e.g. show a message to the user
-                    MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                MessageBox.Show("Les matériels ont été ajoutés avec succès.", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("Une erreur s'est produite lors de l'ajout du matériel.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
-        public async Task envoyer_e(List<Material_DTO> liste_DTO)
-        {
-            try
-            {
-                string json = JsonConvert.SerializeObject(liste_DTO);
-                HttpClient client = new HttpClient();
-                client.BaseAddress = new Uri("https://localhost:7001/");
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage response = await client.PostAsync("api/Material/insert-list", new StringContent(json, Encoding.UTF8, "application/json"));
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
     }
 }
