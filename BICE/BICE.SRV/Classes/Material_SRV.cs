@@ -3,10 +3,11 @@ using System.Collections;
 using BICE.DAL;
 using BICE.DTO;
 using BICE.BLL;
+using BICE.SRV.Interfaces;
 
 namespace BICE.SRV
 {
-	public class Material_SRV
+	public class Material_SRV : IMaterial_SRV
 	{
 		private readonly Intervention_Repository _interventionRepository;
 		private readonly Material_Repository _materialRepository;
