@@ -75,7 +75,7 @@ namespace BICE.DAL
 
         public IEnumerable<Material_DAL> GetByVehicleId(int id)
         {
-            var query = "SELECT * FROM Materials WHERE VehicleId = @VehicleId";
+            var query = "SELECT * FROM Materials WHERE Id_Vehicle = @VehicleId";
             var materials = new List<Material_DAL>();
             using (var connection = new SqlConnection(ConnectionString))
             {
@@ -136,12 +136,21 @@ namespace BICE.DAL
         
         public IEnumerable<Material_DAL> GetMaterialsByBarcodes(List<string> barcodes)
         {
-            var query = "SELECT * FROM Materials WHERE Barcode IN @Barcodes";
+            var parameters = new List<SqlParameter>();
+            var paramNames = barcodes.Select((s, i) => "@Barcode" + i.ToString()).ToList();
+
+            for (int i = 0; i < barcodes.Count; i++)
+            {
+                parameters.Add(new SqlParameter(paramNames[i], barcodes[i]));
+            }
+
+            var query = "SELECT * FROM Materials WHERE Barcode IN (" + string.Join(", ", paramNames) + ")";
+
             var materials = new List<Material_DAL>();
             using (var connection = new SqlConnection(ConnectionString))
             {
                 var command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Barcodes", barcodes);
+                command.Parameters.AddRange(parameters.ToArray());
                 connection.Open();
                 var reader = command.ExecuteReader();
                 while (reader.Read())
@@ -165,6 +174,7 @@ namespace BICE.DAL
             return materials;
         }
 
+
         public override Material_DAL Insert(Material_DAL material)
         {
             var query = "INSERT INTO Materials (Denomination, Barcode, Category, UsageCount, MaxUsageCount, ExpirationDate, NextControlDate, IsStored, IsLost, IsRemoved, Id_Vehicle) VALUES (@Denomination, @Barcode, @Category, @UsageCount, @MaxUsageCount, @ExpirationDate, @NextControlDate, @IsStored, @IsLost, @IsRemoved, @VehicleId)";
@@ -182,16 +192,24 @@ namespace BICE.DAL
                 command.Parameters.AddWithValue("@IsLost", false);
                 command.Parameters.AddWithValue("@IsRemoved", false);
                 command.Parameters.AddWithValue("@VehicleId", material.VehicleId.HasValue ? (object)material.VehicleId.Value : DBNull.Value);
-
+                
                 connection.Open();
-                command.ExecuteNonQuery();
+                try
+                {
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
             }
             return material;
         }
 
         public override Material_DAL Update(Material_DAL material)
         {
-            var query = "UPDATE Materials SET Denomination = @Denomination, Barcode = @Barcode, Category = @Category, UsageCount = @UsageCount, MaxUsageCount = @MaxUsageCount, ExpirationDate = @ExpirationDate, NextControlDate = @NextControlDate, IsStored = @IsStored, IsLost = @IsLost, IsRemoved = @IsRemoved, Id_Vehicle = @VehicleId, WHERE Id = @Id";
+            var query = "UPDATE Materials SET Denomination = @Denomination, Barcode = @Barcode, Category = @Category, UsageCount = @UsageCount, MaxUsageCount = @MaxUsageCount, ExpirationDate = @ExpirationDate, NextControlDate = @NextControlDate, IsStored = @IsStored, IsLost = @IsLost, IsRemoved = @IsRemoved, Id_Vehicle = @VehicleId WHERE Id = @Id";
             using (var connection = new SqlConnection(ConnectionString))
             {
                 var command = new SqlCommand(query, connection);
@@ -228,7 +246,7 @@ namespace BICE.DAL
 
         public IEnumerable<Material_DAL> GetMaterialsByVehicleId(int vehicleId)
         {
-            var query = "SELECT * FROM Materials WHERE VehicleId = @VehicleId";
+            var query = "SELECT * FROM Materials WHERE Id_Vehicle = @VehicleId";
             var materials = new List<Material_DAL>();
             using (var connection = new SqlConnection(ConnectionString))
             {
@@ -255,6 +273,51 @@ namespace BICE.DAL
                 }
             }
             return materials;
+        }
+        
+        
+        public void AddUsageHistory(MaterialUsageHistory_DAL usageHistory)
+        {
+            var query = "INSERT INTO MaterialUsageHistory (Id_Material, Id_Vehicle_Intervention, UsageDate, IsUsed, IsLost) VALUES (@Id_Material, @Id_Vehicle_Intervention, @UsageDate, @IsUsed, @IsLost)";
+            
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                var command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Id_Material", usageHistory.MaterialId);
+                command.Parameters.AddWithValue("@Id_Vehicle_Intervention", usageHistory.VehicleInterventionId);
+                command.Parameters.AddWithValue("@UsageDate", usageHistory.UsageDate);
+                command.Parameters.AddWithValue("@IsUsed", usageHistory.IsUsed);
+                command.Parameters.AddWithValue("@IsLost", usageHistory.IsLost);
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public IEnumerable<MaterialUsageHistory_DAL> GetUsageHistoryByMaterial(int materialId)
+        {
+            var query = "SELECT * FROM MaterialUsageHistory WHERE Id_Material = @Id_Material";
+            
+            var usageHistory = new List<MaterialUsageHistory_DAL>();
+            
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                var command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Id_Material", materialId);
+                connection.Open();
+                var reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    usageHistory.Add(new MaterialUsageHistory_DAL(
+                        (int)reader["Id"],
+                        (int)reader["Id_Material"],
+                        (int)reader["Id_Vehicle_Intervention"],
+                        (DateTime)reader["UsageDate"],
+                        (bool)reader["IsUsed"],
+                        (bool)reader["IsLost"]
+                    ));
+                }
+            }
+            return usageHistory;
         }
     }
 }
