@@ -179,34 +179,35 @@ namespace BICE.DAL
 
         public override Material_DAL Insert(Material_DAL material)
         {
-
-            var query = "INSERT INTO Materials (Denomination, Barcode, Category, UsageCount, MaxUsageCount, ExpirationDate, NextControlDate, IsStored, IsLost, IsRemoved, Id_Vehicle) VALUES (@Denomination, @Barcode, @Category, @UsageCount, @MaxUsageCount, @ExpirationDate, @NextControlDate, @IsStored, @IsLost, @IsRemoved, @VehicleId)";
-            using (var connection = new SqlConnection(ConnectionString))
+            try
             {
-                var command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Denomination", material.Denomination);
-                command.Parameters.AddWithValue("@Barcode", material.Barcode);
-                command.Parameters.AddWithValue("@Category", material.Category);
-                command.Parameters.AddWithValue("@UsageCount", material.UsageCount);
-                command.Parameters.AddWithValue("@MaxUsageCount", material.MaxUsageCount.HasValue ? (object)material.MaxUsageCount.Value : DBNull.Value);
-                command.Parameters.AddWithValue("@ExpirationDate", material.ExpirationDate.HasValue ? (object)material.ExpirationDate.Value : DBNull.Value);
-                command.Parameters.AddWithValue("@NextControlDate", material.NextControlDate.HasValue ? (object)material.NextControlDate.Value : DBNull.Value);
-                command.Parameters.AddWithValue("@IsStored", true);
-                command.Parameters.AddWithValue("@IsLost", false);
-                command.Parameters.AddWithValue("@IsRemoved", false);
-                command.Parameters.AddWithValue("@VehicleId", material.VehicleId.HasValue ? (object)material.VehicleId.Value : DBNull.Value);
-                
-                connection.Open();
-                try
+                var query = "INSERT INTO Materials (Denomination, Barcode, Category, UsageCount, MaxUsageCount, ExpirationDate, NextControlDate, IsStored, IsLost, IsRemoved, Id_Vehicle) VALUES (@Denomination, @Barcode, @Category, @UsageCount, @MaxUsageCount, @ExpirationDate, @NextControlDate, @IsStored, @IsLost, @IsRemoved, @VehicleId)";
+                using (var connection = new SqlConnection(ConnectionString))
                 {
+                    var command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@Denomination", material.Denomination);
+                    command.Parameters.AddWithValue("@Barcode", material.Barcode);
+                    command.Parameters.AddWithValue("@Category", material.Category);
+                    command.Parameters.AddWithValue("@UsageCount", material.UsageCount);
+                    command.Parameters.AddWithValue("@MaxUsageCount", material.MaxUsageCount.HasValue ? (object)material.MaxUsageCount.Value : DBNull.Value);
+                    command.Parameters.AddWithValue("@ExpirationDate", material.ExpirationDate.HasValue ? (object)material.ExpirationDate.Value : DBNull.Value);
+                    command.Parameters.AddWithValue("@NextControlDate", material.NextControlDate.HasValue ? (object)material.NextControlDate.Value : DBNull.Value);
+                    command.Parameters.AddWithValue("@IsStored", true);
+                    command.Parameters.AddWithValue("@IsLost", false);
+                    command.Parameters.AddWithValue("@IsRemoved", false);
+                    command.Parameters.AddWithValue("@VehicleId", material.VehicleId.HasValue ? (object)material.VehicleId.Value : DBNull.Value);
+                
+                    connection.Open();
+           
                     command.ExecuteNonQuery();
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    throw;
-                }
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
                
             return material;
         }
