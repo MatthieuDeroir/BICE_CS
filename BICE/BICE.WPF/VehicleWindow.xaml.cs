@@ -139,5 +139,24 @@ namespace BICE.WPF
                 MessageBox.Show("Veuillez sélectionner un véhicule à modifier.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
+
+        private void DisplayMaterialButton_Click(Object sender, RoutedEventArgs e)
+        {
+            // Vérifier si un véhicule est sélectionné
+            if (VehicleGrid.SelectedItem != null)
+            {
+                Vehicle_DTO selectedVehicle = VehicleGrid.SelectedItem as Vehicle_DTO;
+
+                // Créer une nouvelle instance de la fenêtre d'édition de véhicule
+                VehicleMaterialWindow vehicleMaterialWindow = new VehicleMaterialWindow(selectedVehicle);
+
+                // Afficher la fenêtre 
+                vehicleMaterialWindow.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Veuillez sélectionner un véhicule.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
     }
 }
