@@ -192,5 +192,31 @@ namespace BICE.DAL
                 }
             }
         }
+
+        public int GetVehicleInterventionIdByInterventionIdAndVehicleId(int interventionId, int vehicleId)
+        {
+            var query = "SELECT id FROM VehicleIntervention WHERE id_intervention = @interventionId AND id_vehicle = @vehicleId";
+
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@interventionId", interventionId);
+                    command.Parameters.AddWithValue("@vehicleId", vehicleId);
+                    
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return (int)reader["id"];
+                        }
+                    }
+                }
+            }
+
+            return 0;
+        }
     }
 }
