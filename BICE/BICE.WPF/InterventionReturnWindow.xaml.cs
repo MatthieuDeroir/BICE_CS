@@ -15,6 +15,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -112,8 +113,34 @@ namespace BICE.WPF
 
         public async Task SendInterventionReturn()
         {
-            //TODO Uri = $"ApiUrl{}"
+            if (VehiclesComboBox.SelectedItem is Vehicle_DTO selectedVehicle)
+            {
+                var interventionReturn = new InterventionReturn_DTO
+                {
+                    UsedBarcodes = _usedBarcodes,
+                    UnusedBarcodes = _unusedBarcodes
+                };
+
+                string requestUri = ApiUrl + $"/Material/intervention-return/{_intervention.Id}/{selectedVehicle.Id}";
+
+                using HttpClient client = new HttpClient();
+                var response = await client.PostAsJsonAsync(requestUri, interventionReturn);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Les données de retour d'intervention ont été envoyées avec succès.", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Une erreur s'est produite lors de l'envoi des données de retour d'intervention.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Veuillez sélectionner un véhicule.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
+
 
     }
 }
