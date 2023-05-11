@@ -24,9 +24,8 @@ namespace BICE.DTO
 
 		//DTO when is created for the WPF to API tranfer! Initializing the values to avoid null exceptions
 		[JsonConstructor]
-		public Material_DTO(int id, string barcode, string denomination, string category, int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate)
+		public Material_DTO(string barcode, string denomination, string category, int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate)
 		{
-			Id = id;
 			Barcode = barcode;
 			Denomination = denomination;
 			Category = category;
@@ -39,22 +38,7 @@ namespace BICE.DTO
 			IsRemoved = false;
 			VehicleId = null;
 		}
-		
-		public Material_DTO(string barcode, string denomination, string category, int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate, bool isStored, bool isLost, bool isRemoved, int? vehicleId)
-		{
-			Barcode = barcode;
-			Denomination = denomination;
-			Category = category;
-			UsageCount = usageCount;
-			MaxUsageCount = maxUsageCount;
-			ExpirationDate = expirationDate;
-			NextControlDate = nextControlDate;
-			IsStored = isStored;
-			IsLost = isLost;
-			IsRemoved = isRemoved;
-			VehicleId = vehicleId;
-		}
-		
+
 		public Material_DTO(int id, string barcode, string denomination, string category, int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate, bool isStored, bool isLost, bool isRemoved, int? vehicleId)
 		{
 			Id = Id;
