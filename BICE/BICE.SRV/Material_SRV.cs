@@ -67,6 +67,7 @@ public IEnumerable<Material_DTO> GetMaterial()
 			return new Material_DTO(insertedMaterial);
 		}
 
+
 		public IEnumerable<Material_DTO> AddMaterials(IEnumerable<Material_DTO> materialDtos)
 		{
 			List<Material_DTO> insertedMaterials = new List<Material_DTO>();
@@ -89,6 +90,7 @@ public IEnumerable<Material_DTO> GetMaterial()
 		}
 		
 		public IEnumerable<Material_DTO> PrepareVehicle(int vehicleId, List<string> barcodes)
+
 		{
 			IEnumerable<Material_DAL> materialsToStore = _materialRepository.GetMaterialsByVehicleId(vehicleId);
 			

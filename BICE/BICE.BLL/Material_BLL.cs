@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Security.Principal;
 using System.ComponentModel.DataAnnotations;
 
@@ -95,7 +95,9 @@ namespace BICE.BLL
         {
             ValidateUsageCount();
             ValidateMaxUsageCount();
-            // ValidateDates();
+
+            //ValidateDates();
+
             ValidateUsability();
         }
 

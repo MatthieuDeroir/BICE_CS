@@ -33,7 +33,6 @@
                             <DataGridTextColumn Header="Prochaine date de contrôle" Binding="{Binding NextControlDate}" />
                             <DataGridCheckBoxColumn Header="Est stocké" Binding="{Binding IsStored}" />
                             <DataGridCheckBoxColumn Header="Est perdu" Binding="{Binding IsLost}" />
-                            <DataGridTextColumn Header="ID Véhicule" Binding="{Binding IdVehicle}" />
 
                             <!--
                             <DataGridTemplateColumn Header="Supprimer">
@@ -58,6 +57,7 @@
 
                 </Grid>
             </TabItem>
+            <!--
             <TabItem Header="Ajouter un matériel">
                 <Grid>
                     <Label
@@ -73,6 +73,11 @@
             AllowDrop="True"
             Background="LightGray"
             Drop="FichierDropStackPanel_CSVReader_JsonConverter" Grid.RowSpan="2"/>
+                </Grid>
+            </TabItem> -->
+            <TabItem Header="selection">
+                <Grid>
+                    <Button Height="20" Width="150" Click="ImportCsvButton_Click" Content="Importer CSV"/>
                 </Grid>
             </TabItem>
 
