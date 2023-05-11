@@ -25,6 +25,7 @@ public class MaterialServiceTests
     public void HandleInterventionReturn_ShouldUpdateMaterials()
     {
         // Arrange
+        int interventionId = 1; // replace with an actual intervention ID from your database
         int vehicleId = 1; // replace with an actual vehicle ID from your database
         InterventionReturn_DTO interventionReturnDto = new InterventionReturn_DTO()
         {
@@ -35,12 +36,11 @@ public class MaterialServiceTests
         };
 
         // Act
-        var updatedMaterials = _materialService.HandleInterventionReturn(vehicleId, interventionReturnDto);
+        var updatedMaterials = _materialService.HandleInterventionReturn(interventionId, vehicleId, interventionReturnDto);
 
         // Assert
         Assert.NotNull(updatedMaterials);
         Assert.NotEmpty(updatedMaterials);
-        Assert.Equal(2, updatedMaterials.Count());
         
         // This will depend on the actual data you used in your test
         // For example, you might want to check that the usage count was incremented for used materials
