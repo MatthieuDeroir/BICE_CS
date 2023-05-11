@@ -9,6 +9,7 @@ namespace BICE.DTO
 {
 	public class Material_DTO : BaseNamedEntity_DTO
     {
+	    public int Id { get; set; }
 		public String Denomination { get; set; }   
 		public String Barcode { get; set; }
 		public String Category { get; set; }
@@ -23,8 +24,9 @@ namespace BICE.DTO
 
 		//DTO when is created for the WPF to API tranfer! Initializing the values to avoid null exceptions
 		[JsonConstructor]
-		public Material_DTO(string barcode, string denomination, string category, int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate)
+		public Material_DTO(int id, string barcode, string denomination, string category, int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate)
 		{
+			Id = id;
 			Barcode = barcode;
 			Denomination = denomination;
 			Category = category;
@@ -38,8 +40,9 @@ namespace BICE.DTO
 			VehicleId = null;
 		}
 		
-		public Material_DTO(string barcode, string denomination, string category, int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate, bool isStored, bool isLost, bool isRemoved, int? vehicleId)
+		public Material_DTO(int id, string barcode, string denomination, string category, int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate, bool isStored, bool isLost, bool isRemoved, int? vehicleId)
 		{
+			Id = Id;
 			Barcode = barcode;
 			Denomination = denomination;
 			Category = category;
@@ -55,6 +58,7 @@ namespace BICE.DTO
 
 		public Material_DTO(Material_BLL materialBll)
 		{
+			Id = materialBll.Id;
 			Denomination = materialBll.Denomination;
 			Barcode = materialBll.Barcode;
 			Category = materialBll.Category;
@@ -70,6 +74,7 @@ namespace BICE.DTO
 
 		public Material_DTO(Material_DAL materialDal)
 		{
+			Id = materialDal.Id;
 			Denomination = materialDal.Denomination;
 			Barcode = materialDal.Barcode;
 			Category = materialDal.Category;
@@ -85,12 +90,12 @@ namespace BICE.DTO
 		
 		public Material_BLL ToBLL()
 		{
-			return new Material_BLL(Denomination, Barcode, Category, UsageCount, MaxUsageCount, ExpirationDate, NextControlDate, IsStored, IsLost, IsRemoved, VehicleId);
+			return new Material_BLL(Id, Denomination, Barcode, Category, UsageCount, MaxUsageCount, ExpirationDate, NextControlDate, IsStored, IsLost, IsRemoved, VehicleId);
 		}
 
 		public Material_DAL ToDAL()
 		{
-			return new Material_DAL(Denomination, Barcode, Category, UsageCount, MaxUsageCount, ExpirationDate, NextControlDate, IsStored, IsLost, IsRemoved, VehicleId);
+			return new Material_DAL(Id, Denomination, Barcode, Category, UsageCount, MaxUsageCount, ExpirationDate, NextControlDate, IsStored, IsLost, IsRemoved, VehicleId);
 		}
     }
 }
