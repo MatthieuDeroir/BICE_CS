@@ -17,9 +17,7 @@ public interface IMaterial_DTO
     Boolean IsLost { get; set; }
     Boolean IsRemoved { get; set; }
     int? VehicleId { get; set; }
-    String VehicleDenomination { get; set; }
-    String VehicleInternalNumber { get; set; }
-    String VehicleLicensePlate { get; set; }
+  
     Material_BLL ToBLL();
     Material_DAL ToDAL();
 }

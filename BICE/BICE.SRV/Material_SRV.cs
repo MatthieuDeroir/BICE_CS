@@ -217,7 +217,7 @@ public IEnumerable<Material_DTO> GetMaterial()
 		}
 
 
-		public IEnumerable<Material_DTO> GetStoredMaterials()
+		public IEnumerable<MaterialVehicle_DTO> GetStoredMaterials()
 		{
 			// Fetch all materials from repository
 			var allMaterials = _materialRepository.GetAll();
@@ -237,7 +237,7 @@ public IEnumerable<Material_DTO> GetMaterial()
 
 
 			 // Convert to DTOs and return
-			return storedMaterials.Select(m => new Material_DTO(m.m, m.InternalNumber, m.Denomination, m.LicensePlate)).ToList();
+			return storedMaterials.Select(m => new MaterialVehicle_DTO(m.m, m.InternalNumber, m.Denomination, m.LicensePlate)).ToList();
 		}
 
 		public IEnumerable<Material_DTO> GetMaterialsToBeRemoved()
