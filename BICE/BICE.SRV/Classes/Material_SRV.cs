@@ -179,14 +179,7 @@ public IEnumerable<Material_DTO> GetMaterial()
 					// Evaluate if the material should be removed
 					materialBll.ValidateUsability(); 
 					
-					// Update Material in the database and add it to the updated materials list
-					Material_DAL updatedMaterialDal = new Material_DAL(materialBll.Barcode, materialBll.Denomination,
-						materialBll.Category, materialBll.UsageCount, materialBll.MaxUsageCount, materialBll.ExpirationDate,
-						materialBll.NextControlDate, materialBll.IsStored, materialBll.IsLost, materialBll.IsRemoved,
-						materialBll.VehicleId);
-					Material_DAL updatedMaterial = _materialRepository.Update(updatedMaterialDal);
-					updatedMaterials.Add(new Material_DTO(updatedMaterial));
-					
+
 				}
 				else
 				{
@@ -206,14 +199,10 @@ public IEnumerable<Material_DTO> GetMaterial()
 					// Add the lost history to the database
 					_materialRepository.AddUsageHistory(lostHistory);
 					
-					// Update Material in the database and add it to the updated materials list
-					Material_DAL updatedMaterialDal = new Material_DAL(materialBll.Barcode, materialBll.Denomination,
-						materialBll.Category, materialBll.UsageCount, materialBll.MaxUsageCount, materialBll.ExpirationDate,
-						materialBll.NextControlDate, materialBll.IsStored, true, materialBll.IsRemoved,
-						materialBll.VehicleId);
-					Material_DAL updatedMaterial = _materialRepository.Update(updatedMaterialDal);
-					updatedMaterials.Add(new Material_DTO(updatedMaterial));
 				}
+				Material_DAL updatedMaterialDal = new Material_DAL(materialBll);
+				Material_DAL updatedMaterial = _materialRepository.Update(updatedMaterialDal);
+				updatedMaterials.Add(new Material_DTO(updatedMaterial));
 			}
 			return updatedMaterials;
 		}
