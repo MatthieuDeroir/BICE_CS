@@ -1,14 +1,21 @@
 🚀 B.I.C.E Management System 👨‍🔬🚒
 
 Welcome to the B.I.C.E. Management System! This system is designed to manage the materials and vehicles of an experimental polyvalent fire brigade, B.I.C.E., which intervenes under extreme conditions.
+
 📚 Table of Contents
 
    *About B.I.C.E.
+   
    *Installation
+   
    *Usage
+   
    *Features
+   
    *License
+   
    *Contact
+   
 
 🚒 About B.I.C.E.
 
