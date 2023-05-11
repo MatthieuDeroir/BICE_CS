@@ -15,9 +15,9 @@ namespace BICE.BLL
         public DateTime StartDate { get; set; }
 
         [Required(ErrorMessage = "EndDate is required !")]
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
-        public Intervention_BLL(string denomination, string? description, DateTime startDate, DateTime endDate)
+        public Intervention_BLL(string denomination, string? description, DateTime startDate, DateTime? endDate)
         {
             Denomination = denomination;
             Description = description;
