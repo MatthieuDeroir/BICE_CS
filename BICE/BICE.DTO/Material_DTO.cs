@@ -40,6 +40,21 @@ namespace BICE.DTO
 			VehicleId = null;
 		}
 		
+		public Material_DTO(string barcode, string denomination, string category, int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate, bool isStored, bool isLost, bool isRemoved, int? vehicleId)
+		{
+			Barcode = barcode;
+			Denomination = denomination;
+			Category = category;
+			UsageCount = usageCount;
+			MaxUsageCount = maxUsageCount;
+			ExpirationDate = expirationDate;
+			NextControlDate = nextControlDate;
+			IsStored = isStored;
+			IsLost = isLost;
+			IsRemoved = isRemoved;
+			VehicleId = vehicleId;
+		}
+		
 		public Material_DTO(int id, string barcode, string denomination, string category, int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate, bool isStored, bool isLost, bool isRemoved, int? vehicleId)
 		{
 			Id = Id;
