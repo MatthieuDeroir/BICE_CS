@@ -281,7 +281,7 @@ namespace BICE.DAL
         
         public void AddUsageHistory(MaterialUsageHistory_DAL usageHistory)
         {
-            var query = "INSERT INTO MaterialUsageHistory (Id_Material, Id_Vehicle_Intervention, UsageDate, IsUsed, IsLost) VALUES (@Id_Material, @Id_Vehicle_Intervention, @UsageDate, @IsUsed, @IsLost)";
+            var query = "INSERT INTO MaterialUsageHistory (Id_Material, Id_Vehicle_Intervention, Usage_Date, Is_Used, Is_Lost) VALUES (@Id_Material, @Id_Vehicle_Intervention, @UsageDate, @IsUsed, @IsLost)";
             
             using (var connection = new SqlConnection(ConnectionString))
             {
