@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using BICE.DTO;
+using CsvHelper.Configuration;
+using CsvHelper;
 using Microsoft.VisualBasic.FileIO;
 using Microsoft.Win32;
 using Newtonsoft.Json;
@@ -110,6 +112,144 @@ namespace BICE.WPF
             else
             {
                 MessageBox.Show("Une erreur s'est produite lors de l'ajout du matériel.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        public async void DownloadButton_Click1(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // Fetch data from the API
+                var materials = await GetStoredMaterialsFromApi1();
+
+                // Write data to a CSV file
+                WriteDataToCsv1(materials);
+
+                // Show a success message
+                MessageBox.Show("Le fichier a été téléchargé avec succès", "Téléchargement réussi", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                // Show an error message
+                MessageBox.Show($"Une erreur s'est produite lors du téléchargement du fichier : {ex.Message}", "Erreur de téléchargement", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private async Task<IEnumerable<Material_DTO>> GetStoredMaterialsFromApi1()
+        {
+            using HttpClient client = new HttpClient();
+            var materials = await client.GetFromJsonAsync<IEnumerable<Material_DTO>>(ApiUrl + "/Material/materials-to-be-removed");
+
+            return materials;
+        }
+
+        private void WriteDataToCsv1(IEnumerable<Material_DTO> materials)
+        {
+            // Define the file path where the CSV file will be saved
+            string filePath = $"C:\\Users\\Victor\\Desktop\\BICE\\{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}-Materiel_a_enlever.csv";
+
+            // Use CsvWriter to write the data to a CSV file
+            using (var writer = new StreamWriter(filePath))
+            {
+                var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+                {
+                    Delimiter = ";", // Use semicolon as delimiter
+                };
+                using (var csv = new CsvWriter(writer, config))
+                {
+                    csv.WriteRecords(materials);
+                }
+            }
+        }
+
+        public async void DownloadButton_Click2(object sender, RoutedEventArgs e) {
+            try
+            {
+                // Fetch data from the API
+                var materials = await GetStoredMaterialsFromApi2();
+
+                // Write data to a CSV file
+                WriteDataToCsv2(materials);
+
+                // Show a success message
+                MessageBox.Show("Le fichier a été téléchargé avec succès", "Téléchargement réussi", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                // Show an error message
+                MessageBox.Show($"Une erreur s'est produite lors du téléchargement du fichier : {ex.Message}", "Erreur de téléchargement", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private async Task<IEnumerable<MaterialVehicle_DTO>> GetStoredMaterialsFromApi2()
+        {
+            using HttpClient client = new HttpClient();
+            var materials = await client.GetFromJsonAsync<IEnumerable<MaterialVehicle_DTO>>(ApiUrl + "/Material/stored-materials");
+
+            return materials;
+        }
+
+        private void WriteDataToCsv2(IEnumerable<MaterialVehicle_DTO> materials)
+        {
+            // Define the file path where the CSV file will be saved
+            string filePath = $"C:\\Users\\Victor\\Desktop\\BICE\\{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}-Materiel_disponible.csv";
+
+            // Use CsvWriter to write the data to a CSV file
+            using (var writer = new StreamWriter(filePath))
+            {
+                var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+                {
+                    Delimiter = ";", // Use semicolon as delimiter
+                };
+                using (var csv = new CsvWriter(writer, config))
+                {
+                    csv.WriteRecords(materials);
+                }
+            }
+        }
+        public async void DownloadButton_Click3(object sender, RoutedEventArgs e) {
+            try
+            {
+                // Fetch data from the API
+                var materials = await GetStoredMaterialsFromApi3();
+
+                // Write data to a CSV file
+                WriteDataToCsv3(materials);
+
+                // Show a success message
+                MessageBox.Show("Le fichier a été téléchargé avec succès", "Téléchargement réussi", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                // Show an error message
+                MessageBox.Show($"Une erreur s'est produite lors du téléchargement du fichier : {ex.Message}", "Erreur de téléchargement", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private async Task<IEnumerable<Material_DTO>> GetStoredMaterialsFromApi3()
+        {
+            using HttpClient client = new HttpClient();
+            var materials = await client.GetFromJsonAsync<IEnumerable<Material_DTO>>(ApiUrl + "/Material/materials-to-be-checked");
+
+            return materials;
+        }
+
+        private void WriteDataToCsv3(IEnumerable<Material_DTO> materials)
+        {
+            // Define the file path where the CSV file will be saved
+            string filePath = $"C:\\Users\\Victor\\Desktop\\BICE\\{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}-Materiel_a_controle.csv";
+
+            // Use CsvWriter to write the data to a CSV file
+            using (var writer = new StreamWriter(filePath))
+            {
+                var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+                {
+                    Delimiter = ";", // Use semicolon as delimiter
+                };
+                using (var csv = new CsvWriter(writer, config))
+                {
+                    csv.WriteRecords(materials);
+                }
             }
         }
 

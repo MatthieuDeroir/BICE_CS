@@ -89,7 +89,6 @@ public IEnumerable<Material_DTO> GetMaterial()
 					Console.WriteLine(e);
 					throw;
 				}
-				
 			}
 			return insertedMaterials;
 		}
@@ -136,6 +135,8 @@ public IEnumerable<Material_DTO> GetMaterial()
 			_materialRepository.Delete(materialDal);
 		}
 		
+
+		
 		public IEnumerable<Material_DTO> HandleInterventionReturn(int interventionId, int vehicleId, InterventionReturn_DTO interventionReturnDto)
 		{
 			IEnumerable<Material_DAL> materialsOnVehicle = _materialRepository.GetMaterialsByVehicleId(vehicleId);
@@ -148,6 +149,7 @@ public IEnumerable<Material_DTO> GetMaterial()
 			// Get the vehicleintervention id from the intervention id and the vehicle id
 			int VehicleInterventionId = _vehicleRepository.GetVehicleInterventionIdByInterventionIdAndVehicleId(interventionId, vehicleId);
 			
+			DateTime interventionStartDate = _interventionRepository.GetById(interventionId).StartDate;
 
 			foreach (Material_DAL material in materialsOnVehicle)
 			{
@@ -168,7 +170,7 @@ public IEnumerable<Material_DTO> GetMaterial()
 							material.Id,
 							VehicleInterventionId, // Use the fetched vehicleinterventionId
 							// Use the date and time from the intervention id
-							_interventionRepository.GetById(interventionId).StartDate, 
+							interventionStartDate,
 							true, // Material was used
 							false // Material was not lost
 						);
@@ -233,7 +235,7 @@ public IEnumerable<Material_DTO> GetMaterial()
 								  join v in _vehicleRepository.GetAll() on m.VehicleId equals v.Id into mv
 								  from v in mv.DefaultIfEmpty()
 								  where m.IsStored || m.VehicleId != null
-								  select new { m, InternalNumber = v == null ? null : v.InternalNumber, Denomination = v == null ? null : v.Denomination, LicensePlate = v == null ? null : v.LicensePlate };
+								  select new { m, InternalNumber = v == null ? "" : v.InternalNumber, Denomination = v == null ? "" : v.Denomination, LicensePlate = v == null ? "" : v.LicensePlate };
 
 
 
