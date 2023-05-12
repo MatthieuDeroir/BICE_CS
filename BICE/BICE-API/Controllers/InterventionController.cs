@@ -115,7 +115,7 @@ namespace BICE.API.Controllers
         [HttpDelete("{interventionId}/vehicle/{vehicleId}")]
         public async Task<ActionResult> DeleteVehicleFromIntervention(int interventionId, int vehicleId)
         {
-            await _interventionService.DeleteVehicleFromIntervention(interventionId, vehicleId);
+            _interventionService.DeleteVehicleFromIntervention(interventionId, vehicleId);
             return NoContent();
         }
     }

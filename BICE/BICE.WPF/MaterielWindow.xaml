@@ -75,9 +75,17 @@
             Drop="FichierDropStackPanel_CSVReader_JsonConverter" Grid.RowSpan="2"/>
                 </Grid>
             </TabItem> -->
-            <TabItem Header="selection">
+            <TabItem Header="Import SQL">
                 <Grid>
                     <Button Height="20" Width="150" Click="ImportCsvButton_Click" Content="Importer CSV"/>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Export SQL">
+                <Grid>
+                    <Button Content="téléchargement du fichier" HorizontalAlignment="Left" VerticalAlignment="Top" Click="DownloadButton_Click1" Margin="68,221,0,0"/>
+                    <Button Content="téléchargement du fichier" HorizontalAlignment="Center" VerticalAlignment="Top" Click="DownloadButton_Click2" Margin="0,221,0,0"/>
+                    <Button Content="téléchargement du fichier" HorizontalAlignment="Left" VerticalAlignment="Top" Click="DownloadButton_Click3" Margin="588,221,0,0"/>
                 </Grid>
             </TabItem>
 
