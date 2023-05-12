@@ -64,5 +64,6 @@ namespace BICE.Tests.BLLTests
             // Assert
             Assert.Equal(1, materialBLL.UsageCount);
         }
+        
     }
 }

@@ -35,7 +35,11 @@ namespace BICE.DAL
             : this(id, intervention.Denomination, intervention.Description, intervention.StartDate, intervention.EndDate)
         {
         }
-        
+
+        public Intervention_DAL()
+        {
+        }
+
         public Intervention_BLL ToBLL()
         {
             return new Intervention_BLL(Denomination, Description, StartDate, EndDate);

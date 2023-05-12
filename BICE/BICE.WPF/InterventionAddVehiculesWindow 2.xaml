@@ -1,0 +1,15 @@
+﻿<Window x:Class="BICE.WPF.InterventionAddVehiculesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BICE.WPF"
+        mc:Ignorable="d"
+        Title="InterventionAddVehiculesWindow" Height="450" Width="800">
+    <Grid>
+        <Label x:Name="LabelTitle" Content="Ajouter des véhicules à l'intervention" FontSize="24" FontWeight="Bold" Margin="10" />
+        <DataGrid x:Name="VehiclesDataGrid" Margin="10,130,10,10" AutoGenerateColumns="True" ItemsSource="{Binding Vehicles}" />
+        <ComboBox x:Name="VehiclesComboBox" Height="25" Margin="199,78,243,331" />
+        <Button x:Name="ValidateButton" Content="Ajouter" Click="ValidateButton_Click" Margin="619,79,81,325" Width="100" Height="30" />
+    </Grid>
+</Window>

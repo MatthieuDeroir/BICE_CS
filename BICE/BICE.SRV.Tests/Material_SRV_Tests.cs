@@ -1,48 +1,141 @@
+using Xunit;
+using Moq;
+using System.Collections.Generic;
 using BICE.DAL;
 using BICE.DAL.Repositories;
 using BICE.DTO;
+using BICE.SRV;
 
-namespace BICE.SRV.Tests;
-
-public class MaterialServiceTests
+public class Material_SRV_Tests
 {
-    private Material_SRV _materialService;
-    private Material_Repository _materialRepository;
-    private Vehicle_Repository _vehicleRepository;
-    private Intervention_Repository _interventionRepository;
-
-    public MaterialServiceTests()
+    [Fact]
+    public void GetMaterial_ReturnsAllMaterials()
     {
-        // Initialize the repositories and service with real instances
-        _materialRepository = new Material_Repository();
-        _vehicleRepository = new Vehicle_Repository();
-        _interventionRepository = new Intervention_Repository();
+        // Arrange
+        var mockMaterialRepository = new Mock<Material_Repository>();
+        var mockVehicleRepository = new Mock<Vehicle_Repository>();
+        var mockInterventionRepository = new Mock<Intervention_Repository>();
+        var service = new Material_SRV(mockInterventionRepository.Object, mockMaterialRepository.Object,
+            mockVehicleRepository.Object);
+        var materials = new List<Material_DAL>
+        {
+            new Material_DAL
+            {
+                // Fill with your material properties
+            },
+            new Material_DAL
+            {
+                // Fill with your material properties
+            }
+        };
+        mockMaterialRepository.Setup(repo => repo.GetAll()).Returns(materials);
 
-        _materialService = new Material_SRV();
+        // Act
+        var result = service.GetMaterial();
+
+        // Assert
+        var resultList = result.ToList();
+        Assert.Equal(2, resultList.Count);
+        // Additional assertions to verify the properties of the returned materials can also be done
     }
 
     [Fact]
-    public void HandleInterventionReturn_ShouldUpdateMaterials()
+    public void GetMaterialById_ReturnsCorrectMaterial()
     {
         // Arrange
-        int interventionId = 1; // replace with an actual intervention ID from your database
-        int vehicleId = 1; // replace with an actual vehicle ID from your database
-        InterventionReturn_DTO interventionReturnDto = new InterventionReturn_DTO()
+        var mockMaterialRepository = new Mock<Material_Repository>();
+        var mockVehicleRepository = new Mock<Vehicle_Repository>();
+        var mockInterventionRepository = new Mock<Intervention_Repository>();
+        var service = new Material_SRV(mockInterventionRepository.Object, mockMaterialRepository.Object,
+            mockVehicleRepository.Object);
+        var material = new Material_DAL
         {
-            // populate this DTO with actual data
-            // Example:
-            UsedBarcodes = new List<string> { "BC001"},
-            UnusedBarcodes = new List<string> { "BC002" }
+            Id = 1,
+            Barcode = "123456789",
+            Denomination = "Material A",
+            Category = "Material A Description",
+            IsLost = false,
+            IsRemoved = false,
         };
+        mockMaterialRepository.Setup(repo => repo.GetById(It.IsAny<int>())).Returns(material);
 
         // Act
-        var updatedMaterials = _materialService.HandleInterventionReturn(interventionId, vehicleId, interventionReturnDto);
+        var result = service.GetMaterialById(1);
 
         // Assert
-        Assert.NotNull(updatedMaterials);
-        Assert.NotEmpty(updatedMaterials);
-        
-        // This will depend on the actual data you used in your test
-        // For example, you might want to check that the usage count was incremented for used materials
+        Assert.NotNull(result);
+        // Additional assertions to verify the properties of the returned material can also be done
     }
-}
+
+    [Fact]
+    public void InsertMaterial_InsertsMaterialAndReturnsInsertedMaterial()
+    {
+        // Arrange
+        var mockMaterialRepository = new Mock<Material_Repository>();
+        var mockVehicleRepository = new Mock<Vehicle_Repository>();
+        var mockInterventionRepository = new Mock<Intervention_Repository>();
+        var service = new Material_SRV(mockInterventionRepository.Object, mockMaterialRepository.Object,
+            mockVehicleRepository.Object);
+        var material = new Material_DAL
+        {
+            Id = 1,
+            Barcode = "123456789",
+            Denomination = "Material A",
+            Category = "Material A Description",
+            IsLost = false,
+            IsRemoved = false,
+        };
+        mockMaterialRepository.Setup(repo => repo.Insert(It.IsAny<Material_DAL>())).Returns(material);
+
+        // Act
+        var result = service.AddMaterial(new Material_DTO(material));
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.Equal(material.Id, result.Id);
+        Assert.Equal(material.Barcode, result.Barcode);
+        Assert.Equal(material.Denomination, result.Denomination);
+        Assert.Equal(material.Category, result.Category);
+        Assert.Equal(material.IsLost, result.IsLost);
+        Assert.Equal(material.IsRemoved, result.IsRemoved);
+        Assert.Equal(material.VehicleId, result.VehicleId);
+        // Additional assertions to verify the properties of the returned material can also be done
+    }
+// }
+// //     
+     [Fact]
+     public void HandleInterventionReturn_UpdatesUsedMaterial()
+     {
+         // Arrange
+         var mockMaterialRepository = new Mock<Material_Repository>();
+         var mockVehicleRepository = new Mock<Vehicle_Repository>();
+         var mockInterventionRepository = new Mock<Intervention_Repository>();
+         var service = new Material_SRV(mockInterventionRepository.Object, mockMaterialRepository.Object, mockVehicleRepository.Object);
+         var interventionReturnDto = new InterventionReturn_DTO
+         {
+             UsedBarcodes = new List<string> { "123" },
+             UnusedBarcodes = new List<string> { "456" },
+         };
+         var materialsOnVehicle = new List<Material_DAL>
+         {
+             new Material_DAL
+             {
+                 // Fill with your material properties
+                 Barcode = "123",
+             }
+         };
+         mockMaterialRepository.Setup(repo => repo.GetMaterialsByVehicleId(It.IsAny<int>())).Returns(materialsOnVehicle);
+         mockVehicleRepository.Setup(repo => repo.GetById(It.IsAny<int>())).Returns(new Vehicle_DAL { /* Fill with your properties */ });
+         mockVehicleRepository.Setup(repo => repo.GetVehicleInterventionIdByInterventionIdAndVehicleId(It.IsAny<int>(), It.IsAny<int>())).Returns(1);
+         mockInterventionRepository.Setup(repo => repo.GetById(It.IsAny<int>())).Returns(new Intervention_DAL { StartDate = DateTime.Now });
+
+         // Act
+         var result = service.HandleInterventionReturn(1, 1, interventionReturnDto);
+
+      // Assert
+        var resultList = result.ToList();
+     Assert.Single(resultList);
+        // Additional assertions to verify the properties of the returned materials can also be done
+     }
+
+ }

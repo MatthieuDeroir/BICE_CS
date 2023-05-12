@@ -15,6 +15,11 @@ namespace BICE.SRV
             _vehicleRepository = new Vehicle_Repository();
         }
         
+        public Vehicle_SRV(Vehicle_Repository vehicleRepository)
+        {
+            _vehicleRepository = vehicleRepository;
+        }
+        
         public IEnumerable<Vehicle_DTO> GetVehicle()
         {
             IEnumerable<Vehicle_DAL> vehicleDal = _vehicleRepository.GetAll();

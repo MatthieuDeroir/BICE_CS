@@ -19,6 +19,13 @@ namespace BICE.SRV
 			_vehicleRepository = new Vehicle_Repository();
 		}
 		
+		public Material_SRV(Intervention_Repository interventionRepository, Material_Repository materialRepository, Vehicle_Repository vehicleRepository)
+		{
+			_interventionRepository = interventionRepository;
+			_materialRepository = materialRepository;
+			_vehicleRepository = vehicleRepository;
+		}
+		
 public IEnumerable<Material_DTO> GetMaterial()
 		{
 			IEnumerable<Material_DAL> materialDal = _materialRepository.GetAll();
