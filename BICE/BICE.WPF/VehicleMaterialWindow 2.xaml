@@ -1,0 +1,34 @@
+﻿<Window x:Class="BICE.WPF.VehicleMaterialWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BICE.WPF"
+        mc:Ignorable="d"
+        Title="VehicleMaterialWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <!-- Header -->
+            <RowDefinition Height="Auto" />
+            <!-- Tableau -->
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" x:Name="VehicleLabel" Content="Liste des matériels pour le véhicule" FontSize="24" FontWeight="Bold" Margin="10" />
+
+        <DataGrid Grid.Row="1" x:Name="VehicleMaterialGrid" ItemsSource="{Binding Materials}" AutoGenerateColumns="False" Margin="10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Code-barres" Binding="{Binding Barcode}" />
+                <DataGridTextColumn Header="Dénomination" Binding="{Binding Denomination}" />
+                <DataGridTextColumn Header="Catégorie" Binding="{Binding Category}" />
+                <DataGridTextColumn Header="Compteur d'utilisation" Binding="{Binding UsageCount}" />
+                <DataGridTextColumn Header="Utilisations max" Binding="{Binding MaxUsageCount}" />
+                <DataGridTextColumn Header="Date d'expiration" Binding="{Binding ExpirationDate}" />
+                <DataGridTextColumn Header="Prochaine date de contrôle" Binding="{Binding NextControlDate}" />
+                <DataGridCheckBoxColumn Header="Est stocké" Binding="{Binding IsStored}" />
+                <DataGridCheckBoxColumn Header="Est perdu" Binding="{Binding IsLost}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

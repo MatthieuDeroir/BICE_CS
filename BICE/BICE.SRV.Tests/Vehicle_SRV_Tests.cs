@@ -1,6 +1,9 @@
 using System.Linq;
+using BICE.DAL;
+using BICE.DTO;
 using Xunit;
 using BICE.SRV;
+using Moq;
 
 namespace BICE.Tests
 {
@@ -16,22 +19,94 @@ namespace BICE.Tests
         [Fact]
         public void GetVehicle_ReturnsAllVehicles()
         {
-            var result = _vehicleService.GetVehicle();
-            Assert.NotNull(result);
-            Assert.True(result.Any());
+            // Arrange
+            var mockRepository = new Mock<Vehicle_Repository>();
+            var service = new Vehicle_SRV(mockRepository.Object);
+            var vehicles = new List<Vehicle_DAL>
+            {
+                new Vehicle_DAL
+                {
+                    Id = 1,
+                    Denomination = "Vehicle A",
+                    InternalNumber = "A001",
+                    LicensePlate = "AA-123-BB",
+                    IsActive = true
+                },
+                new Vehicle_DAL
+                {
+                    Id = 1,
+                    Denomination = "Vehicle A",
+                    InternalNumber = "A001",
+                    LicensePlate = "AA-123-BB",
+                    IsActive = true
+                }
+            };
+            mockRepository.Setup(repo => repo.GetAll()).Returns(vehicles);
+
+            // Act
+            var result = service.GetVehicle();
+
+            // Assert
+            var resultList = result.ToList();
+            Assert.Equal(2, resultList.Count);
+            // Additional assertions to verify the properties of the returned vehicles can also be done
         }
 
         [Fact]
-        public void GetVehicleById_ReturnsCorrectVehicle()
+        public void AddVehicle_InsertsVehicleAndReturnsInsertedVehicle()
         {
-            var allVehicles = _vehicleService.GetVehicle();
-            var vehicleId = allVehicles.First().Id;
+            // Arrange
+            var mockRepository = new Mock<Vehicle_Repository>();
+            var service = new Vehicle_SRV(mockRepository.Object);
+            var vehicleDto = new Vehicle_DTO
+            {
+                Id = 1,
+                Denomination = "Vehicle A",
+                InternalNumber = "A001",
+                LicensePlate = "AA-123-BB",
+                IsActive = true
+            };
+            var vehicleDal = new Vehicle_DAL
+            {
+                Id = 1,
+                Denomination = "Vehicle A",
+                InternalNumber = "A001",
+                LicensePlate = "AA-123-BB",
+                IsActive = true
+            };
+            mockRepository.Setup(repo => repo.Insert(It.IsAny<Vehicle_DAL>())).Returns(vehicleDal);
 
-            var result = _vehicleService.GetVehicleById(vehicleId);
-            Assert.Equal(vehicleId, result.Id);
+            // Act
+            var result = service.AddVehicle(vehicleDto);
+
+            // Assert
+            Assert.Equal(vehicleDal.Id, result.Id);
+            // Additional assertions to verify the properties of the returned vehicle can also be done
         }
 
-        // Implement similar tests for other methods
-        // Remember to handle cleanup for methods that change the database (AddVehicle, Update, Delete)
+        [Fact]
+        public void GetVehicleById_ReturnsVehicleWithMatchingId()
+        {
+            // Arrange
+            var mockRepository = new Mock<Vehicle_Repository>();
+            var service = new Vehicle_SRV(mockRepository.Object);
+            var vehicleDal = new Vehicle_DAL
+            {
+                Id = 1,
+                Denomination = "Vehicle A",
+                InternalNumber = "A001",
+                LicensePlate = "AA-123-BB",
+                IsActive = true
+            };
+            mockRepository.Setup(repo => repo.GetById(It.IsAny<int>())).Returns(vehicleDal);
+
+            // Act
+            var result = service.GetVehicleById(1);
+
+            // Assert
+            Assert.Equal(vehicleDal.Id, result.Id);
+            // Additional assertions to verify the properties of the returned vehicle can also be done
+        }
+        
     }
 }
