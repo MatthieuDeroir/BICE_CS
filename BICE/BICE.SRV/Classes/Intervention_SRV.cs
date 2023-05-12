@@ -7,13 +7,15 @@ namespace BICE.SRV
 	public class Intervention_SRV : IIntervention_SRV
 	{
 		private readonly Intervention_Repository _interventionRepository;
-		private readonly Material_Repository _materialRepository;
-		private readonly Vehicle_Repository _vehicleRepository;
+
 		public Intervention_SRV()
 		{
 			_interventionRepository = new Intervention_Repository();
-			_materialRepository = new Material_Repository();
-			_vehicleRepository = new Vehicle_Repository();
+		}
+		
+		public Intervention_SRV(Intervention_Repository interventionRepository)
+		{
+			_interventionRepository = interventionRepository;
 		}
 		
 		public IEnumerable<Intervention_DTO> GetIntervention()

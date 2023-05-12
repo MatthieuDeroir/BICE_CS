@@ -107,5 +107,6 @@ namespace BICE.Tests
             Assert.Equal(vehicleDal.Id, result.Id);
             // Additional assertions to verify the properties of the returned vehicle can also be done
         }
+        
     }
 }

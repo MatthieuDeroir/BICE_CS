@@ -102,40 +102,5 @@ public class Material_SRV_Tests
         // Additional assertions to verify the properties of the returned material can also be done
     }
 // }
-// //     
-     [Fact]
-     public void HandleInterventionReturn_UpdatesUsedMaterial()
-     {
-         // Arrange
-         var mockMaterialRepository = new Mock<Material_Repository>();
-         var mockVehicleRepository = new Mock<Vehicle_Repository>();
-         var mockInterventionRepository = new Mock<Intervention_Repository>();
-         var service = new Material_SRV(mockInterventionRepository.Object, mockMaterialRepository.Object, mockVehicleRepository.Object);
-         var interventionReturnDto = new InterventionReturn_DTO
-         {
-             UsedBarcodes = new List<string> { "123" },
-             UnusedBarcodes = new List<string> { "456" },
-         };
-         var materialsOnVehicle = new List<Material_DAL>
-         {
-             new Material_DAL
-             {
-                 // Fill with your material properties
-                 Barcode = "123",
-             }
-         };
-         mockMaterialRepository.Setup(repo => repo.GetMaterialsByVehicleId(It.IsAny<int>())).Returns(materialsOnVehicle);
-         mockVehicleRepository.Setup(repo => repo.GetById(It.IsAny<int>())).Returns(new Vehicle_DAL { /* Fill with your properties */ });
-         mockVehicleRepository.Setup(repo => repo.GetVehicleInterventionIdByInterventionIdAndVehicleId(It.IsAny<int>(), It.IsAny<int>())).Returns(1);
-         mockInterventionRepository.Setup(repo => repo.GetById(It.IsAny<int>())).Returns(new Intervention_DAL { StartDate = DateTime.Now });
 
-         // Act
-         var result = service.HandleInterventionReturn(1, 1, interventionReturnDto);
-
-      // Assert
-        var resultList = result.ToList();
-     Assert.Single(resultList);
-        // Additional assertions to verify the properties of the returned materials can also be done
-     }
-
- }
+}

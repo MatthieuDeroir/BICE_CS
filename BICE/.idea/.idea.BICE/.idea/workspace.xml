@@ -11,15 +11,10 @@
   <component name="ChangeListManager">
     <list default="true" id="a90e9a96-dbd4-48f2-9ad9-9809aa701d45" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BICE/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BICE/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BICE.BLL.Tests/Material_BLL_Tests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.BLL.Tests/Material_BLL_Tests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BICE.DAL/Classes/Intervention_DAL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Classes/Intervention_DAL.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BICE.DAL/Classes/Material_DAL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Classes/Material_DAL.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BICE.DAL/Classes/Vehicle_DAL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Classes/Vehicle_DAL.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BICE.DAL/Repositories/Vehicle_Repository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Repositories/Vehicle_Repository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DAL.Tests/Intevention_DAL_Tests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL.Tests/Intevention_DAL_Tests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.SRV.Tests/Intervention_SRV_Tests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.SRV.Tests/Intervention_SRV_Tests.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BICE.SRV.Tests/Material_SRV_Tests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.SRV.Tests/Material_SRV_Tests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BICE.SRV.Tests/Vehicle_SRV_Tests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.SRV.Tests/Vehicle_SRV_Tests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BICE.SRV/Classes/Material_SRV.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.SRV/Classes/Material_SRV.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BICE.SRV/Classes/Vehicle_SRV.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.SRV/Classes/Vehicle_SRV.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.SRV/Classes/Intervention_SRV.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.SRV/Classes/Intervention_SRV.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,34 +22,44 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/../../C#/bases_repo/Geometrie.DAL/Depot_DAL.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2d04e2ae4c478fc42e0209765a31dcd4c177f45f5d4718f042c0fe7567ca12/Guard.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/52253c49337a49efc92d1df5b5511611cf57b142e2f3eb25a114df42c1e3/CastHelpers.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6817e7532e1d7a287d2a6bb85f7bbb1a2a6854231116296e562a8d83b3fb71/NullReferenceException.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/792963b61369bfe3b78223c280de2d8fb02f558debe73937d8797dfea8f86431/InvalidOperationException.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b3ed9f8226a5f643ea5254d868339499e9f0342ddcb280d1d5074c9899c6b6/DbConnection.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/eea758c0c9c613482f7cf5c6be8888b336c981123cecc18540413f5f47eb224b/ControllerActionInvoker.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="2OQDGctKElgJyeISoMlFMXSbsGy" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;/Users/mderoir/Library/Application Support/JetBrains/Rider2023.1/resharper-host/DecompilerCache&quot;,
-      &quot;/Users/mderoir/Library/Application Support/JetBrains/Rider2023.1/resharper-host/SourcesCache&quot;,
-      &quot;/Users/mderoir/.local/share/Symbols/src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "/Users/mderoir/Library/Application Support/JetBrains/Rider2023.1/resharper-host/DecompilerCache",
+      "/Users/mderoir/Library/Application Support/JetBrains/Rider2023.1/resharper-host/SourcesCache",
+      "/Users/mderoir/.local/share/Symbols/src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.BICE.API: http">
     <configuration name="BICE.WPF" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
@@ -140,6 +145,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -163,19 +169,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/BICE.SRV.Tests/Material_SRV_Tests.cs</url>
-          <line>103</line>
-          <properties documentPath="$PROJECT_DIR$/BICE.SRV.Tests/Material_SRV_Tests.cs" initialLine="103" containingFunctionPresentation="Method 'HandleInterventionReturn_UpdatesUsedMaterial'">
-            <startOffsets>
-              <option value="3843" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3844" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

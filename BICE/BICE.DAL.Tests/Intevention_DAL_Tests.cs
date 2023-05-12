@@ -5,12 +5,7 @@ namespace BICE.Tests.DALTests
     public class Intervention_DAL_Tests
     {
         private readonly Intervention_Repository _repository;
-        
-        public Intervention_DAL_Tests()
-        {
-            _repository = new Intervention_Repository();
-        }
-        
+
         [Fact]
         public void InterventionDAL_CreateInstance_Success()
         {
