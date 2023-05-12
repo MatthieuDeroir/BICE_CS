@@ -51,57 +51,5 @@ namespace BICE.WPF
             InterventionWindos interventionWindos = new InterventionWindos();
             interventionWindos.Show();
         }
-
-
-
-        public async void DownloadButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                // Fetch data from the API
-                var materials = await GetStoredMaterialsFromApi();
-
-                // Write data to a CSV file
-                WriteDataToCsv(materials);
-
-                // Show a success message
-                MessageBox.Show("Le fichier a été téléchargé avec succès", "Téléchargement réussi", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            catch (Exception ex)
-            {
-                // Show an error message
-                MessageBox.Show($"Une erreur s'est produite lors du téléchargement du fichier : {ex.Message}", "Erreur de téléchargement", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        private async Task<IEnumerable<Material_DTO>> GetStoredMaterialsFromApi()
-        {
-            using HttpClient client = new HttpClient();
-            var materials = await client.GetFromJsonAsync<IEnumerable<Material_DTO>>(ApiUrl + "Material/materials-to-be-removed");
-
-            return materials;
-        }
-
-        private void WriteDataToCsv(IEnumerable<Material_DTO> materials)
-        {
-            // Define the file path where the CSV file will be saved
-            string filePath = $"C:\\Users\\Victor\\Desktop\\BICE\\{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}-Materiel_a_enlever.csv";
-
-            // Use CsvWriter to write the data to a CSV file
-            using (var writer = new StreamWriter(filePath))
-            {
-                var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-                {
-                    Delimiter = ";", // Use semicolon as delimiter
-                };
-                using (var csv = new CsvWriter(writer, config))
-                {
-                    csv.WriteRecords(materials);
-                }
-            }
-        }
-
-
-
     }
 }
