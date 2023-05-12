@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BICE.DAL.Wrappers;
 using Microsoft.AspNetCore.Mvc;
 using BICE.DTO;
 using BICE.SRV;
@@ -12,9 +13,9 @@ namespace BICE.API.Controllers
     {
         private readonly Intervention_SRV _interventionService;
 
-        public InterventionController()
+        public InterventionController(IDbConnectionWrapper connection, IDbCommandWrapper command)
         {
-            _interventionService = new Intervention_SRV();
+            _interventionService = new Intervention_SRV(connection, command);
         }
         
         [HttpGet]

@@ -1,7 +1,28 @@
-﻿using System.Text.Json;
+﻿using System.Data.SqlClient;
+using System.Text.Json;
 using System.Text.Json.Serialization;
+using BICE.DAL.Wrappers;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var configuration = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json")
+    .Build();
+
+string connectionString = configuration.GetConnectionString("default");
+
+builder.Services.AddSingleton(connectionString);
+
+builder.Services.AddScoped(provider =>
+{
+    var connectionString = provider.GetRequiredService<string>();
+    var connection = new SqlConnection(connectionString);
+    return new SqlCommand { Connection = connection };
+});
+
+// Add services to the container.
+builder.Services.AddScoped<IDbConnectionWrapper, DbConnectionWrapper>();
+builder.Services.AddScoped<IDbCommandWrapper, DbCommandWrapper>();
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {

@@ -19,6 +19,10 @@ namespace BICE.DAL
         
         public int? VehicleId { get; set; }
 
+        public Material_DAL()
+        {
+        }
+        
         public Material_DAL(string denomination, string barcode, string category, int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate, bool isStored, bool isLost, bool isRemoved, int? vehicleId)
         {
             Denomination = denomination;

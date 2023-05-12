@@ -1,6 +1,7 @@
 ﻿using BICE.DTO;
 using BICE.BLL;
 using BICE.DAL;
+using BICE.DAL.Wrappers;
 
 namespace BICE.SRV
 {
@@ -9,11 +10,11 @@ namespace BICE.SRV
 		private readonly Intervention_Repository _interventionRepository;
 		private readonly Material_Repository _materialRepository;
 		private readonly Vehicle_Repository _vehicleRepository;
-		public Intervention_SRV()
+		public Intervention_SRV(IDbConnectionWrapper connection, IDbCommandWrapper command)
 		{
-			_interventionRepository = new Intervention_Repository();
-			_materialRepository = new Material_Repository();
-			_vehicleRepository = new Vehicle_Repository();
+			_interventionRepository = new Intervention_Repository(connection, command);
+			_materialRepository = new Material_Repository(connection, command);
+			_vehicleRepository = new Vehicle_Repository(connection, command);
 		}
 		
 		public IEnumerable<Intervention_DTO> GetIntervention()

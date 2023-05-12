@@ -10,20 +10,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a90e9a96-dbd4-48f2-9ad9-9809aa701d45" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/BICE.DTO/MaterialVehicle_DTO.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BICE.DAL/Wrappers/DbCommandWrapper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BICE.DAL/Wrappers/DbConnectionWrapper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BICE.DAL/Wrappers/DbDataReaderWrapper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BICE.DAL/Wrappers/IDbCommandWrapper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BICE.DAL/Wrappers/IDbConnectionWrapper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BICE.DAL/Wrappers/IDbDataReaderWrapper.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BICE/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BICE/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE-API/Controllers/InterventionController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE-API/Controllers/InterventionController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BICE-API/Controllers/MaterialController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE-API/Controllers/MaterialController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BICE.BLL/Material_BLL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.BLL/Material_BLL.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BICE.DAL/Intervention_DAL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Classes/Intervention_DAL.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BICE.DAL/MaterialUsageHistory_DAL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Classes/MaterialUsageHistory_DAL.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BICE.DAL/Material_DAL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Classes/Material_DAL.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE-API/Controllers/VehicleController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE-API/Controllers/VehicleController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE-API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE-API/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE-API/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/BICE-API/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DAL.Tests/Intevention_DAL_Tests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL.Tests/Intevention_DAL_Tests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DAL.Tests/Material_DAL_Tests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL.Tests/Material_DAL_Tests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DAL.Tests/Usings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL.Tests/Usings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DAL.Tests/Vehicle_DAL_Tests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL.Tests/Vehicle_DAL_Tests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DAL/Classes/Intervention_DAL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Classes/Intervention_DAL.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DAL/Classes/MaterialUsageHistory_DAL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Classes/MaterialUsageHistory_DAL.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DAL/Classes/Material_DAL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Classes/Material_DAL.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DAL/Classes/Vehicle_DAL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Classes/Vehicle_DAL.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DAL/Repositories/Intervention_Repository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Repositories/Intervention_Repository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BICE.DAL/Repositories/Material_Repository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Repositories/Material_Repository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BICE.DAL/Vehicle_DAL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Classes/Vehicle_DAL.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BICE.DTO.Tests/Material_DTO_Tests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DTO.Tests/Material_DTO_Tests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BICE.DTO/MaterialUsageHistory_DTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DTO/MaterialUsageHistory_DTO.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BICE.DTO/Material_DTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DTO/Material_DTO.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BICE.SRV.Tests/Vehicle_SRV_Tests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.SRV.Tests/Vehicle_SRV_Tests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DAL/Repositories/Repository_DAL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Repositories/Repository_DAL.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DAL/Repositories/Vehicle_Repository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Repositories/Vehicle_Repository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DAL/Repositories/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Repositories/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.SRV/Intervention_SRV.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.SRV/Intervention_SRV.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BICE.SRV/Material_SRV.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.SRV/Material_SRV.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.SRV/Vehicle_SRV.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.SRV/Vehicle_SRV.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +45,9 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/../../C#/bases_repo/Geometrie.DAL/Depot_DAL.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/52253c49337a49efc92d1df5b5511611cf57b142e2f3eb25a114df42c1e3/CastHelpers.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b3ed9f8226a5f643ea5254d868339499e9f0342ddcb280d1d5074c9899c6b6/DbConnection.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/eea758c0c9c613482f7cf5c6be8888b336c981123cecc18540413f5f47eb224b/ControllerActionInvoker.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="2OQDGctKElgJyeISoMlFMXSbsGy" />
@@ -125,6 +142,8 @@
       <workItem from="1682668917171" duration="907000" />
       <workItem from="1682671971544" duration="1368000" />
       <workItem from="1683699391111" duration="23930000" />
+      <workItem from="1683855457713" duration="7277000" />
+      <workItem from="1683862765294" duration="851000" />
     </task>
     <servers />
   </component>
@@ -154,6 +173,19 @@
           </properties>
           <option name="timeStamp" value="1" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/../../C#/bases_repo/Geometrie.DAL/Depot_DAL.cs</url>
+          <line>17</line>
+          <properties documentPath="$PROJECT_DIR$/../../C#/bases_repo/Geometrie.DAL/Depot_DAL.cs" initialLine="17" containingFunctionPresentation="Constructor 'Depot_DAL'">
+            <startOffsets>
+              <option value="487" />
+            </startOffsets>
+            <endOffsets>
+              <option value="488" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

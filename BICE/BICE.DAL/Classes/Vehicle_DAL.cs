@@ -11,7 +11,9 @@
             public string LicensePlate { get; set; }
             public bool IsActive { get; set; }
             
-            
+            public Vehicle_DAL()
+            {
+            }
 
             public Vehicle_DAL(string denomination, string internalNumber, string licensePlate, bool isActive)
             {

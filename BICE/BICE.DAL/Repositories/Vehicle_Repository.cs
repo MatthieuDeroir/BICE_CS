@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using BICE.DAL.Repositories;
 using BICE.BLL;
+using BICE.DAL.Wrappers;
 
 namespace BICE.DAL
 {
     public class Vehicle_Repository : Repository<Vehicle_DAL>
     {
         // Implement the CRUD methods for Vehicle
-
+        public Vehicle_Repository(IDbConnectionWrapper connection, IDbCommandWrapper command) : base(connection, command)
+        {
+        }
         public override IEnumerable<Vehicle_DAL> GetAll()
         {
             var query = "SELECT * FROM Vehicles";

@@ -11,6 +11,10 @@ namespace BICE.DAL
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         
+        public Intervention_DAL()
+        {
+        }
+        
         public Intervention_DAL(string denomination, string? description, DateTime startDate, DateTime? endDate)
         {
             Denomination = denomination;

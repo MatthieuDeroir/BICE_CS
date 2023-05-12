@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BICE.DAL.Wrappers;
 using Microsoft.AspNetCore.Mvc;
 using BICE.DTO;
 using BICE.SRV;
@@ -11,9 +12,9 @@ namespace BICE.API.Controllers
     {
         private readonly Vehicle_SRV _vehicleService;
 
-        public VehicleController()
+        public VehicleController(IDbConnectionWrapper connection, IDbCommandWrapper command)
         {
-            _vehicleService = new Vehicle_SRV();
+            _vehicleService = new Vehicle_SRV(connection, command);
         }
         
         [HttpGet]

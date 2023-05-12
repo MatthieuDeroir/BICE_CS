@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BICE.DAL.Wrappers;
 using Microsoft.AspNetCore.Mvc;
 using BICE.DTO;
 using BICE.SRV;
@@ -12,9 +13,9 @@ namespace BICE.API.Controllers
     {   
         private readonly Material_SRV _materialService;
         
-        public MaterialController()
+        public MaterialController(IDbConnectionWrapper connection, IDbCommandWrapper command)
         {
-            _materialService = new Material_SRV();
+            _materialService = new Material_SRV(connection, command);
         }
         
         [HttpGet]

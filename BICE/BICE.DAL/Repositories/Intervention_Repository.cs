@@ -4,37 +4,44 @@ using System.Data.SqlClient;
 using BICE.DAL;
 using BICE.BLL;
 using BICE.DAL.Repositories;
+using BICE.DAL.Wrappers;
 
 namespace BICE.DAL
 {
     public class Intervention_Repository : Repository<Intervention_DAL>
     {
+        private readonly IDbConnectionWrapper _connection;
+        private readonly IDbCommandWrapper _command;
+        
+        public Intervention_Repository(IDbConnectionWrapper connection, IDbCommandWrapper command) : base(connection, command)
+        {
+            _connection = connection;
+            _command = command;
+        }
         public override IEnumerable<Intervention_DAL> GetAll()
         {
             var query = "SELECT * FROM Interventions";
 
-            using (var connection = new SqlConnection(ConnectionString))
+            _connection.Open();
+            _command.CommandText = query;
+
+            using (var reader = _command.ExecuteReader())
             {
-                connection.Open();
-                
-                using (var command = new SqlCommand(query, connection))
+                while (reader.Read())
                 {
-                    using (var reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            yield return new Intervention_DAL(
-                                (int)reader["id"],
-                                reader["denomination"] == DBNull.Value ? (string)null : (string)reader["denomination"],
-                                reader["description"] == DBNull.Value ? (string)null : (string)reader["description"],
-                                (DateTime)reader["startDate"],
-                           reader["endDate"] == DBNull.Value ? (DateTime?)null : (DateTime)reader["endDate"]
-                            );
-                        }
-                    }
+                    var id = (int)reader["id"];
+                    var denomination = reader["denomination"] == DBNull.Value ? (string)null : (string)reader["denomination"];
+                    var description = reader["description"] == DBNull.Value ? (string)null : (string)reader["description"];
+                    var startDate = (DateTime)reader["startDate"];
+                    var endDate = reader["endDate"] == DBNull.Value ? (DateTime?)null : (DateTime)reader["endDate"];
+
+                    Console.WriteLine($"id: {id}, denomination: {denomination}, description: {description}, startDate: {startDate}, endDate: {endDate}");
+
+                    yield return new Intervention_DAL(id, denomination, description, startDate, endDate);
                 }
             }
         }
+
 
         public override Intervention_DAL GetById(int id)
         {

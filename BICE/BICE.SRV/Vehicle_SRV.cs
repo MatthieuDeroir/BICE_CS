@@ -2,6 +2,7 @@
 using BICE.DTO;
 using BICE.BLL;
 using BICE.DAL;
+using BICE.DAL.Wrappers;
 
 namespace BICE.SRV
 {
@@ -9,9 +10,9 @@ namespace BICE.SRV
     {
         private readonly Vehicle_Repository _vehicleRepository;
 
-        public Vehicle_SRV()
+        public Vehicle_SRV(IDbConnectionWrapper connection, IDbCommandWrapper command)
         {
-            _vehicleRepository = new Vehicle_Repository();
+            _vehicleRepository = new Vehicle_Repository(connection, command);
         }
         
         public IEnumerable<Vehicle_DTO> GetVehicle()

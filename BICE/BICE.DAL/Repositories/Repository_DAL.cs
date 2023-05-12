@@ -1,51 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using BICE.DAL;
+using BICE.DAL.Wrappers;
+
 
 namespace BICE.DAL.Repositories
 {
     public abstract class Repository<T> : IRepository<T> where T : class
     {
         public string ConnectionString { get; set; }
-        protected SqlConnection Connection { get; set; }
-        protected SqlCommand Command { get; set; }
+        protected IDbConnectionWrapper Connection { get; set; }
+        protected IDbCommandWrapper Command { get; set; }
 
-        public Repository()
+        public Repository(IDbConnectionWrapper connection, IDbCommandWrapper command)
         {
             var builder = new ConfigurationBuilder();
-
-
-            // connection string for VICOOOOOOOOOOOOOO0000000000 🙂
-            ConnectionString = "Data Source=localhost;Initial Catalog=BICE_DATABASE;Integrated Security=True";
-
-            // connection string for __M_A_T_Y_W_IZOD
-            //var config = builder.AddJsonFile("appsettings.json", false, true).Build();
-            //ConnectionString =
-            //    "Data Source=localhost,1433;Initial Catalog=BICE_DATABASE;User Id=sa;Password=78934797497xX!!;";
-
-
-          
-          // connection string for VICOOOOOOOOOOOOOO0000000000 :)  
-             // ConnectionString = "Data Source=localhost;Integrated Security=True";
-
-          // connection string for _M_A_A_W_O_X_
             var config = builder.AddJsonFile("appsettings.json", false, true).Build();
-            ConnectionString =
-                "Data Source=localhost,1433;Initial Catalog=BICE_DATABASE;User Id=sa;Password=78934797497xX!!;";
-          
+            ConnectionString = config.GetSection("ConnectionStrings:default").Value;
 
-            Connection = new SqlConnection(ConnectionString);
+            Connection = connection;
+            Command = command;
 
             Console.WriteLine($"ConnectionString: {ConnectionString}");
         }
 
         protected void InitializeConnectionAndCommand()
         {
-            Connection = new SqlConnection(ConnectionString);
-            Command = Connection.CreateCommand();
             Connection.Open();
+            Command = Connection.CreateCommand();
         }
 
         protected void CloseAndDisposeConnectionAndCommand()

@@ -9,6 +9,10 @@ public class MaterialUsageHistory_DAL
     public bool IsUsed { get; set; }
     public bool IsLost { get; set; }
 
+    public MaterialUsageHistory_DAL()
+    {
+    }
+    
     public MaterialUsageHistory_DAL(int materialId, int vehicleInterventionId, DateTime usageDate, bool isUsed, bool isLost)
     {
         MaterialId = materialId;
