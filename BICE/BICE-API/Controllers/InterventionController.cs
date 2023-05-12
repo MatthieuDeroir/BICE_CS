@@ -1,10 +1,22 @@
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using BICE.DTO;
 using BICE.SRV;
 
+
+
 namespace BICE.API.Controllers
 {
+    
+    /// <summary>
+    /// InterventionController :
+    /// Obtenir toutes les interventions (GetIntervention)
+    /// Obtenir une intervention spécifique par son ID (GetInterventionById)
+    /// Ajouter une nouvelle intervention (AddIntervention)
+    /// Ajouter un véhicule à une intervention spécifique (AddVehicleToIntervention)
+    /// Mettre à jour une intervention (UpdateIntervention)
+    /// Supprimer une intervention (DeleteIntervention)
+    /// </summary>
+    
     [Route("api/[controller]")]
     [ApiController]
     
@@ -17,12 +29,18 @@ namespace BICE.API.Controllers
             _interventionService = new Intervention_SRV();
         }
         
+        // GET api/intervention
+        // Obtenir toutes les interventions
+        
         [HttpGet]
         public ActionResult<IEnumerable<Intervention_DTO>> GetIntervention()
         {
             IEnumerable<Intervention_DTO> interventionDto = _interventionService.GetIntervention();
             return Ok(interventionDto);
         }
+        
+        // GET api/intervention/{id}
+        // Obtenir une intervention spécifique par son ID
         
         [HttpGet("{id}")]
         public ActionResult<Intervention_DTO> GetInterventionById(int id)
@@ -37,6 +55,8 @@ namespace BICE.API.Controllers
         
 
         // POST api/intervention
+        // Ajouter une nouvelle intervention
+        
         [HttpPost]
         public ActionResult<Intervention_DTO> AddIntervention(Intervention_DTO interventionDto)
         {
@@ -48,19 +68,10 @@ namespace BICE.API.Controllers
             Intervention_DTO insertedIntervention = _interventionService.AddIntervention(interventionDto);
             return CreatedAtAction(nameof(AddIntervention), new { id = insertedIntervention.Id }, insertedIntervention);
         }
+
+        // POST api/intervention/{interventionId}/vehicle/{vehicleId}
+        // Ajouter un véhicule à une intervention spécifique
         
-        [HttpGet("{interventionId}/vehicles")]
-        public ActionResult<Intervention_DTO> GetVehiclesByInterventionId(int interventionId)
-        {
-            IEnumerable<Vehicle_DTO> vehicleDto = _interventionService.GetVehiclesByInterventionId(interventionId);
-            if (vehicleDto == null)
-            {
-                return NotFound();
-            }
-            return Ok(vehicleDto);
-        }
-        
-        // add vehicle to intervention
         [HttpPost("{interventionId}/vehicle/{vehicleId}")]
         public async Task<ActionResult> AddVehicleToIntervention(int interventionId, int vehicleId)
         {
@@ -68,6 +79,8 @@ namespace BICE.API.Controllers
             return NoContent();
         }
 
+        // PUT api/intervention/{id}
+        // Mettre à jour une intervention
         
         [HttpPut("{id}")]
         public ActionResult<Intervention_DTO> UpdateIntervention(Intervention_DTO interventionDto)
@@ -81,6 +94,9 @@ namespace BICE.API.Controllers
             return Ok(updatedIntervention);
         }
         
+        // DELETE api/intervention/{id}
+        // Supprimer une intervention
+        
         [HttpDelete("{id}")]
         public ActionResult DeleteIntervention(Intervention_DTO interventionDto)
         {
@@ -92,7 +108,5 @@ namespace BICE.API.Controllers
             _interventionService.Delete(interventionDto);
             return Ok();
         }
-
-
     }
 }
