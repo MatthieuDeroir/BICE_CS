@@ -233,7 +233,7 @@ public IEnumerable<Material_DTO> GetMaterial()
 								  join v in _vehicleRepository.GetAll() on m.VehicleId equals v.Id into mv
 								  from v in mv.DefaultIfEmpty()
 								  where m.IsStored || m.VehicleId != null
-								  select new { m, InternalNumber = v == null ? null : v.InternalNumber, Denomination = v == null ? null : v.Denomination, LicensePlate = v == null ? null : v.LicensePlate };
+								  select new { m, InternalNumber = v == null ? "" : v.InternalNumber, Denomination = v == null ? "" : v.Denomination, LicensePlate = v == null ? "" : v.LicensePlate };
 
 
 
