@@ -7,9 +7,36 @@
         mc:Ignorable="d"
         Title="InterventionAddVehiculesWindow" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
         <Label x:Name="LabelTitle" Content="Ajouter des véhicules à l'intervention" FontSize="24" FontWeight="Bold" Margin="10" />
-        <DataGrid x:Name="VehiclesDataGrid" Margin="10,130,10,10" AutoGenerateColumns="True" ItemsSource="{Binding Vehicles}" />
-        <ComboBox x:Name="VehiclesComboBox" Height="25" Margin="199,78,243,331" />
-        <Button x:Name="ValidateButton" Content="Ajouter" Click="ValidateButton_Click" Margin="619,79,81,325" Width="100" Height="30" />
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10,10,10,10">
+            <ComboBox x:Name="VehiclesComboBox" Height="25" Width="200" Margin="10,0,10,0"/>
+            <Button x:Name="ValidateButton" Content="Ajouter" Click="ValidateButton_Click" Width="100" Height="30" />
+        </StackPanel>
+
+        <DataGrid x:Name="VehiclesDataGrid" Margin="10,10,10,10" AutoGenerateColumns="False" ItemsSource="{Binding Vehicles}" Grid.Row="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Denomination" Binding="{Binding Denomination}" />
+                <DataGridTextColumn Header="Internal Number" Binding="{Binding InternalNumber}" />
+                <!-- Add more columns as needed -->
+
+                <!-- Add button inside the DataGrid -->
+                <DataGridTemplateColumn Width="SizeToCells" Header="Actions">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Supprimer" Click="DeleteButton_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
+
 </Window>
