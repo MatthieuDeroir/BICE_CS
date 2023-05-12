@@ -65,18 +65,42 @@ namespace BICE.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            Intervention_DTO insertedIntervention = _interventionService.AddIntervention(interventionDto);
-            return CreatedAtAction(nameof(AddIntervention), new { id = insertedIntervention.Id }, insertedIntervention);
+            try
+            {
+                Intervention_DTO insertedIntervention = _interventionService.AddIntervention(interventionDto);
+                return Ok(insertedIntervention);
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return BadRequest(e);
+            }
         }
 
         // POST api/intervention/{interventionId}/vehicle/{vehicleId}
         // Ajouter un véhicule à une intervention spécifique
+        // Gestion des erreurs :
         
         [HttpPost("{interventionId}/vehicle/{vehicleId}")]
-        public async Task<ActionResult> AddVehicleToIntervention(int interventionId, int vehicleId)
+        public ActionResult AddVehicleToIntervention(int interventionId, int vehicleId)
         {
-            await _interventionService.AddVehicleToIntervention(interventionId, vehicleId);
-            return NoContent();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            
+            try
+            {
+                var addedVehiculeToIntervention= _interventionService.AddVehicleToIntervention(interventionId, vehicleId);
+                return Ok(addedVehiculeToIntervention);
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return BadRequest(e);
+            }
         }
 
         // PUT api/intervention/{id}
@@ -90,8 +114,17 @@ namespace BICE.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            Intervention_DTO updatedIntervention = _interventionService.Update(interventionDto);
-            return Ok(updatedIntervention);
+            try
+            {
+                Intervention_DTO updatedIntervention = _interventionService.Update(interventionDto);
+                return Ok(updatedIntervention);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return BadRequest();
+            }
+
         }
         
         // DELETE api/intervention/{id}
@@ -105,18 +138,41 @@ namespace BICE.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            _interventionService.Delete(interventionDto);
-            return Ok();
+            try
+            {
+                _interventionService.Delete(interventionDto);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return BadRequest();
+            }
+            
         }
         
         // DELETE api/intervention/{interventionId}/vehicle/{vehicleId}
         // Supprimer un véhicule d'une intervention spécifique
         
         [HttpDelete("{interventionId}/vehicle/{vehicleId}")]
-        public async Task<ActionResult> DeleteVehicleFromIntervention(int interventionId, int vehicleId)
+        public ActionResult DeleteVehicleFromIntervention(int interventionId, int vehicleId)
         {
-            await _interventionService.DeleteVehicleFromIntervention(interventionId, vehicleId);
-            return NoContent();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                _interventionService.DeleteVehicleFromIntervention(interventionId, vehicleId);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return BadRequest();
+            }
+            ;
         }
     }
 }
