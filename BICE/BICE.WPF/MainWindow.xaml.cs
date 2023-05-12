@@ -23,13 +23,14 @@ using CsvHelper;
 using System.Globalization;
 using System.IO;
 using System.Net.Http.Json;
+using CsvHelper.Configuration;
 
 namespace BICE.WPF
 
 {
     public partial class MainWindow : Window
     {
-        string ApiUrl = "http://localhost:7001/api/";
+        string ApiUrl = "https://localhost:7001/api/";
         public MainWindow()
         {
             InitializeComponent();
@@ -51,37 +52,56 @@ namespace BICE.WPF
             interventionWindos.Show();
         }
 
-  
+
 
         public async void DownloadButton_Click(object sender, RoutedEventArgs e)
         {
-            // Fetch data from the API
-            var materials = await GetStoredMaterialsFromApi();
+            try
+            {
+                // Fetch data from the API
+                var materials = await GetStoredMaterialsFromApi();
 
-            // Write data to a CSV file
-            WriteDataToCsv(materials);
+                // Write data to a CSV file
+                WriteDataToCsv(materials);
+
+                // Show a success message
+                MessageBox.Show("Le fichier a été téléchargé avec succès", "Téléchargement réussi", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                // Show an error message
+                MessageBox.Show($"Une erreur s'est produite lors du téléchargement du fichier : {ex.Message}", "Erreur de téléchargement", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
-        private async Task<List<MaterialVehicle_DTO>> GetStoredMaterialsFromApi()
+        private async Task<IEnumerable<Material_DTO>> GetStoredMaterialsFromApi()
         {
             using HttpClient client = new HttpClient();
-            var materials = await client.GetFromJsonAsync<List<MaterialVehicle_DTO>>(ApiUrl + "Material/materials-to-be-removed"); 
+            var materials = await client.GetFromJsonAsync<IEnumerable<Material_DTO>>(ApiUrl + "Material/materials-to-be-removed");
 
             return materials;
         }
 
-        private void WriteDataToCsv(List<MaterialVehicle_DTO> materials)
+        private void WriteDataToCsv(IEnumerable<Material_DTO> materials)
         {
             // Define the file path where the CSV file will be saved
-            string filePath = "C:\\Users\\Victor\\Desktop\\fichier.csv";
+            string filePath = $"C:\\Users\\Victor\\Desktop\\BICE\\{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}-Materiel_a_enlever.csv";
 
             // Use CsvWriter to write the data to a CSV file
             using (var writer = new StreamWriter(filePath))
-            using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
             {
-                csv.WriteRecords(materials);
+                var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+                {
+                    Delimiter = ";", // Use semicolon as delimiter
+                };
+                using (var csv = new CsvWriter(writer, config))
+                {
+                    csv.WriteRecords(materials);
+                }
             }
         }
 
-}
+
+
+    }
 }
