@@ -19,6 +19,13 @@ namespace BICE.SRV
 			_vehicleRepository = new Vehicle_Repository();
 		}
 		
+		public Material_SRV(Intervention_Repository interventionRepository, Material_Repository materialRepository, Vehicle_Repository vehicleRepository)
+		{
+			_interventionRepository = interventionRepository;
+			_materialRepository = materialRepository;
+			_vehicleRepository = vehicleRepository;
+		}
+		
 public IEnumerable<Material_DTO> GetMaterial()
 		{
 			IEnumerable<Material_DAL> materialDal = _materialRepository.GetAll();
@@ -187,6 +194,8 @@ public IEnumerable<Material_DTO> GetMaterial()
 				{
 					// Mark material as lost
 					materialBll.HasBeenLost();
+					Material_DAL updatedMaterialDal1 = new Material_DAL(materialBll);
+					_materialRepository.Update(updatedMaterialDal1);
             
 					// Add a lost record to MaterialUsageHistory
 					MaterialUsageHistory_DAL lostHistory = new MaterialUsageHistory_DAL

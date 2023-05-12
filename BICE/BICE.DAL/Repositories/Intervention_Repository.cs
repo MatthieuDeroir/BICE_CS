@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using BICE.DAL;
 using BICE.BLL;
 using BICE.DAL.Repositories;
@@ -180,19 +181,26 @@ namespace BICE.DAL
         public Task RemoveVehicleFromIntervention(int interventionId, int vehicleId)
         {
             var query = "DELETE FROM VehicleIntervention WHERE id_intervention = @interventionId AND id_vehicle = @vehicleId";
-            
-            using (var connection = new SqlConnection(ConnectionString))
+            try
             {
-                connection.Open();
-                
-                using (var command = new SqlCommand(query, connection))
+                using (var connection = new SqlConnection(ConnectionString))
                 {
-                    command.Parameters.AddWithValue("@interventionId", interventionId);
-                    command.Parameters.AddWithValue("@vehicleId", vehicleId);
-                    
-                    return command.ExecuteNonQueryAsync();
+                    connection.Open();
+
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@interventionId", interventionId);
+                        command.Parameters.AddWithValue("@vehicleId", vehicleId);
+
+                        return command.ExecuteNonQueryAsync();
+                    }
                 }
             }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+            return null;
         }
 
         public void DeleteVehicleFromIntervention(int interventionId, int vehicleId)

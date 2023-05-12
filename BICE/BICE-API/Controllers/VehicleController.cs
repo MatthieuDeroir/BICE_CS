@@ -58,7 +58,7 @@ namespace BICE.API.Controllers
             return Ok(vehicleDto);
         }
         
-        // GET api/vehicle/{interventionId}/vehicles
+        // GET api/intervention/{interventionId}/vehicles
         // Obtenir les véhicules liés à une intervention spécifique
         
         [HttpGet("in-intervention/{interventionId}")]

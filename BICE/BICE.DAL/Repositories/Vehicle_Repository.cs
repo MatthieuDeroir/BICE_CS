@@ -9,6 +9,7 @@ namespace BICE.DAL
     public class Vehicle_Repository : Repository<Vehicle_DAL>
     {
         // Implement the CRUD methods for Vehicle
+        
 
         public override IEnumerable<Vehicle_DAL> GetAll()
         {
