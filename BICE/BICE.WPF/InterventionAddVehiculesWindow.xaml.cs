@@ -58,7 +58,7 @@ namespace BICE.WPF
         private async void LoadInterventionVehicles()
         {
             using HttpClient client = new HttpClient();
-            var vehicles = await client.GetFromJsonAsync<List<Vehicle_DTO>>(ApiUrl + $"/Intervention/{_intervention.Id}/vehicles");
+            var vehicles = await client.GetFromJsonAsync<List<Vehicle_DTO>>(ApiUrl + $"/Vehicle/in-intervention/{_intervention.Id}");
 
             if (vehicles != null)
             {
@@ -95,6 +95,33 @@ namespace BICE.WPF
                 MessageBox.Show("Veuillez sélectionner un véhicule.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
+
+        private async void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Get the current vehicle from the DataContext of the button
+            var button = sender as Button;
+            var vehicle = button.DataContext as Vehicle_DTO;
+
+            MessageBoxResult result = MessageBox.Show("Voulez-vous vraiment supprimer ce véhicule de l'intervention ?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                using HttpClient client = new HttpClient();
+                var response = await client.DeleteAsync(ApiUrl + $"/Intervention/{_intervention.Id}/vehicle/{vehicle.Id}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Le véhicule a été supprimé de l'intervention avec succès.", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
+                    LoadVehicles();
+                    LoadInterventionVehicles();
+                }
+                else
+                {
+                    MessageBox.Show("Erreur lors de la suppression du véhicule de l'intervention.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
 
     }
 }

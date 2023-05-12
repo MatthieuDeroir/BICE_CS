@@ -45,7 +45,7 @@ namespace BICE.WPF
         private async void LoadVehicles()
         {
             using HttpClient client = new HttpClient();
-            var vehicles = await client.GetFromJsonAsync<List<Vehicle_DTO>>(ApiUrl + $"/Vehicle/{_intervention.Id}/vehicles");
+            var vehicles = await client.GetFromJsonAsync<List<Vehicle_DTO>>(ApiUrl + $"/Vehicle/in-intervention/{_intervention.Id}");
 
             if (vehicles != null)
             {

@@ -58,6 +58,7 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
+                            
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition />
@@ -79,10 +80,6 @@
                         </Grid>
                     </Border>
                 </Grid>
-
-            </TabItem>
-            <TabItem Header="Retour d'intervention">
-                
             </TabItem>
         </TabControl>
     </Grid>
