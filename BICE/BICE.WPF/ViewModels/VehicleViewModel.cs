@@ -26,7 +26,7 @@ namespace BICE.WPF.ViewModels
             LoadVehicles();
         }
 
-        private void LoadVehicles()
+        public async Task LoadVehicles()
         {
             //Vehicles = new ObservableCollection<Vehicle_DTO>(_vehicleService.GetVehicle());
             var allVehicles = _vehicleService.GetVehicle();
@@ -34,16 +34,28 @@ namespace BICE.WPF.ViewModels
             Vehicles = new ObservableCollection<Vehicle_DTO>(activeVehicles);
         }
 
-        public async Task DeleteVehicle(Vehicle_DTO vehicle)
+        public async Task EnableDisableVehicle(Vehicle_DTO vehicle)
         {
-            // Envoyez une requête DELETE à l'API pour supprimer le véhicule
+            // Envoyez une requête à l'API pour desac le véhicule
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("https://localhost:7001/");
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            HttpResponseMessage response = await client.DeleteAsync($"api/Vehicle/{vehicle.Id}");
+
+            string vehicleJson = JsonConvert.SerializeObject(vehicle);
+            StringContent content = new StringContent(vehicleJson, Encoding.UTF8, "application/json");
+            HttpResponseMessage response;
+            if (vehicle.IsActive)
+            {
+                response = await client.PutAsync($"api/Vehicle/disable/{vehicle.Id}", content);
+            }
+            else
+            {
+                response = await client.PutAsync($"api/Vehicle/enable/{vehicle.Id}", content);
+            }
+
             if (response.IsSuccessStatusCode)
             {
-                MessageBox.Show("Le véhicule a été supprimé avec succès.", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Le véhicule a été désactivé avec succès.", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
@@ -51,7 +63,7 @@ namespace BICE.WPF.ViewModels
             }
 
             //Refresh   
-            LoadVehicles();
+            await LoadVehicles();
         }
 
         public async Task UpdateVehicle(Vehicle_DTO vehicle)

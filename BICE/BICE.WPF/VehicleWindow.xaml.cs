@@ -34,7 +34,7 @@ namespace BICE.WPF
             DataContext = new VehicleViewModel();
         }
 
-        private async void DeleteButton_Click(object sender, RoutedEventArgs e)
+        private async void EnableDisableButton_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
             var vehicle = button.DataContext as Vehicle_DTO;
@@ -43,7 +43,7 @@ namespace BICE.WPF
 
             if (result == MessageBoxResult.Yes)
             {
-                await (DataContext as VehicleViewModel).DeleteVehicle(vehicle);
+                await (DataContext as VehicleViewModel).EnableDisableVehicle(vehicle);
                 (DataContext as VehicleViewModel).Vehicles.Remove(vehicle);
             }
         }

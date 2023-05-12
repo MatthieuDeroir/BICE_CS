@@ -28,10 +28,10 @@
                         <DataGridTextColumn Header="Denomination" Binding="{Binding Denomination}" />
                         <DataGridTextColumn Header="License Plate" Binding="{Binding LicensePlate}" />
                         
-                        <DataGridTemplateColumn Header="Supprimer">
+                        <DataGridTemplateColumn Header="Désactivé">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Content="Supprimer" Click="DeleteButton_Click"/>
+                                    <Button Content="Désactivé" Click="EnableDisableButton_Click"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
