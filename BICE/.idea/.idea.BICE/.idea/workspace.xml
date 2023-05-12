@@ -9,7 +9,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a90e9a96-dbd4-48f2-9ad9-9809aa701d45" name="Changes" comment="" />
+    <list default="true" id="a90e9a96-dbd4-48f2-9ad9-9809aa701d45" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BICE/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BICE/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE-API/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/BICE-API/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DAL/Repositories/Repository_DAL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Repositories/Repository_DAL.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DAL/Repositories/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Repositories/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DTO/Classes/MaterialVehicle_DTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DTO/Classes/MaterialVehicle_DTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.SRV/Classes/Material_SRV.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.SRV/Classes/Material_SRV.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -110,6 +117,7 @@
       <workItem from="1682668917171" duration="907000" />
       <workItem from="1682671971544" duration="1368000" />
       <workItem from="1683699391111" duration="23930000" />
+      <workItem from="1683878195303" duration="1629000" />
     </task>
     <servers />
   </component>
