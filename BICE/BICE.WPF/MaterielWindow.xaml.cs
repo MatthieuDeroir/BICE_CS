@@ -189,7 +189,7 @@ namespace BICE.WPF
         {
             using HttpClient client = new HttpClient();
             var materials = await client.GetFromJsonAsync<IEnumerable<MaterialVehicle_DTO>>(ApiUrl + "/Material/stored-materials");
-
+            
             return materials;
         }
 

@@ -11,6 +11,8 @@ public class MaterialVehicle_DTO : Material_DTO, IMaterialVehicle_DTO
     public String VehicleDenomination { get; set; }
     public String VehicleInternalNumber { get; set; }
     public String VehicleLicensePlate { get; set; }
+
+    public MaterialVehicle_DTO() { }
     
     public MaterialVehicle_DTO(Material_DAL materialDal, string vehicleInternalNumber, string vehicleDenomination, string vehicleLicensePlate)
     {
