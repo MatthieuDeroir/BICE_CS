@@ -108,5 +108,15 @@ namespace BICE.API.Controllers
             _interventionService.Delete(interventionDto);
             return Ok();
         }
+        
+        // DELETE api/intervention/{interventionId}/vehicle/{vehicleId}
+        // Supprimer un véhicule d'une intervention spécifique
+        
+        [HttpDelete("{interventionId}/vehicle/{vehicleId}")]
+        public async Task<ActionResult> DeleteVehicleFromIntervention(int interventionId, int vehicleId)
+        {
+            await _interventionService.DeleteVehicleFromIntervention(interventionId, vehicleId);
+            return NoContent();
+        }
     }
 }

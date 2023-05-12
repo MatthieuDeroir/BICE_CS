@@ -72,6 +72,11 @@ namespace BICE.SRV
 			Intervention_DAL interventionDal = new Intervention_DAL(interventionBll);
 			_interventionRepository.Delete(interventionDal);
 		}
+		
+		public void DeleteVehicleFromIntervention(int interventionId, int vehicleId)
+		{
+			_interventionRepository.DeleteVehicleFromIntervention(interventionId, vehicleId);
+		}
 
 
 	}

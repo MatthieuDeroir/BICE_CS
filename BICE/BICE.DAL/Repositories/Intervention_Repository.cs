@@ -194,5 +194,23 @@ namespace BICE.DAL
                 }
             }
         }
+
+        public void DeleteVehicleFromIntervention(int interventionId, int vehicleId)
+        {
+            var query = "DELETE FROM VehicleIntervention WHERE id_intervention = @interventionId AND id_vehicle = @vehicleId";
+            
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@interventionId", interventionId);
+                    command.Parameters.AddWithValue("@vehicleId", vehicleId);
+                    
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }
