@@ -35,6 +35,7 @@ namespace BICE.API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Intervention_DTO>> GetIntervention()
         {
+            
             IEnumerable<Intervention_DTO> interventionDto = _interventionService.GetIntervention();
             return Ok(interventionDto);
         }
@@ -45,12 +46,17 @@ namespace BICE.API.Controllers
         [HttpGet("{id}")]
         public ActionResult<Intervention_DTO> GetInterventionById(int id)
         {
-            Intervention_DTO interventionDto = _interventionService.GetInterventionById(id);
-            if (interventionDto == null)
+            try
             {
-                return NotFound();
+                Intervention_DTO interventionDto = _interventionService.GetInterventionById(id);
+                return Ok(interventionDto); 
             }
-            return Ok(interventionDto);
+            
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return BadRequest(e);
+            }
         }
         
 
