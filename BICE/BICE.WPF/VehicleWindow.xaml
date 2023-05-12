@@ -28,7 +28,7 @@
                         <DataGridTextColumn Header="Denomination" Binding="{Binding Denomination}" />
                         <DataGridTextColumn Header="License Plate" Binding="{Binding LicensePlate}" />
                         
-                        <DataGridTemplateColumn Header="Désactivé/Activé">
+                        <DataGridTemplateColumn Header="Désactivé">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Content="Désactivé" Click="EnableDisableButton_Click"/>
