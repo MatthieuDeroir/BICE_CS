@@ -58,10 +58,10 @@ namespace BICE.API.Controllers
             return Ok(vehicleDto);
         }
         
-        // GET api/vehicle/{interventionId}/vehicles
+        // GET api/intervention/{interventionId}/vehicles
         // Obtenir les véhicules liés à une intervention spécifique
         
-        [HttpGet("{interventionId}/vehicles")]
+        [HttpGet("in-intervention/{interventionId}")]
         public ActionResult<Vehicle_DTO> GetVehiclesByInterventionId(int interventionId)
         {
             IEnumerable<Vehicle_DTO> vehicleDto = _vehicleService.GetVehiclesByInterventionId(interventionId);

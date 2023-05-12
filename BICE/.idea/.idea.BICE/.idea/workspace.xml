@@ -10,14 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a90e9a96-dbd4-48f2-9ad9-9809aa701d45" name="Changes" comment="">
-
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BICE/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BICE/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE-API/Controllers/InterventionController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE-API/Controllers/InterventionController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE-API/Controllers/VehicleController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE-API/Controllers/VehicleController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BICE-API/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/BICE-API/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BICE.DAL/Repositories/Repository_DAL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Repositories/Repository_DAL.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BICE.DAL/Repositories/Intervention_Repository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Repositories/Intervention_Repository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BICE.DAL/Repositories/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DAL/Repositories/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BICE.DTO/Classes/MaterialVehicle_DTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.DTO/Classes/MaterialVehicle_DTO.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BICE.SRV/Classes/Material_SRV.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BICE.SRV/Classes/Material_SRV.cs" afterDir="false" />
-
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +117,7 @@
       <workItem from="1682668917171" duration="907000" />
       <workItem from="1682671971544" duration="1368000" />
       <workItem from="1683699391111" duration="23930000" />
-      <workItem from="1683878195303" duration="1629000" />
+      <workItem from="1683878195303" duration="3851000" />
     </task>
     <servers />
   </component>
@@ -149,6 +147,19 @@
           </properties>
           <option name="timeStamp" value="1" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/BICE.BLL/Classes/Material_BLL.cs</url>
+          <line>142</line>
+          <properties documentPath="$PROJECT_DIR$/BICE.BLL/Classes/Material_BLL.cs" initialLine="142" containingFunctionPresentation="Method 'ValidateUsability'">
+            <startOffsets>
+              <option value="4240" />
+            </startOffsets>
+            <endOffsets>
+              <option value="4257" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

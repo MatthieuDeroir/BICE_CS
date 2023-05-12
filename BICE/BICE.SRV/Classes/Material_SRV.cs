@@ -187,6 +187,8 @@ public IEnumerable<Material_DTO> GetMaterial()
 				{
 					// Mark material as lost
 					materialBll.HasBeenLost();
+					Material_DAL updatedMaterialDal1 = new Material_DAL(materialBll);
+					_materialRepository.Update(updatedMaterialDal1);
             
 					// Add a lost record to MaterialUsageHistory
 					MaterialUsageHistory_DAL lostHistory = new MaterialUsageHistory_DAL
