@@ -17,6 +17,7 @@ public class MaterialVehicle_DTO : Material_DTO, IMaterialVehicle_DTO
     {
         
     }
+
     public MaterialVehicle_DTO(Material_DAL materialDal, string vehicleInternalNumber, string vehicleDenomination, string vehicleLicensePlate)
     {
         Id = materialDal.Id;

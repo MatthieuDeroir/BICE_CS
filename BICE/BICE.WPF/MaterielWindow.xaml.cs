@@ -115,6 +115,8 @@ namespace BICE.WPF
             }
         }
 
+
+        //
         public async void DownloadButton_Click1(object sender, RoutedEventArgs e)
         {
             try
@@ -162,6 +164,8 @@ namespace BICE.WPF
             }
         }
 
+
+        //
         public async void DownloadButton_Click2(object sender, RoutedEventArgs e) {
             try
             {
@@ -185,7 +189,7 @@ namespace BICE.WPF
         {
             using HttpClient client = new HttpClient();
             var materials = await client.GetFromJsonAsync<IEnumerable<MaterialVehicle_DTO>>(ApiUrl + "/Material/stored-materials");
-
+            
             return materials;
         }
 
@@ -207,6 +211,9 @@ namespace BICE.WPF
                 }
             }
         }
+
+
+        //
         public async void DownloadButton_Click3(object sender, RoutedEventArgs e) {
             try
             {
