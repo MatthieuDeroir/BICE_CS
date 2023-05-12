@@ -18,9 +18,9 @@ namespace BICE.DAL.Repositories
             var config = builder.AddJsonFile("appsettings.json", false, true).Build();
             ConnectionString = config.GetConnectionString("default");
 
-
             Connection = new SqlConnection(ConnectionString);
 
+            
             Console.WriteLine($"ConnectionString: {ConnectionString}");
         }
 
