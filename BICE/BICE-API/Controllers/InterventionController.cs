@@ -172,7 +172,6 @@ namespace BICE.API.Controllers
                 Console.WriteLine(e);
                 return BadRequest();
             }
-            ;
         }
     }
 }
