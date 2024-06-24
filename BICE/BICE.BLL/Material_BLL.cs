@@ -7,6 +7,7 @@ namespace BICE.BLL
 {
 	public class Material_BLL
 	{
+        public int Id { get; set; }
         [Required(ErrorMessage = "Denomination is required !")]
         [StringLength(255,ErrorMessage = "Denomination cannot exceed 255 characters !")]
         public String Denomination { get; set; }
@@ -28,16 +29,19 @@ namespace BICE.BLL
 
         public DateTime? NextControlDate { get; set; }
 
-        [Required(ErrorMessage = "Denomination is required !")]
         public Boolean IsStored { get; set; }
         
         public Boolean IsLost { get; set; }
         
-        public Boolean IsUsable { get; set; }
+        public Boolean IsRemoved { get; set; }
+        
+        public int? VehicleId { get; set; }
+   
 
-		public Material_BLL(String denomination, String barcode, String category,
-            int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate, Boolean isStored, Boolean isLost, Boolean isUsable)
+        public Material_BLL(int id, String denomination, String barcode, String category,
+            int usageCount, int? maxUsageCount, DateTime? expirationDate, DateTime? nextControlDate, Boolean isStored, Boolean isLost, Boolean isRemoved, int? vehicleId)
 		{
+            Id = id;
             Denomination = denomination;
             Barcode = barcode;
             Category = category;
@@ -47,23 +51,59 @@ namespace BICE.BLL
             NextControlDate = nextControlDate;
             IsStored = isStored;
             IsLost = isLost;
-            IsUsable = isUsable;
+            IsRemoved = isRemoved;
+            VehicleId = vehicleId;
             Validate();
         }
         
+        public void UpdateUsageCount()
+        {
+            UsageCount++;
+        }
+        
+        public void PutInStorage()
+        {
+            VehicleId = null;
+            IsStored = true;
+        }
+        
+        public void PutInVehicle(int vehicleId)
+        {
+            VehicleId = vehicleId;
+            IsStored = false;
+        }
+        
+        public void HasBeenLost()
+        {
+            IsLost = true;
+            VehicleId = null;
+            IsStored = false;
+        }
+
+        public void HasBeenRemoved()
+        {
+            IsRemoved = true;
+            VehicleId = null;
+        }
+        
+        public void HasBeenRestored()
+        {
+            IsRemoved = false;
+        }
+
         public void Validate()
         {
             ValidateUsageCount();
             ValidateMaxUsageCount();
-            ValidateDates();
+            // ValidateDates();
             ValidateUsability();
         }
 
         private void ValidateDates()
         {
-            if (ExpirationDate.HasValue && NextControlDate.HasValue && ExpirationDate > NextControlDate)
+            if (ExpirationDate.HasValue && NextControlDate.HasValue && ExpirationDate < NextControlDate)
             {
-                throw new ArgumentException("Expiration date cannot be after next control date!");
+                throw new ArgumentException("Next control date cannot be after expiration date!");
             }
         }
 
@@ -88,13 +128,13 @@ namespace BICE.BLL
         
         public void ValidateUsability()
         {
-            if (UsageCount < MaxUsageCount && ExpirationDate > DateTime.Now && NextControlDate > DateTime.Now && IsStored == true)
+            if (UsageCount < MaxUsageCount && ExpirationDate > DateTime.Now)
             {
-                IsUsable = true;
+                IsRemoved = false;
             }
             else
             {
-                IsUsable = false;
+                IsRemoved = true;
             }
         }
     }

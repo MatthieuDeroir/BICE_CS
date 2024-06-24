@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BICE.DAL.Wrappers;
 using Microsoft.AspNetCore.Mvc;
 using BICE.DTO;
 using BICE.SRV;
@@ -12,9 +13,9 @@ namespace BICE.API.Controllers
     {
         private readonly Intervention_SRV _interventionService;
 
-        public InterventionController()
+        public InterventionController(IDbConnectionWrapper connection, IDbCommandWrapper command)
         {
-            _interventionService = new Intervention_SRV();
+            _interventionService = new Intervention_SRV(connection, command);
         }
         
         [HttpGet]
@@ -34,6 +35,7 @@ namespace BICE.API.Controllers
             }
             return Ok(interventionDto);
         }
+        
 
         // POST api/intervention
         [HttpPost]
@@ -48,7 +50,27 @@ namespace BICE.API.Controllers
             return CreatedAtAction(nameof(AddIntervention), new { id = insertedIntervention.Id }, insertedIntervention);
         }
         
-        [HttpPut]
+        [HttpGet("{interventionId}/vehicles")]
+        public ActionResult<Intervention_DTO> GetVehiclesByInterventionId(int interventionId)
+        {
+            IEnumerable<Vehicle_DTO> vehicleDto = _interventionService.GetVehiclesByInterventionId(interventionId);
+            if (vehicleDto == null)
+            {
+                return NotFound();
+            }
+            return Ok(vehicleDto);
+        }
+        
+        // add vehicle to intervention
+        [HttpPost("{interventionId}/vehicle/{vehicleId}")]
+        public async Task<ActionResult> AddVehicleToIntervention(int interventionId, int vehicleId)
+        {
+            await _interventionService.AddVehicleToIntervention(interventionId, vehicleId);
+            return NoContent();
+        }
+
+        
+        [HttpPut("{id}")]
         public ActionResult<Intervention_DTO> UpdateIntervention(Intervention_DTO interventionDto)
         {
             if (!ModelState.IsValid)

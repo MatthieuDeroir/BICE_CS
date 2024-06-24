@@ -1,16 +1,20 @@
-﻿using System;
-using BICE.DTO;
+﻿using BICE.DTO;
 using BICE.BLL;
 using BICE.DAL;
+using BICE.DAL.Wrappers;
 
 namespace BICE.SRV
 {
 	public class Intervention_SRV
 	{
 		private readonly Intervention_Repository _interventionRepository;
-		public Intervention_SRV()
+		private readonly Material_Repository _materialRepository;
+		private readonly Vehicle_Repository _vehicleRepository;
+		public Intervention_SRV(IDbConnectionWrapper connection, IDbCommandWrapper command)
 		{
-			_interventionRepository = new Intervention_Repository();
+			_interventionRepository = new Intervention_Repository(connection, command);
+			_materialRepository = new Material_Repository(connection, command);
+			_vehicleRepository = new Vehicle_Repository(connection, command);
 		}
 		
 		public IEnumerable<Intervention_DTO> GetIntervention()
@@ -30,12 +34,29 @@ namespace BICE.SRV
 			return new Intervention_DTO(interventionDal);
 		}
 		
+		public IEnumerable<Vehicle_DTO> GetVehiclesByInterventionId(int interventionId)
+		{
+			IEnumerable<Vehicle_DAL> vehicleDal = _interventionRepository.GetVehiclesByInterventionId(interventionId);
+			List<Vehicle_DTO> vehicleDto = new List<Vehicle_DTO>();
+			foreach (Vehicle_DAL vehicle in vehicleDal)
+			{
+				vehicleDto.Add(new Vehicle_DTO(vehicle));
+			}
+			return vehicleDto;
+		}
+		
 		public Intervention_DTO AddIntervention(Intervention_DTO interventionDto)
 		{
 			Intervention_BLL interventionBll = interventionDto.ToBLL();
 			Intervention_DAL interventionDal = new Intervention_DAL(interventionBll);
 			Intervention_DAL insertedIntervention = _interventionRepository.Insert(interventionDal);
 			return new Intervention_DTO(insertedIntervention);
+		}
+
+		public Task AddVehicleToIntervention(int interventionId, int vehicleId)
+		{
+			_interventionRepository.AddVehicleToIntervention(interventionId, vehicleId);
+			return Task.CompletedTask;
 		}
 		
 		public Intervention_DTO Update(Intervention_DTO interventionDto)
@@ -52,6 +73,8 @@ namespace BICE.SRV
 			Intervention_DAL interventionDal = new Intervention_DAL(interventionBll);
 			_interventionRepository.Delete(interventionDal);
 		}
+
+
 	}
 }
 

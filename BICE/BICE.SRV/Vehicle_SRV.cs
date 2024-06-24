@@ -2,6 +2,7 @@
 using BICE.DTO;
 using BICE.BLL;
 using BICE.DAL;
+using BICE.DAL.Wrappers;
 
 namespace BICE.SRV
 {
@@ -9,9 +10,9 @@ namespace BICE.SRV
     {
         private readonly Vehicle_Repository _vehicleRepository;
 
-        public Vehicle_SRV()
+        public Vehicle_SRV(IDbConnectionWrapper connection, IDbCommandWrapper command)
         {
-            _vehicleRepository = new Vehicle_Repository();
+            _vehicleRepository = new Vehicle_Repository(connection, command);
         }
         
         public IEnumerable<Vehicle_DTO> GetVehicle()
@@ -28,6 +29,23 @@ namespace BICE.SRV
         public Vehicle_DTO GetVehicleById(int id)
         {
             Vehicle_DAL vehicleDal = _vehicleRepository.GetById(id);
+            return new Vehicle_DTO(vehicleDal);
+        }
+        
+        public IEnumerable<Vehicle_DTO> GetVehiclesByInterventionId(int id)
+        {
+            IEnumerable<Vehicle_DAL> vehicleDal = _vehicleRepository.GetByInterventionId(id);
+            List<Vehicle_DTO> vehicleDto = new List<Vehicle_DTO>();
+            foreach (Vehicle_DAL vehicle in vehicleDal)
+            {
+                vehicleDto.Add(new Vehicle_DTO(vehicle));
+            }
+            return vehicleDto;
+        }
+        
+        public Vehicle_DTO GetVehicleByInternalNumber(string internalNumber)
+        {
+            Vehicle_DAL vehicleDal = _vehicleRepository.GetByInternalNumber(internalNumber);
             return new Vehicle_DTO(vehicleDal);
         }
 
@@ -49,13 +67,10 @@ namespace BICE.SRV
         
         public void Delete(Vehicle_DTO vehicleDto)
         {
-            Vehicle_BLL vehicleBll = vehicleDto.ToBLL();
-            Vehicle_DAL vehicleDal = new Vehicle_DAL(vehicleBll);
+            Vehicle_DAL vehicleDal = vehicleDto.ToDAL();
             _vehicleRepository.Delete(vehicleDal);
         }
         
         
-
-        // Implement other CRUD methods using DTO conversions
     }
 }
